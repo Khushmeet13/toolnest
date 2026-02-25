@@ -1,229 +1,538 @@
 import { toolCategories } from "../data/toolCategories";
 import HeroSection from "../components/home/HeroSection";
+import {
+  QrCode,
+  FileText,
+  Image,
+  Ruler,
+  Calculator,
+  Type,
+  Code,
+  ShieldCheck,
+  Braces,
+  Folder,
+  Archive,
+  ClipboardList,
+  Link,
+  Palette,
+  PenTool,
+  Search,
+  CalendarDays,
+  Receipt,
+  Code2,
+  GraduationCap,
+  Globe,
+  Briefcase,
+  Database,
+  Sparkles,
+  BarChart3
+} from "lucide-react";
+import {
+  BoltIcon,
+  ShieldCheckIcon,
+  DevicePhoneMobileIcon,
+  CurrencyDollarIcon,
+  CursorArrowRaysIcon,
+  ArrowUpTrayIcon,
+  SparklesIcon
+} from "@heroicons/react/24/solid";
+import whychoose from "../assets/whychoose.png";
+
+const features = [
+  {
+    name: "Lightning Fast.",
+    description:
+      "All tools run instantly in your browser with optimized performance and zero waiting time.",
+    icon: BoltIcon,
+  },
+  {
+    name: "Privacy Focused.",
+    description:
+      "Your files and data never leave your device. Everything is processed locally.",
+    icon: ShieldCheckIcon,
+  },
+  {
+    name: "Completely Free.",
+    description:
+      "No subscriptions, no hidden costs, and no usage limits. Just open and use.",
+    icon: CurrencyDollarIcon,
+  },
+  {
+    name: "Fully Responsive.",
+    description:
+      "Seamless experience across desktop, tablet, and mobile devices.",
+    icon: DevicePhoneMobileIcon,
+  },
+];
+
 
 export default function Home() {
   return (
-    <div className="space-y-20">
+    <div className="">
       <HeroSection />
 
-      <section className="relative py-28 bg-gray-50 to-white overflow-hidden">
+      <section className="relative py-20 bg-white overflow-hidden">
 
-        {/* Soft background gradients */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-indigo-200 blur-[120px] opacity-20 rounded-full" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[400px] bg-cyan-200 blur-[120px] opacity-20 rounded-full" />
+        {/* Background glow */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-indigo-500/10 blur-[120px] rounded-full" />
+        </div>
 
-        <div className="relative max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
 
           {/* Heading */}
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
-              Most Popular Tools
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-medium text-gray-900 tracking-tight">
+              Powerful Tools for Modern Workflows
             </h2>
 
-            <p className="mt-5 text-lg text-gray-600">
-              Everything you need to work faster and smarter — powerful tools
-              designed for productivity, creativity, and development.
+            <p className="mt-4 text-base text-gray-600 leading-relaxed">
+              A curated suite of professional utilities built for developers,
+              creators, and businesses — fast, secure, and beautifully designed.
             </p>
           </div>
 
           {/* Tools Grid */}
-          <div className="mt-20 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8">
+          <div className="mt-24 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
 
             {[
-              { icon: "🔗", name: "QR Generator" },
-              { icon: "📄", name: "PDF Tools" },
-              { icon: "🖼️", name: "Image Converter" },
-              { icon: "📐", name: "Unit Converter" },
-              { icon: "🧮", name: "Calculator" },
-              { icon: "✍️", name: "Text Tools" },
-              { icon: "💻", name: "Code Formatter" },
-              { icon: "🔐", name: "Password Generator" },
-              { icon: "📊", name: "JSON Formatter" },
-              { icon: "📁", name: "File Converter" },
-              { icon: "🗂️", name: "ZIP Extractor" },
-              { icon: "📝", name: "Form Builder" },
-              { icon: "🌐", name: "URL Shortener" },
-              { icon: "🎨", name: "Color Picker" },
-              { icon: "🖊️", name: "Signature Maker" },
-              { icon: "🔍", name: "SEO Tools" },
-              { icon: "📅", name: "Date Calculator" },
-              { icon: "🧾", name: "Invoice Generator" }
-            ].map((tool, i) => (
-              <div
-                key={i}
-                className="group relative rounded-2xl bg-white border border-gray-200
-                     p-6 flex flex-col items-center text-center gap-4
-                     shadow-sm hover:shadow-2xl transition-all duration-300
-                     cursor-pointer hover:-translate-y-2 hover:border-indigo-200"
-              >
-                {/* Icon Container */}
-                <div className="w-14 h-14 flex items-center justify-center rounded-xl
-                          bg-gradient-to-br from-indigo-50 to-cyan-50
-                          text-2xl shadow-inner
-                          group-hover:scale-110 transition">
-                  {tool.icon}
+              { icon: QrCode, name: "QR Generator" },
+              { icon: FileText, name: "PDF Tools" },
+              { icon: Image, name: "Image Converter" },
+              { icon: Ruler, name: "Unit Converter" },
+              { icon: Calculator, name: "Calculator" },
+              { icon: Type, name: "Text Tools" },
+              { icon: Code, name: "Code Formatter" },
+              { icon: ShieldCheck, name: "Password Generator" },
+              { icon: Braces, name: "JSON Formatter" },
+              { icon: Folder, name: "File Converter" },
+              { icon: Archive, name: "ZIP Extractor" },
+              { icon: ClipboardList, name: "Form Builder" },
+              { icon: Link, name: "URL Shortener" },
+              { icon: Palette, name: "Color Picker" },
+              { icon: PenTool, name: "Signature Maker" },
+              { icon: Search, name: "SEO Tools" },
+              { icon: CalendarDays, name: "Date Calculator" },
+              { icon: Receipt, name: "Invoice Generator" }
+            ].map((tool, i) => {
+              const Icon = tool.icon;
+
+              return (
+                <div
+                  key={i}
+                  className="group relative bg-white/70 backdrop-blur-sm border border-gray-200
+                       rounded-lg p-4 flex flex-col items-center justify-center
+                       transition-all duration-300
+                       hover:border-cyan-600 hover:shadow-md hover:shadow-cyan-100 hover:-translate-y-1 cursor-pointer"
+                >
+
+                  {/* Icon */}
+                  <div className="
+                            flex items-center justify-center
+                            group-hover:bg-gray-50 transition">
+                    <Icon className="w-6 h-6 text-gray-700 group-hover:text-cyan-600 transition" />
+                  </div>
+
+                  {/* Tool Name */}
+                  <p className="mt-4 text-sm font-medium text-gray-800 text-center">
+                    {tool.name}
+                  </p>
+
+                  {/* Subtle hover glow */}
+                  {/* <div className="absolute inset-0 rounded-lg opacity-0 
+                            group-hover:opacity-100 transition
+                            bg-gradient-to-br from-indigo-500/5 to-purple-500/5" /> */}
                 </div>
-
-                {/* Tool Name */}
-                <p className="font-semibold text-gray-800">
-                  {tool.name}
-                </p>
-
-                {/* Subtle hover glow */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100
-                          transition duration-300 bg-gradient-to-br from-indigo-500/5 to-cyan-500/5" />
-              </div>
-            ))}
+              );
+            })}
 
           </div>
+
+          {/* CTA */}
+          <div className="mt-12 text-center">
+            <button className="px-5 py-2.5 rounded-lg bg-cyan-600 text-white 
+                         font-medium text-sm tracking-wide
+                         hover:bg-cyan-700 transition cursor-pointer">
+              View All Tools
+            </button>
+          </div>
+
         </div>
       </section>
 
       {/* 3️⃣ Popular Tools Section */}
-      <section className="py-20">
+      <section className="relative py-20 bg-gray-50">
+
+        <div className="max-w-7xl mx-auto">
+
+          {/* Heading */}
+          <div className="text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-medium text-gray-900 tracking-tight">
+              Browse by Category
+            </h2>
+            <p className="mt-4 text-base text-gray-600">
+              Explore powerful tools organized by workflow — built for developers,
+              students, businesses, and creators.
+            </p>
+          </div>
+
+          {/* Categories Grid */}
+          <div className="mt-20 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            {[
+              {
+                icon: Code2,
+                title: "Developer Tools",
+                desc: "Format code, validate JSON, generate APIs, encode/decode data.",
+              },
+              {
+                icon: GraduationCap,
+                title: "Study & Education",
+                desc: "Calculators, unit converters, note helpers, exam utilities.",
+              },
+              {
+                icon: FileText,
+                title: "PDF & File Tools",
+                desc: "Merge, compress, convert, edit and manage documents.",
+              },
+              {
+                icon: Image,
+                title: "Image & Media",
+                desc: "Resize, convert, compress, crop and enhance visuals.",
+              },
+              {
+                icon: Calculator,
+                title: "Calculators",
+                desc: "Financial, date, age, scientific and business calculators.",
+              },
+              {
+                icon: Palette,
+                title: "Design Tools",
+                desc: "Color picker, gradient maker, signature and branding tools.",
+              },
+              {
+                icon: Globe,
+                title: "Web & SEO",
+                desc: "URL shortener, meta preview, sitemap tools, SEO analyzers.",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Security Tools",
+                desc: "Password generator, hash generator, encryption utilities.",
+              },
+              {
+                icon: Briefcase,
+                title: "Business Tools",
+                desc: "Invoice generator, tax calculator, productivity utilities.",
+              },
+              {
+                icon: Database,
+                title: "Data & Conversion",
+                desc: "CSV/JSON/XML tools, formatters, validators, converters.",
+              },
+              {
+                icon: Sparkles,
+                title: "AI Utilities",
+                desc: "Text enhancer, content generator, smart automation tools.",
+              },
+              {
+                icon: BarChart3,
+                title: "Analytics Tools",
+                desc: "Data visualizers, metrics calculators, reporting utilities.",
+              },
+            ].map((category, i) => {
+              const Icon = category.icon;
+
+              return (
+                <div
+                  key={i}
+                  className="group relative bg-white border border-gray-200
+                       rounded-lg p-4
+                       transition-all duration-300
+                       hover:shadow-md hover:shadow-cyan-100 hover:-translate-y-1 hover:border-cyan-600"
+                >
+                  {/* Icon */}
+                  <div className="flex items-center gap-2">
+                    <Icon className="w-6 h-6 text-gray-700 group-hover:text-cyan-600 transition" />
+                    {/* Title */}
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      {category.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="mt-3 text-gray-600 leading-relaxed">
+                    {category.desc}
+                  </p>
+
+
+                </div>
+              );
+            })}
+
+          </div>
+
+        </div>
+      </section>
+
+
+
+      <section className="bg-white py-20 dark:bg-gray-950">
+        <div className="mx-auto max-w-7xl">
+          <div className="relative isolate overflow-hidden bg-gray-900 px-6 py-20 sm:rounded-3xl sm:px-12 lg:px-20 lg:py-12">
+
+            {/* Glow background */}
+            <div
+              aria-hidden="true"
+              className="absolute -top-40 left-1/2 -z-10 h-[400px] w-[800px] -translate-x-1/2 blur-3xl"
+            >
+              <div className="h-full w-full bg-gradient-to-tr from-cyan-500 to-purple-600 opacity-20" />
+            </div>
+
+            <div className="grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:max-w-none lg:grid-cols-2 lg:items-center">
+
+              {/* Left Content */}
+              <div>
+                <h2 className="text-3xl font-medium tracking-tight text-white sm:text-4xl">
+                  Why Choose ToolNest?
+                </h2>
+
+                <p className="mt-2 text-base text-gray-300">
+                  A powerful suite of modern utilities designed for speed,
+                  privacy, and productivity. Everything you need — in one place.
+                </p>
+
+                <dl className="mt-10 space-y-6 text-base text-gray-300">
+                  {features.map((feature) => (
+                    <div key={feature.name} className="relative">
+                      <dt className="ml-9 font-semibold text-white">
+                        <feature.icon
+                          className="absolute left-0 top-1 h-5 w-5 text-cyan-600"
+                          aria-hidden="true"
+                        />
+                        {feature.name}
+                      </dt>
+                      <dd className="ml-9 mt-2 text-gray-400">
+                        {feature.description}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+
+              {/* Right Screenshot */}
+              <div>
+                <img
+                  src={whychoose}
+                  alt="ToolNest Dashboard"
+                  className="rounded-xl shadow-2xl ring-1 ring-white/10"
+                />
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-gray-50 py-24 sm:py-32 dark:bg-gray-900">
+        <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+
+          {/* Heading */}
+          <h2 className="text-center text-base font-semibold text-indigo-600 dark:text-indigo-400">
+            Simple Process
+          </h2>
+
+          <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-bold text-gray-950 sm:text-5xl dark:text-white">
+            How ToolNest Works
+          </p>
+
+          {/* Grid */}
+          <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
+
+            {/* STEP 1 — Large */}
+            <div className="relative lg:row-span-2">
+              <div className="absolute inset-px rounded-lg bg-white lg:rounded-l-4xl dark:bg-gray-800" />
+
+              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+
+                <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10">
+                  <p className="text-lg font-semibold text-gray-950 dark:text-white">
+                    1️⃣ Choose Tool
+                  </p>
+
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    Browse our collection and select the tool you need.
+                  </p>
+                </div>
+
+                <div className="relative min-h-80 w-full grow">
+                  <img
+                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c"
+                    alt="Choose tool"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-black/5 lg:rounded-l-4xl dark:outline-white/15" />
+            </div>
+
+            {/* STEP 2 */}
+            <div className="relative">
+              <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-800" />
+
+              <div className="relative flex h-full flex-col overflow-hidden rounded-lg">
+
+                <div className="px-8 pt-8">
+                  <p className="text-lg font-semibold text-gray-950 dark:text-white">
+                    2️⃣ Input Data
+                  </p>
+
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    Upload files or enter text securely.
+                  </p>
+                </div>
+
+                <div className="flex flex-1 items-center justify-center p-6">
+                  <img
+                    src="https://images.unsplash.com/photo-1581092160607-ee22731c5b4a"
+                    alt="Upload data"
+                    className="w-full max-w-xs rounded-lg object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-black/5 dark:outline-white/15" />
+            </div>
+
+            {/* STEP 3 */}
+            <div className="relative lg:col-start-2 lg:row-start-2">
+              <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-800" />
+
+              <div className="relative flex h-full flex-col overflow-hidden rounded-lg">
+
+                <div className="px-8 pt-8">
+                  <p className="text-lg font-semibold text-gray-950 dark:text-white">
+                    3️⃣ Get Results
+                  </p>
+
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    Receive instant output ready to download.
+                  </p>
+                </div>
+
+                <div className="flex flex-1 items-center justify-center p-6">
+                  <img
+                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71"
+                    alt="Results"
+                    className="w-full max-w-xs rounded-lg object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-black/5 dark:outline-white/15" />
+            </div>
+
+            {/* EXTRA FEATURE — Large */}
+            <div className="relative lg:row-span-2">
+              <div className="absolute inset-px rounded-lg bg-white lg:rounded-r-4xl dark:bg-gray-800" />
+
+              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-r-[calc(2rem+1px)]">
+
+                <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10">
+                  <p className="text-lg font-semibold text-gray-950 dark:text-white">
+                    ⚡ Instant & Secure
+                  </p>
+
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    All processing happens instantly with complete privacy.
+                  </p>
+                </div>
+
+                <div className="relative min-h-80 w-full grow">
+                  <img
+                    src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b"
+                    alt="Secure processing"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+              </div>
+
+              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-black/5 lg:rounded-r-4xl dark:outline-white/15" />
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-6">
 
-          <h2 className="text-4xl font-bold text-center">
-            Browse by Category
-          </h2>
-
-          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <div className="p-8 bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl shadow-lg">
-              <h3 className="text-xl font-semibold">💻 Developer Tools</h3>
-              <p className="mt-2 opacity-90">
-                Format code, encode data, generate APIs and more.
-              </p>
-            </div>
-
-            <div className="p-8 bg-gradient-to-br from-cyan-500 to-blue-600 text-white rounded-2xl shadow-lg">
-              <h3 className="text-xl font-semibold">📚 Study Tools</h3>
-              <p className="mt-2 opacity-90">
-                Calculators, converters, note helpers.
-              </p>
-            </div>
-
-            <div className="p-8 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl shadow-lg">
-              <h3 className="text-xl font-semibold">📄 PDF & File Tools</h3>
-              <p className="mt-2 opacity-90">
-                Merge, compress, convert files instantly.
-              </p>
-            </div>
-
+          {/* Heading */}
+          <div className="text-center">
+            <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
+              🆕 Newly Added Tools
+            </h2>
+            <p className="mt-3 text-gray-600 dark:text-gray-400">
+              Fresh tools added to boost your productivity.
+            </p>
           </div>
-        </div>
-      </section>
 
-      <section className="py-24 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+          {/* Layout */}
+          <div className="mt-16 grid lg:grid-cols-3 gap-8">
 
-          <h2 className="text-4xl font-bold">
-            Why Choose ToolNest?
-          </h2>
+            {/* Featured Tool (Large) */}
+            <div className="lg:col-span-2 relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 to-purple-600 p-10 text-white shadow-xl">
 
-          <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
+              <span className="inline-block bg-white/20 px-3 py-1 text-sm rounded-full mb-6">
+                Featured
+              </span>
 
-            <div>
-              <div className="text-4xl mb-4">⚡</div>
-              <h3 className="font-semibold text-lg">Lightning Fast</h3>
-              <p className="text-gray-400 mt-2">
-                Tools that work instantly without delays.
+              <h3 className="text-3xl font-bold">
+                AI Text Generator
+              </h3>
+
+              <p className="mt-4 text-white/80 max-w-lg">
+                Generate high-quality content instantly using advanced AI technology.
+                Perfect for blogs, ads, and social media posts.
               </p>
+
+              <button className="mt-8 bg-white text-indigo-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">
+                Try Now →
+              </button>
+
+              {/* Glow Effect */}
+              <div className="absolute -bottom-10 -right-10 h-40 w-40 bg-white/20 rounded-full blur-3xl"></div>
             </div>
 
-            <div>
-              <div className="text-4xl mb-4">🔒</div>
-              <h3 className="font-semibold text-lg">Privacy First</h3>
-              <p className="text-gray-400 mt-2">
-                Your data never leaves your device.
-              </p>
-            </div>
+            {/* Side Tools */}
+            <div className="space-y-8">
 
-            <div>
-              <div className="text-4xl mb-4">💯</div>
-              <h3 className="font-semibold text-lg">Completely Free</h3>
-              <p className="text-gray-400 mt-2">
-                No hidden charges, no subscriptions.
-              </p>
-            </div>
+              <div className="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow hover:shadow-2xl transition relative overflow-hidden">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Image Background Remover
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 mt-2">
+                  Remove backgrounds from images with one click.
+                </p>
 
-            <div>
-              <div className="text-4xl mb-4">📱</div>
-              <h3 className="font-semibold text-lg">Mobile Friendly</h3>
-              <p className="text-gray-400 mt-2">
-                Works perfectly on all devices.
-              </p>
-            </div>
+                <span className="absolute top-6 right-6 text-sm text-indigo-600 font-semibold opacity-0 group-hover:opacity-100 transition">
+                  →
+                </span>
+              </div>
 
-          </div>
-        </div>
-      </section>
+              <div className="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow hover:shadow-2xl transition relative overflow-hidden">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  JSON Formatter
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 mt-2">
+                  Beautify and validate JSON data instantly.
+                </p>
 
-      <section className="py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6 text-center">
+                <span className="absolute top-6 right-6 text-sm text-indigo-600 font-semibold opacity-0 group-hover:opacity-100 transition">
+                  →
+                </span>
+              </div>
 
-          <h2 className="text-4xl font-bold text-gray-900">
-            How It Works
-          </h2>
-
-          <div className="mt-16 grid md:grid-cols-3 gap-10">
-
-            <div className="bg-white p-8 rounded-xl shadow">
-              <div className="text-4xl mb-4">1️⃣</div>
-              <h3 className="font-semibold text-lg">Choose Tool</h3>
-              <p className="text-gray-500 mt-2">
-                Pick the tool you need from our library.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow">
-              <div className="text-4xl mb-4">2️⃣</div>
-              <h3 className="font-semibold text-lg">Input Data</h3>
-              <p className="text-gray-500 mt-2">
-                Upload file or enter your data.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow">
-              <div className="text-4xl mb-4">3️⃣</div>
-              <h3 className="font-semibold text-lg">Get Results</h3>
-              <p className="text-gray-500 mt-2">
-                Instant output ready to download.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
-
-          <h2 className="text-4xl font-bold text-center">
-            🆕 Newly Added Tools
-          </h2>
-
-          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition">
-              <h3 className="text-xl font-semibold">AI Text Generator</h3>
-              <p className="text-gray-500 mt-2">
-                Generate high-quality content instantly.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition">
-              <h3 className="text-xl font-semibold">Image Background Remover</h3>
-              <p className="text-gray-500 mt-2">
-                Remove backgrounds with one click.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow hover:shadow-xl transition">
-              <h3 className="text-xl font-semibold">JSON Formatter</h3>
-              <p className="text-gray-500 mt-2">
-                Beautify and validate JSON data instantly.
-              </p>
             </div>
 
           </div>

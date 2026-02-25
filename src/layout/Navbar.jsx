@@ -27,7 +27,7 @@ export default function Navbar() {
       <div className="px-10 py-3 flex items-center justify-between">
 
         {/* Logo */}
-        <div className="text-2xl font-bold italic tracking-wide text-cyan-500">
+        <div className="text-2xl font-bold italic tracking-wide text-cyan-600">
           ToolNest
         </div>
 
@@ -67,11 +67,11 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <button className="bg-cyan-500 px-4 py-1.5 rounded-lg hover:bg-cyan-600 cursor-pointer">
+            <button className="bg-cyan-600 px-4 py-1.5 rounded-lg hover:bg-cyan-600 cursor-pointer text-white">
               Login
             </button>
 
-            <button className="border border-cyan-500 px-4 py-1.5 rounded-lg hover:bg-cyan-500 cursor-pointer">
+            <button className="border border-cyan-600 px-4 py-1.5 rounded-lg cursor-pointer text-cyan-600">
               Signup
             </button>
           </div>
