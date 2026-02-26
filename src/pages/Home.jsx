@@ -25,7 +25,9 @@ import {
   Briefcase,
   Database,
   Sparkles,
-  BarChart3
+  BarChart3,
+  ChevronRight,
+  ArrowRight
 } from "lucide-react";
 import {
   BoltIcon,
@@ -37,6 +39,10 @@ import {
   SparklesIcon
 } from "@heroicons/react/24/solid";
 import whychoose from "../assets/whychoose.png";
+import step1 from "../assets/videos/step1.mp4";
+import step2 from "../assets/videos/step2.mp4";
+import step3 from "../assets/videos/step3.mp4";
+import step4 from "../assets/videos/step4.mp4";
 
 const features = [
   {
@@ -333,15 +339,15 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-gray-50 py-24 sm:py-32 dark:bg-gray-900">
+      <section className="bg-gray-50 py-20 dark:bg-gray-900">
         <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
 
           {/* Heading */}
-          <h2 className="text-center text-base font-semibold text-indigo-600 dark:text-indigo-400">
+          <h2 className="text-center text-base font-semibold text-cyan-600 dark:text-indigo-400 uppercase">
             Simple Process
           </h2>
 
-          <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-bold text-gray-950 sm:text-5xl dark:text-white">
+          <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-medium text-gray-950 dark:text-white">
             How ToolNest Works
           </p>
 
@@ -352,28 +358,35 @@ export default function Home() {
             <div className="relative lg:row-span-2">
               <div className="absolute inset-px rounded-lg bg-white lg:rounded-l-4xl dark:bg-gray-800" />
 
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+              <div className="relative flex h-full flex-col overflow-hidden rounded-xl lg:rounded-l-xl">
 
-                <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10">
+                <div className="p-6">
+                  <p className="uppercase text-sm text-cyan-600 font-medium">Step 1</p>
                   <p className="text-lg font-semibold text-gray-950 dark:text-white">
-                    1️⃣ Choose Tool
+                    Choose Tool
                   </p>
 
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    Browse our collection and select the tool you need.
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 text-justify">
+                    Browse the categories, select the tool that fits your needs, and access it instantly with a seamless experience.
+                    Built for efficiency, each tool is optimized to deliver fast, reliable results for both personal and professional use.
                   </p>
                 </div>
 
                 <div className="relative min-h-80 w-full grow">
-                  <img
-                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c"
-                    alt="Choose tool"
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                     className="absolute inset-0 h-full w-full object-cover"
-                  />
+                  >
+                    <source src={step1} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
 
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-black/5 lg:rounded-l-4xl dark:outline-white/15" />
+              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-black/5 lg:rounded-l-xl dark:outline-white/15" />
             </div>
 
             {/* STEP 2 */}
@@ -382,22 +395,29 @@ export default function Home() {
 
               <div className="relative flex h-full flex-col overflow-hidden rounded-lg">
 
-                <div className="px-8 pt-8">
+                <div className="p-6">
+                  <p className="uppercase text-sm text-cyan-600 font-medium">Step 2</p>
                   <p className="text-lg font-semibold text-gray-950 dark:text-white">
-                    2️⃣ Input Data
+                    Input Data
                   </p>
 
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    Upload files or enter text securely.
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 text-justify">
+                    Enter text or upload files through our secure input system designed for speed and accuracy.
+                    The platform supports multiple formats and processes your data instantly to ensure reliable results.
                   </p>
                 </div>
 
-                <div className="flex flex-1 items-center justify-center p-6">
-                  <img
-                    src="https://images.unsplash.com/photo-1581092160607-ee22731c5b4a"
-                    alt="Upload data"
-                    className="w-full max-w-xs rounded-lg object-cover"
-                  />
+                <div className="relative min-h-50 w-full max-w-[350px] mx-auto grow rounded-xl mb-6">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover rounded-xl"
+                  >
+                    <source src={step2} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
 
@@ -410,22 +430,29 @@ export default function Home() {
 
               <div className="relative flex h-full flex-col overflow-hidden rounded-lg">
 
-                <div className="px-8 pt-8">
+                <div className="p-6">
+                  <p className="uppercase text-sm text-cyan-600 font-medium">Step 3</p>
                   <p className="text-lg font-semibold text-gray-950 dark:text-white">
-                    3️⃣ Get Results
+                    Get Results
                   </p>
 
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    Receive instant output ready to download.
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 text-justify">
+                    Get instant, high-quality results generated in real time.
+                    Preview, download, or export your output in multiple formats with ease.
                   </p>
                 </div>
 
-                <div className="flex flex-1 items-center justify-center p-6">
-                  <img
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71"
-                    alt="Results"
-                    className="w-full max-w-xs rounded-lg object-cover"
-                  />
+               <div className="relative min-h-100 w-full max-w-[350px] mx-auto grow rounded-xl mb-6">
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover rounded-xl"
+                  >
+                    <source src={step3} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
 
@@ -438,22 +465,29 @@ export default function Home() {
 
               <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-r-[calc(2rem+1px)]">
 
-                <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10">
+                <div className="p-6">
+                  <p className="uppercase text-sm text-cyan-600 font-medium">Step 4</p>
                   <p className="text-lg font-semibold text-gray-950 dark:text-white">
-                    ⚡ Instant & Secure
+                    Instant & Secure
                   </p>
 
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                    All processing happens instantly with complete privacy.
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 text-justify">
+                    Enjoy real-time processing powered by advanced security and privacy protection.
+                    Your data remains confidential while results are delivered instantly and safely.
                   </p>
                 </div>
 
                 <div className="relative min-h-80 w-full grow">
-                  <img
-                    src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b"
-                    alt="Secure processing"
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                     className="absolute inset-0 h-full w-full object-cover"
-                  />
+                  >
+                    <source src={step4} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
 
@@ -464,16 +498,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-white dark:bg-gray-900">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-6">
 
           {/* Heading */}
           <div className="text-center">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
-              🆕 Newly Added Tools
+            <h2 className="text-4xl font-medium text-gray-900 dark:text-white">
+              Newly Added Tools
             </h2>
             <p className="mt-3 text-gray-600 dark:text-gray-400">
-              Fresh tools added to boost your productivity.
+               Explore our newest tools created to streamline your work and improve efficiency. 
             </p>
           </div>
 
@@ -481,23 +515,23 @@ export default function Home() {
           <div className="mt-16 grid lg:grid-cols-3 gap-8">
 
             {/* Featured Tool (Large) */}
-            <div className="lg:col-span-2 relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 to-purple-600 p-10 text-white shadow-xl">
+            <div className="lg:col-span-2 relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-cyan-600 p-10 text-white shadow-xl">
 
               <span className="inline-block bg-white/20 px-3 py-1 text-sm rounded-full mb-6">
                 Featured
               </span>
 
-              <h3 className="text-3xl font-bold">
+              <h3 className="text-3xl font-medium">
                 AI Text Generator
               </h3>
 
-              <p className="mt-4 text-white/80 max-w-lg">
+              <p className="mt-2 text-white/80 max-w-lg">
                 Generate high-quality content instantly using advanced AI technology.
                 Perfect for blogs, ads, and social media posts.
               </p>
 
-              <button className="mt-8 bg-white text-indigo-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">
-                Try Now →
+              <button className="mt-8 flex items-center gap-1 border border-white text-white px-4 py-2.5 rounded-lg text-sm font-medium hover:bg-gray-100 transition">
+                Try Now <ArrowRight size={14} className="mt-1" />
               </button>
 
               {/* Glow Effect */}
@@ -507,29 +541,29 @@ export default function Home() {
             {/* Side Tools */}
             <div className="space-y-8">
 
-              <div className="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow hover:shadow-2xl transition relative overflow-hidden">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <div className="group bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-md transition relative overflow-hidden cursor-pointer">
+                <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                   Image Background Remover
                 </h3>
                 <p className="text-gray-500 dark:text-gray-400 mt-2">
                   Remove backgrounds from images with one click.
                 </p>
 
-                <span className="absolute top-6 right-6 text-sm text-indigo-600 font-semibold opacity-0 group-hover:opacity-100 transition">
-                  →
+                <span className="absolute top-6 right-6 text-sm text-cyan-600 font-semibold opacity-0 group-hover:opacity-100 transition">
+                  <ArrowRight size={16} />
                 </span>
               </div>
 
-              <div className="group bg-white dark:bg-gray-800 p-8 rounded-2xl shadow hover:shadow-2xl transition relative overflow-hidden">
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              <div className="group bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-md transition relative overflow-hidden">
+                <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                   JSON Formatter
                 </h3>
                 <p className="text-gray-500 dark:text-gray-400 mt-2">
                   Beautify and validate JSON data instantly.
                 </p>
 
-                <span className="absolute top-6 right-6 text-sm text-indigo-600 font-semibold opacity-0 group-hover:opacity-100 transition">
-                  →
+                <span className="absolute top-6 right-6 text-sm text-cyan-600 font-semibold opacity-0 group-hover:opacity-100 transition">
+                   <ArrowRight size={16} />
                 </span>
               </div>
 
