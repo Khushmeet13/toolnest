@@ -515,7 +515,7 @@ export default function Home() {
           <div className="mt-16 grid lg:grid-cols-3 gap-8">
 
             {/* Featured Tool (Large) */}
-            <div className="lg:col-span-2 relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-cyan-600 p-10 text-white shadow-xl">
+            <div className="lg:col-span-2 relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-cyan-600 p-6 text-white shadow-xl">
 
               <span className="inline-block bg-white/20 px-3 py-1 text-sm rounded-full mb-6">
                 Featured
@@ -541,7 +541,7 @@ export default function Home() {
             {/* Side Tools */}
             <div className="space-y-8">
 
-              <div className="group bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-md transition relative overflow-hidden cursor-pointer">
+              <div className="group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm shadow-cyan-500/50 hover:shadow-md transition relative overflow-hidden cursor-pointer">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                   Image Background Remover
                 </h3>
@@ -554,7 +554,7 @@ export default function Home() {
                 </span>
               </div>
 
-              <div className="group bg-white dark:bg-gray-800 p-6 rounded-xl shadow hover:shadow-md transition relative overflow-hidden">
+              <div className="group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm shadow-cyan-500/50  hover:shadow-md transition relative overflow-hidden">
                 <h3 className="text-xl font-medium text-gray-900 dark:text-white">
                   JSON Formatter
                 </h3>
