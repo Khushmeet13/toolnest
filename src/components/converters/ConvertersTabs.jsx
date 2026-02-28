@@ -9,7 +9,6 @@ import {
   BuildingOffice2Icon,
   FaceSmileIcon,
 } from "@heroicons/react/20/solid";
-import ToolsGrid from "./ToolsGrid";
 import generators from "../../data/generatorTools";
 
 const tabs = [
@@ -26,7 +25,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function GeneratorTabs() {
+export default function ConvertersTabs() {
   const [activeTab, setActiveTab] = useState("All");
 
   return (
@@ -92,7 +91,6 @@ export default function GeneratorTabs() {
         </div>
       </div>
 
-      <ToolsGrid activeTab={activeTab} generators={generators} />
     </div>
   );
 }
