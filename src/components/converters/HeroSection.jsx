@@ -6,6 +6,7 @@ import {
     LockClosedIcon,
     ServerIcon,
 } from '@heroicons/react/20/solid'
+import converters from "../../assets/img/converters.png";
 
 const features = [
     {
@@ -59,9 +60,9 @@ export default function HeroSection() {
                 <div className="mx-auto max-w-7xl h-80 px-6 lg:px-8">
                     <img
                         alt="App screenshot"
-                        src="https://tailwindcss.com/plus-assets/img/component-images/project-app-screenshot.png"
+                        src={converters}
                      
-                        className="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-gray-900/10 dark:hidden dark:ring-white/10"
+                        className="mb-[-12%] rounded-xl border border-cyan-100 shadow-xl shadow-cyan-100 ring-1 ring-cyan-900/10 dark:hidden dark:ring-white/10"
                     />
                     <div aria-hidden="true" className="relative">
                         <div className="absolute -inset-x-20 bottom-0 bg-linear-to-t from-white pt-[7%] dark:from-gray-900" />

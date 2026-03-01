@@ -6,11 +6,11 @@ import {
     Lock,
     Zap,
 } from "lucide-react";
-import qr_back from "../../assets/qr-img.jpg";
-import form_back from "../../assets/form-builder.webp";
-import img_convert from "../../assets/img-converter.png";
-import json_back from "../../assets/json-convert.jpg";
-import password_back from "../../assets/password-gen.jpg";
+import qr_back from "../../assets/img/qr-img.jpg";
+import form_back from "../../assets/img/form-builder.webp";
+import img_convert from "../../assets/img/img-converter.png";
+import json_back from "../../assets/img/json-convert.jpg";
+import password_back from "../../assets/img/password-gen.jpg";
 
 function ToolCard({ Icon, name, image }) {
     return (

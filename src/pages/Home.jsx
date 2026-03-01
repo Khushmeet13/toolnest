@@ -38,7 +38,7 @@ import {
   ArrowUpTrayIcon,
   SparklesIcon
 } from "@heroicons/react/24/solid";
-import whychoose from "../assets/whychoose.png";
+import whychoose from "../assets/img/whychoose.png";
 import step1 from "../assets/videos/step1.mp4";
 import step2 from "../assets/videos/step2.mp4";
 import step3 from "../assets/videos/step3.mp4";

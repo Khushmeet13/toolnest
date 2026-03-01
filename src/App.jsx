@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import MainLayout from "./layout/MainLayout";
 import Generators from "./pages/Generators";
 import Converters from "./pages/Converters";
+import ImageTools from "./pages/ImageTools";
+import DevTools from "./pages/DevTools";
 
 export default function App() {
   return (
@@ -16,7 +18,9 @@ export default function App() {
 
           <Route path="/" element={<Home />} />
           <Route path="/generators" element={<Generators />} />
-           <Route path="/converters" element={<Converters />} />
+          <Route path="/converters" element={<Converters />} />
+          <Route path="/image-tools" element={<ImageTools />} />
+           <Route path="/dev-tools" element={<DevTools />} />
           {/* <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} /> */}
 
