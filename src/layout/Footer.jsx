@@ -19,10 +19,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-3">Popular Tools</h4>
             <ul className="space-y-2 text-sm">
-              <li>Image Compressor</li>
-              <li>PDF to Word</li>
-              <li>QR Generator</li>
-              <li>Password Generator</li>
+              <li><a href="/image-compressor" className="hover:text-white transition">Image Compressor</a></li>
+              <li><a href="/pdf-to-word" className="hover:text-white transition">PDF to Word</a></li>
+              <li><a href="/qr-generator" className="hover:text-white transition">QR Generator</a></li>
+              <li><a href="/password-generator" className="hover:text-white transition">Password Generator</a></li>
             </ul>
           </div>
 
@@ -30,10 +30,9 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-3">Company</h4>
             <ul className="space-y-2 text-sm">
-              <li>About Us</li>
-              <li>Contact</li>
-              <li>Blog</li>
-              <li></li>
+              <li><a href="/about" className="hover:text-white transition">About Us</a></li>
+              <li><a href="/contact" className="hover:text-white transition">Contact</a></li>
+              <li><a href="/blog" className="hover:text-white transition">Blog</a></li>
             </ul>
           </div>
 
@@ -41,9 +40,8 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-3">Legal</h4>
             <ul className="space-y-2 text-sm">
-              <li>Privacy Policy</li>
-              <li>Terms & Conditions</li>
-              <li></li>
+              <li><a href="/privacy-policy" className="hover:text-white transition">Privacy Policy</a></li>
+              <li><a href="/terms" className="hover:text-white transition">Terms & Conditions</a></li>
             </ul>
           </div>
         </div>

@@ -407,7 +407,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="relative min-h-50 w-full max-w-[350px] mx-auto grow rounded-xl mb-6">
+                <div className="relative min-h-40 w-full max-w-[350px] mx-auto grow rounded-xl mb-6">
                   <video
                     autoPlay
                     muted
@@ -442,7 +442,7 @@ export default function Home() {
                   </p>
                 </div>
 
-               <div className="relative min-h-100 w-full max-w-[350px] mx-auto grow rounded-xl mb-6">
+               <div className="relative min-h-50 w-full max-w-[350px] mx-auto grow rounded-xl mb-6">
                   <video
                     autoPlay
                     muted
@@ -461,9 +461,9 @@ export default function Home() {
 
             {/* EXTRA FEATURE — Large */}
             <div className="relative lg:row-span-2">
-              <div className="absolute inset-px rounded-lg bg-white lg:rounded-r-4xl dark:bg-gray-800" />
+              <div className="absolute inset-px rounded-lg bg-white lg:rounded-r-xl dark:bg-gray-800" />
 
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-r-[calc(2rem+1px)]">
+              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-r-2xl">
 
                 <div className="p-6">
                   <p className="uppercase text-sm text-cyan-600 font-medium">Step 4</p>
@@ -491,7 +491,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-black/5 lg:rounded-r-4xl dark:outline-white/15" />
+              <div className="pointer-events-none absolute inset-px rounded-lg shadow outline outline-black/5 lg:rounded-r-xl dark:outline-white/15" />
             </div>
 
           </div>
