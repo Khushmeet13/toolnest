@@ -391,12 +391,12 @@ export default function About() {
 
 
                 <div className="mx-auto max-w-7xl">
-                    <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
+                    <div className="mx-auto max-w-2xl text-center">
                         <h2 className="text-3xl font-medium tracking-tight text-balance text-gray-900 sm:text-4xl dark:text-white">
                             From the blog
                         </h2>
                         <p className="mt-2 text-base text-gray-600 dark:text-gray-400">
-                            Learn how to grow your business with our expert advice.
+                            Discover a collection of smart utilities built to save your time and effort.
                         </p>
                     </div>
                     <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">

@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+.field-outline {
+  @apply relative rounded-lg border border-slate-300 bg-white px-4 py-2 transition;
+}
+
+.field-label {
+  @apply absolute -top-2 left-3 bg-white px-2 text-xs font-medium text-slate-600;
+}
+
+.field-input {
+  @apply w-full bg-transparent text-sm text-slate-900 outline-none placeholder-slate-400;
+}
+
+.field-outline:focus-within {
+  @apply border-cyan-600;
+}
+
+.field-outline:focus-within .field-label {
+  @apply text-cyan-600;
+}
