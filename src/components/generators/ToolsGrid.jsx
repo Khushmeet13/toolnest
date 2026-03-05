@@ -1,4 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
+const slugify = (text) =>
+    text.toLowerCase().replace(/\s+/g, "-");
 
 const tabContent = {
     All: {
@@ -32,6 +36,8 @@ const tabContent = {
 };
 
 export default function ToolsGrid({ activeTab, generators }) {
+    const navigate = useNavigate();
+
     const filteredTools =
         activeTab === "All"
             ? generators
@@ -60,7 +66,10 @@ export default function ToolsGrid({ activeTab, generators }) {
                     {filteredTools.map((tool) => (
                         <div
                             key={tool.id}
-                            className="group relative p-4 rounded-lg bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                            onClick={() =>
+                                navigate(`/generators/${slugify(tool.title)}`)
+                            }
+                            className="group relative p-4 rounded-lg bg-white/70 dark:bg-white/5 backdrop-blur-xl border border-gray-200 dark:border-white/10 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
                         >
                             {/* Glow Effect */}
                             <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-cyan-400/10 to-blue-500/10 blur-xl"></div>

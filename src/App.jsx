@@ -16,6 +16,7 @@ import Terms from "./pages/TermsPage";
 import Changelog from "./pages/Changelog";
 import Roadmap from "./pages/Roadmap";
 import FAQPage from "./pages/FAQPage";
+import GeneratorSinglePage from "./components/generators/GeneratorSinglePage";
 
 export default function App() {
   return (
@@ -39,6 +40,8 @@ export default function App() {
           <Route path="/changelog" element={<Changelog />} />
           <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/faq" element={<FAQPage />} />
+
+          <Route path="/generators/:slug" element={<GeneratorSinglePage />} />
 
 
           {/* <Route path="/contact" element={<Contact />} /> */}
