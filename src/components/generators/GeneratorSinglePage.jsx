@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import generators from "../../data/generatorTools";
-import { ArrowRight, ChevronRightIcon } from "lucide-react";
+import { ArrowRight, ArrowUp, ArrowUpIcon, ChevronRightIcon } from "lucide-react";
 import ToolInterface from "./ToolInterface";
 import {
     BoltIcon,
@@ -11,66 +11,30 @@ import {
     GlobeAltIcon,
     AdjustmentsHorizontalIcon
 } from "@heroicons/react/24/outline";
+import HowItWorks from "./HowItWorks";
+import FeatureSection from "./FeatureSection";
+import ExampleSection from "./ExampleSection";
+import FAQSection from "./FAQSection";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
 
-
-const toolFeatures = [
-    {
-        title: "Lightning Fast",
-        description:
-            "Generate AI text instantly with optimized processing and powerful AI models.",
-        icon: BoltIcon
-    },
-    {
-        title: "AI Powered",
-        description:
-            "Advanced AI technology generates accurate, high-quality text for any use case.",
-        icon: CpuChipIcon
-    },
-    {
-        title: "Multiple Writing Styles",
-        description:
-            "Choose from Formal, Casual, Expand, or Shorten to get the exact tone you need.",
-        icon: AdjustmentsHorizontalIcon
-    },
-    {
-        title: "Secure & Private",
-        description:
-            "Your prompts and generated results stay completely private and secure.",
-        icon: ShieldCheckIcon
-    },
-    {
-        title: "Works Everywhere",
-        description:
-            "Access the tool from any device — desktop, tablet, or mobile.",
-        icon: GlobeAltIcon
-    },
-    {
-        title: "Smart Results",
-        description:
-            "AI understands your input and generates meaningful and relevant results.",
-        icon: SparklesIcon
-    }
-];
-
 const slides = [
-  {
-    prompt: "Generate a caption for a graphic designer's latest logo reveal.",
-    result:
-      "Excited to unveil my latest creation! 🎨✨ Here's the new logo that captures the essence of the brand. #LogoDesign #CreativeProcess",
-  },
-  {
-    prompt: "Explain blockchain technology in simple terms.",
-    result:
-      "Blockchain is a digital ledger that stores transactions securely across many computers. It ensures transparency and prevents data manipulation.",
-  },
-  {
-    prompt: "Write a short product description for wireless earbuds.",
-    result:
-      "Experience crystal-clear sound with our wireless earbuds. Lightweight design, long battery life, and immersive audio for your everyday music.",
-  },
+    {
+        prompt: "Generate a caption for a graphic designer's latest logo reveal.",
+        result:
+            "Excited to unveil my latest creation! 🎨✨ Here's the new logo that captures the essence of the brand. #LogoDesign #CreativeProcess",
+    },
+    {
+        prompt: "Explain blockchain technology in simple terms.",
+        result:
+            "Blockchain is a digital ledger that stores transactions securely across many computers. It ensures transparency and prevents data manipulation.",
+    },
+    {
+        prompt: "Write a short product description for wireless earbuds.",
+        result:
+            "Experience crystal-clear sound with our wireless earbuds. Lightweight design, long battery life, and immersive audio for your everyday music.",
+    },
 ];
 
 
@@ -101,10 +65,10 @@ export default function GeneratorSinglePage() {
 
     if (!tool) return <div className="p-20 text-center">Tool not found</div>;
 
-     const [active, setActive] = useState(0);
+    const [active, setActive] = useState(0);
 
-  const prevIndex = (active - 1 + slides.length) % slides.length;
-  const nextIndex = (active + 1) % slides.length;
+    const prevIndex = (active - 1 + slides.length) % slides.length;
+    const nextIndex = (active + 1) % slides.length;
 
     return (
         <div className="bg-white dark:bg-gray-900">
@@ -207,230 +171,183 @@ export default function GeneratorSinglePage() {
 
 
             {/* Features Section */}
-            <section className="py-20 bg-gray-50 dark:bg-gray-900">
-
-                <div className="max-w-7xl mx-auto px-6">
-
-                    {/* Heading */}
-                    <div className="text-center max-w-2xl mx-auto mb-14">
-                        <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
-                            Powerful Features
-                        </h2>
-                        <p className="mt-4 text-gray-600 dark:text-gray-400">
-                            Everything you need to generate AI text quickly and efficiently.
-                        </p>
-                    </div>
-
-                    {/* Feature Grid */}
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                        {toolFeatures.map((feature, index) => {
-                            const Icon = feature.icon;
-
-                            return (
-                                <div
-                                    key={index}
-                                    className="group relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-8 transition hover:shadow-xl hover:-translate-y-1"
-                                >
-
-                                    {/* Icon */}
-                                    <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white mb-5">
-                                        <Icon className="w-6 h-6" />
-                                    </div>
-
-                                    {/* Title */}
-                                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                                        {feature.title}
-                                    </h3>
-
-                                    {/* Description */}
-                                    <p className="mt-3 text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                                        {feature.description}
-                                    </p>
-
-                                    {/* Hover Glow */}
-                                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition bg-gradient-to-r from-indigo-500/5 to-cyan-500/5"></div>
-
-                                </div>
-                            );
-                        })}
-
-                    </div>
-
-                </div>
-
-            </section>
+            <FeatureSection />
 
 
             {/* How It Works */}
-               <section className="py-24 bg-gray-50 dark:bg-gray-900 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 text-center">
+            <section className="py-24 bg-gray-50 dark:bg-gray-900 overflow-hidden">
+                <div className="max-w-6xl mx-auto px-6 text-center">
 
-        {/* Heading */}
-        <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
-          See how it works
-        </h2>
-
-        <p className="mt-3 text-gray-600 dark:text-gray-400">
-          Get inspired by these text generation prompts
-        </p>
-
-        <div className="relative mt-16">
-
-          {/* LEFT CARD */}
-          <div className="hidden lg:block absolute left-0 top-14 w-72 transform -translate-x-10 opacity-40 blur-sm transition-all duration-500">
-            <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
-              <p className="text-sm text-gray-500">
-                {slides[prevIndex].prompt}
-              </p>
-            </div>
-          </div>
-
-          {/* RIGHT CARD */}
-          <div className="hidden lg:block absolute right-0 top-14 w-72 transform translate-x-10 opacity-40 blur-sm transition-all duration-500">
-            <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
-              <p className="text-sm text-gray-500">
-                {slides[nextIndex].prompt}
-              </p>
-            </div>
-          </div>
-
-          {/* CENTER PROMPT */}
-          <div className="inline-block bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow mb-6 text-sm font-medium">
-            {slides[active].prompt}
-          </div>
-
-          {/* RESULT CARD */}
-          <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-left transition-all duration-500">
-
-            <SparklesIcon className="w-6 h-6 text-emerald-500 mb-4" />
-
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-              {slides[active].result}
-            </p>
-
-          </div>
-
-          {/* DOTS */}
-          <div className="flex justify-center gap-3 mt-8">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                className={`h-3 rounded-full transition-all duration-300 ${
-                  active === i
-                    ? "w-8 bg-emerald-600"
-                    : "w-3 bg-gray-300"
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* CTA */}
-          <button className="mt-10 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-full font-medium transition">
-            Try AI text generator
-          </button>
-
-        </div>
-      </div>
-    </section>
-
-            {/* Example Output */}
-            <section className="py-16 bg-gray-50 dark:bg-gray-800">
-                <div className="max-w-4xl mx-auto px-6 text-center">
-
-                    <h2 className="text-3xl font-bold mb-8 text-gray-900 dark:text-white">
-                        Example Output
+                    {/* Heading */}
+                    <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
+                        See how it works
                     </h2>
 
-                    <div className="space-y-3">
+                    <p className="mt-3 text-gray-600 dark:text-gray-400">
+                        Get inspired by these text generation prompts
+                    </p>
 
-                        <div className="bg-white dark:bg-gray-900 border rounded-lg p-4">
-                            Example Result 1
+                    <div className="relative mt-16">
+
+                        {/* LEFT CARD */}
+                        <div className="hidden lg:block absolute left-0 top-14 w-72 transform -translate-x-10 opacity-40 blur-sm transition-all duration-500">
+                            <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+                                <p className="text-sm text-gray-500">
+                                    {slides[prevIndex].prompt}
+                                </p>
+                            </div>
                         </div>
 
-                        <div className="bg-white dark:bg-gray-900 border rounded-lg p-4">
-                            Example Result 2
+                        {/* RIGHT CARD */}
+                        <div className="hidden lg:block absolute right-0 top-14 w-72 transform translate-x-10 opacity-40 blur-sm transition-all duration-500">
+                            <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
+                                <p className="text-sm text-gray-500">
+                                    {slides[nextIndex].prompt}
+                                </p>
+                            </div>
                         </div>
 
-                        <div className="bg-white dark:bg-gray-900 border rounded-lg p-4">
-                            Example Result 3
+                        {/* CENTER PROMPT */}
+                        <div className="inline-block bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow mb-6 text-sm font-medium">
+                            {slides[active].prompt}
                         </div>
+
+                        {/* RESULT CARD */}
+                        <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-left transition-all duration-500">
+
+                            <SparklesIcon className="w-6 h-6 text-emerald-500 mb-4" />
+
+                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                                {slides[active].result}
+                            </p>
+
+                        </div>
+
+                        {/* DOTS */}
+                        <div className="flex justify-center gap-3 mt-8">
+                            {slides.map((_, i) => (
+                                <button
+                                    key={i}
+                                    onClick={() => setActive(i)}
+                                    className={`h-3 rounded-full transition-all duration-300 ${active === i
+                                        ? "w-8 bg-emerald-600"
+                                        : "w-3 bg-gray-300"
+                                        }`}
+                                />
+                            ))}
+                        </div>
+
+                        {/* CTA */}
+                        <button className="mt-10 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-full font-medium transition">
+                            Try AI text generator
+                        </button>
 
                     </div>
-
                 </div>
             </section>
 
+            <HowItWorks />
+
+            <ExampleSection />
+
             {/* Related Tools */}
-            <section className="py-16">
-                <div className="max-w-6xl mx-auto px-6">
+            <section className="relative bg-white py-16 px-6 overflow-hidden">
 
-                    <h2 className="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">
-                        Related Tools
-                    </h2>
+                {/* Subtle dot grid */}
 
-                    <div className="grid md:grid-cols-4 gap-6">
+                <div className="relative z-20 max-w-6xl mx-auto">
 
+                    {/* Header */}
+                    <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
+                        <div>
+
+                            <h2 className="text-4xl font-medium text-gray-900 tracking-tight leading-tight">
+                                Related <span className="text-cyan-700">generators</span>
+                            </h2>
+                            <p className="mt-2 text-base text-gray-500 max-w-md leading-relaxed">
+                                Explore more AI-powered tools built to save you time and sharpen your writing.
+                            </p>
+                        </div>
+
+                        <Link
+                            to="/generators"
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors duration-150 whitespace-nowrap group"
+                        >
+                            View all tools
+                            <span className="transition-transform duration-200 group-hover:translate-x-1">
+                                <ArrowUp />
+                            </span>
+                        </Link>
+                    </div>
+
+                    {/* Grid */}
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 border border-gray-200 rounded-xl overflow-hidden">
                         {relatedTools.map((tool) => (
                             <Link
                                 key={tool.id}
                                 to={`/generators/${slugify(tool.title)}`}
-                                className="p-6 bg-gray-50 dark:bg-gray-800 rounded-lg hover:shadow"
+                                className="group relative bg-white  p-7 flex flex-col gap-4 transition-colors duration-200 cursor-pointer overflow-hidden"
                             >
-                                <h3 className="font-semibold">{tool.title}</h3>
-                                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                                    {tool.description}
-                                </p>
+                                {/* Top hover accent */}
+                                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-cyan-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                {/* Spotlight */}
+                                <div
+                                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                                    style={{
+                                        background:
+                                            "radial-gradient(circle at 50% 0%, rgba(8,145,178,0.08) 0%, transparent 70%)",
+                                    }}
+                                />
+
+                                {/* Icon + badge row */}
+                                <div className="flex items-start justify-between">
+                                    <div className="w-11 h-11 flex items-center justify-center text-xl bg-gray-50 border border-gray-200 rounded-xl transition-all duration-300 group-hover:border-emerald-200 group-hover:bg-emerald-50">
+                                        {tool.icon}
+                                    </div>
+                                    {tool.badge && (
+                                        <span className={`text-[9px] font-bold tracking-[0.15em] uppercase px-2.5 py-1 rounded-full border ${tool.badgeColor}`}>
+                                            {tool.badge}
+                                        </span>
+                                    )}
+                                </div>
+
+                                {/* Text */}
+                                <div>
+                                    <h3 className="text-sm font-bold text-gray-900 leading-snug tracking-tight group-hover:text-cyan-800 transition-colors duration-150">
+                                        {tool.title}
+                                    </h3>
+                                    <p className="mt-1.5 text-xs text-gray-400 group-hover:text-gray-500 leading-relaxed transition-colors duration-150">
+                                        {tool.description}
+                                    </p>
+                                </div>
+
+                                {/* Arrow — appears on hover */}
+                                <div className="flex items-center gap-1 text-xs font-semibold text-cyan-600 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200">
+                                    Try it free <ArrowUpIcon size={14} />
+                                </div>
                             </Link>
                         ))}
+                    </div>
 
+                    {/* Bottom CTA */}
+                    <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 px-1">
+                        <p className="text-sm text-gray-400">
+                            Can't find what you need?{" "}
+                            <Link to="/suggest" className="text-emerald-700 font-semibold hover:underline">
+                                Suggest a tool →
+                            </Link>
+                        </p>
+                        <div className="flex items-center gap-2 text-xs text-gray-400">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            {relatedTools.length} tools available · New added weekly
+                        </div>
                     </div>
 
                 </div>
             </section>
 
-            {/* FAQ */}
-            <section className="py-16 bg-gray-50 dark:bg-gray-800">
-                <div className="max-w-4xl mx-auto px-6">
-
-                    <h2 className="text-3xl font-bold text-center mb-10 text-gray-900 dark:text-white">
-                        Frequently Asked Questions
-                    </h2>
-
-                    <div className="space-y-6">
-
-                        <div>
-                            <h3 className="font-semibold text-lg">
-                                Is this tool free to use?
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-400">
-                                Yes, all tools on ToolNest are completely free to use.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 className="font-semibold text-lg">
-                                Can I use it unlimited times?
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-400">
-                                Yes, there are no usage limits.
-                            </p>
-                        </div>
-
-                        <div>
-                            <h3 className="font-semibold text-lg">
-                                Do I need to sign up?
-                            </h3>
-                            <p className="text-gray-600 dark:text-gray-400">
-                                No signup is required.
-                            </p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </section>
+            <FAQSection />
 
         </div>
     );

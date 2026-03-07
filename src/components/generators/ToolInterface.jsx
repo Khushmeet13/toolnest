@@ -40,7 +40,7 @@ export default function ToolInterface({ tool }) {
     ];
 
     return (
-        <div className="min-h-screen bg-white dark:from-gray-950 dark:via-gray-900 dark:to-black">
+        <div className="min-h-screen bg-white">
             {/* Full-width hero-ish header */}
             <div className="relative max-w-6xl mx-auto border-b border-gray-200 dark:border-gray-800/50 bg-white/40 dark:bg-gray-900/30 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-10 md:pt-14 lg:pt-16 pb-5">
