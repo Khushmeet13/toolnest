@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const slides = [
@@ -123,13 +124,13 @@ export default function HowItWorks() {
                     </p>
 
                     {/* Slider */}
-                    <div className="relative mt-16 h-[340px] flex items-center justify-center">
+                    <div className="relative h-[280px] flex items-center justify-center">
 
                         {/* Left arrow */}
                         <button
                             onClick={prev}
-                            className="absolute top-1/2 -translate-y-1/2 z-30 w-10 h-10 bg-white border border-black/10 rounded-full flex items-center justify-center text-[#374535] shadow-md transition-all duration-200 hover:bg-emerald-700 hover:text-white hover:border-emerald-700 hover:scale-105 cursor-pointer"
-                            style={{ left: "calc(50% - 260px)" }}
+                            className="absolute top-1/2 -translate-y-1/2 z-30 w-10 h-10 bg-white border border-black/10 rounded-full flex items-center justify-center text-[#374535] shadow-md transition-all duration-200 hover:bg-cyan-600 hover:text-white hover:border-cyan-700 hover:scale-105 cursor-pointer"
+                            style={{ left: "calc(30% - 260px)" }}
                         >
                             <ChevronLeft />
                         </button>
@@ -137,8 +138,8 @@ export default function HowItWorks() {
                         {/* Right arrow */}
                         <button
                             onClick={next}
-                            className="absolute top-1/2 -translate-y-1/2 z-30 w-10 h-10 bg-white border border-black/10 rounded-full flex items-center justify-center text-[#374535] shadow-md transition-all duration-200 hover:bg-emerald-700 hover:text-white hover:border-emerald-700 hover:scale-105 cursor-pointer"
-                            style={{ right: "calc(50% - 260px)" }}
+                            className="absolute top-1/2 -translate-y-1/2 z-30 w-10 h-10 bg-white border border-black/10 rounded-full flex items-center justify-center text-[#374535] shadow-md transition-all duration-200 hover:bg-cyan-600 hover:text-white hover:border-cyan-700 hover:scale-105 cursor-pointer"
+                            style={{ right: "calc(30% - 260px)" }}
                         >
                             <ChevronRight />
                         </button>
@@ -151,22 +152,22 @@ export default function HowItWorks() {
                                 <div
                                     key={i}
                                     onClick={() => pos !== "center" && go(i)}
-                                    className="absolute w-[360px] bg-white rounded-2xl p-7 border border-black/[0.06] cursor-pointer select-none transition-all duration-[450ms]"
+                                    className="absolute max-w-3xl bg-white rounded-xl p-6 border border-black/[0.06] cursor-pointer select-none transition-all duration-[450ms]"
                                     style={{
                                         transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                                         ...cardStyles[pos],
                                     }}
                                 >
                                     {/* Prompt bubble */}
-                                    <div className="inline-block bg-[#f0f5ef] border border-[#d8e8d4] rounded-full px-4 py-2 text-[13px] font-medium text-[#2a3d28] mb-5 text-left leading-snug">
+                                    <div className="inline-block  mb-6 text-sm font-medium">
                                         {slide.prompt}
                                     </div>
 
                                     {/* Result */}
                                     <div className="flex items-start gap-3 text-left">
                                         <div
-                                            className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-emerald-700 mt-0.5"
-                                            style={{ background: "linear-gradient(135deg, #d4f0e0, #a8dfc0)" }}
+                                            className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-cyan-600 mt-0.5"
+                                            
                                         >
                                             <SparkleIcon />
                                         </div>
@@ -180,14 +181,14 @@ export default function HowItWorks() {
                     </div>
 
                     {/* Dots */}
-                    <div className="flex justify-center items-center gap-2 mt-10">
+                    <div className="flex justify-center items-center gap-2">
                         {slides.map((_, i) => (
                             <button
                                 key={i}
                                 onClick={() => go(i)}
                                 className={`h-[7px] rounded-full border-none cursor-pointer transition-all duration-300 ${i === active
-                                        ? "w-7 bg-emerald-700"
-                                        : "w-[7px] bg-[#c8d5c6] hover:bg-[#97b594]"
+                                    ? "w-7 bg-cyan-600"
+                                    : "w-[7px] bg-[#c8d5c6] hover:bg-cyan-600/40"
                                     }`}
                             />
                         ))}
@@ -196,13 +197,15 @@ export default function HowItWorks() {
                     {/* CTA */}
                     <div className="mt-12">
                         <button
-                            className="group relative inline-flex items-center gap-2 bg-emerald-800 hover:bg-emerald-900 text-white text-[15px] font-semibold px-9 py-3.5 rounded-full cursor-pointer tracking-wide transition-all duration-200 overflow-hidden hover:-translate-y-0.5 hover:shadow-xl hover:shadow-emerald-800/40 border-0"
+                            className="group relative inline-flex items-center gap-1 bg-cyan-600 hover:bg-cyan-600/80 text-white text-sm font-semibold px-4.5 py-2 rounded-full cursor-pointer tracking-wide transition-all duration-200 overflow-hidden hover:-translate-y-0.5 hover:shadow-xl hover:shadow-emerald-800/40 border-0"
                             style={{ boxShadow: "0 4px 24px rgba(29,107,68,0.3)" }}
                         >
                             {/* Shimmer sweep */}
                             <span className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:left-full transition-[left] duration-[400ms]" />
                             Try AI text generator
-                            <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                            <span className="transition-transform duration-200 group-hover:translate-x-1">
+                                <ArrowRight size={14} />
+                            </span>
                         </button>
                     </div>
 

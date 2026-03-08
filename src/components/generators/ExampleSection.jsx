@@ -69,37 +69,33 @@ export default function ExampleSection() {
   };
 
   return (
-    <section className="relative bg-white py-24 px-6 overflow-hidden">
+    <section className="relative bg-gray-50 py-16 px-6 overflow-hidden">
 
       <div className="relative z-20 max-w-5xl mx-auto">
 
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] uppercase text-emerald-700 bg-emerald-50 border border-emerald-200 px-4 py-1.5 rounded-full mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-            Live Examples
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
-            See the <span className="text-emerald-700">difference</span> it makes
+          <h2 className="text-4xl font-medium text-gray-900 tracking-tight leading-tight">
+            See the <span className="text-cyan-600">difference</span> it makes
           </h2>
-          <p className="mt-4 text-base text-gray-500 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-2 text-base text-gray-500 max-w-lg mx-auto leading-relaxed">
             Real inputs transformed in seconds. Pick a mode, paste your text — done.
           </p>
         </div>
 
         {/* Mode tabs */}
-        <div className="flex justify-center gap-2 mb-10 flex-wrap">
+        <div className="flex justify-center gap-2 mb-6 flex-wrap">
           {examples.map((ex, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-200 cursor-pointer ${
+              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 cursor-pointer ${
                 active === i
                   ? "bg-gray-900 text-white border-gray-900 shadow-md"
-                  : "bg-white text-gray-500 border-gray-200 hover:border-gray-400 hover:text-gray-700"
+                  : "bg-white text-gray-500 border-gray-200 hover:border-cyan-600 hover:text-gray-700"
               }`}
             >
-              <span className={`w-2 h-2 rounded-full ${active === i ? "bg-emerald-400" : "bg-gray-300"}`} />
+              <span className={`w-2 h-2 rounded-full ${active === i ? "bg-cyan-600" : "bg-gray-300"}`} />
               {ex.mode}
             </button>
           ))}
@@ -111,7 +107,7 @@ export default function ExampleSection() {
             key={i}
             className={`transition-all duration-300 ${active === i ? "block" : "hidden"}`}
           >
-            <div className="grid md:grid-cols-2 gap-px bg-gray-200 rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+            <div className="grid md:grid-cols-2 gap-px bg-gray-200 rounded-lg overflow-hidden border border-gray-200 shadow-sm">
 
               {/* Input side */}
               <div className="bg-white p-8">
@@ -164,14 +160,14 @@ export default function ExampleSection() {
             {/* Arrow connector label */}
             <div className="flex items-center justify-center gap-3 mt-6">
               <span className="text-xs text-gray-400">Input</span>
-              <div className="flex items-center gap-1.5 text-emerald-600">
+              <div className="flex items-center gap-1.5 text-cyan-600">
                 <ArrowIcon />
               </div>
-              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-600 bg-cyan-50 border border-cyan-600 px-3 py-1 rounded-full">
                 <SparkleIcon />
                 AI transforms in &lt;2s
               </span>
-              <div className="flex items-center gap-1.5 text-emerald-600">
+              <div className="flex items-center gap-1.5 text-cyan-600">
                 <ArrowIcon />
               </div>
               <span className="text-xs text-gray-400">Output</span>
@@ -180,7 +176,7 @@ export default function ExampleSection() {
         ))}
 
         {/* Bottom stat pills */}
-        <div className="flex flex-wrap justify-center gap-3 mt-14">
+        {/* <div className="flex flex-wrap justify-center gap-3 mt-14">
           {[
             "⚡ Generates in under 2 seconds",
             "🎯 4 transform modes",
@@ -194,14 +190,7 @@ export default function ExampleSection() {
               {item}
             </span>
           ))}
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-10">
-          <button className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-bold px-8 py-3.5 rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-700/20 cursor-pointer border-0">
-            Try it yourself — it's free →
-          </button>
-        </div>
+        </div> */}
 
       </div>
     </section>

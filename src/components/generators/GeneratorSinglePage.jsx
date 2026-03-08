@@ -168,86 +168,8 @@ export default function GeneratorSinglePage() {
             </div>
 
             <ToolInterface tool={tool} />
-
-
-            {/* Features Section */}
             <FeatureSection />
-
-
-            {/* How It Works */}
-            <section className="py-24 bg-gray-50 dark:bg-gray-900 overflow-hidden">
-                <div className="max-w-6xl mx-auto px-6 text-center">
-
-                    {/* Heading */}
-                    <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
-                        See how it works
-                    </h2>
-
-                    <p className="mt-3 text-gray-600 dark:text-gray-400">
-                        Get inspired by these text generation prompts
-                    </p>
-
-                    <div className="relative mt-16">
-
-                        {/* LEFT CARD */}
-                        <div className="hidden lg:block absolute left-0 top-14 w-72 transform -translate-x-10 opacity-40 blur-sm transition-all duration-500">
-                            <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
-                                <p className="text-sm text-gray-500">
-                                    {slides[prevIndex].prompt}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* RIGHT CARD */}
-                        <div className="hidden lg:block absolute right-0 top-14 w-72 transform translate-x-10 opacity-40 blur-sm transition-all duration-500">
-                            <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow">
-                                <p className="text-sm text-gray-500">
-                                    {slides[nextIndex].prompt}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* CENTER PROMPT */}
-                        <div className="inline-block bg-white dark:bg-gray-800 px-6 py-3 rounded-full shadow mb-6 text-sm font-medium">
-                            {slides[active].prompt}
-                        </div>
-
-                        {/* RESULT CARD */}
-                        <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-left transition-all duration-500">
-
-                            <SparklesIcon className="w-6 h-6 text-emerald-500 mb-4" />
-
-                            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                {slides[active].result}
-                            </p>
-
-                        </div>
-
-                        {/* DOTS */}
-                        <div className="flex justify-center gap-3 mt-8">
-                            {slides.map((_, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => setActive(i)}
-                                    className={`h-3 rounded-full transition-all duration-300 ${active === i
-                                        ? "w-8 bg-emerald-600"
-                                        : "w-3 bg-gray-300"
-                                        }`}
-                                />
-                            ))}
-                        </div>
-
-                        {/* CTA */}
-                        <button className="mt-10 bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-full font-medium transition">
-                            Try AI text generator
-                        </button>
-
-                    </div>
-                </div>
-            </section>
-
             <HowItWorks />
-
             <ExampleSection />
 
             {/* Related Tools */}
@@ -271,11 +193,11 @@ export default function GeneratorSinglePage() {
 
                         <Link
                             to="/generators"
-                            className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 hover:text-emerald-800 transition-colors duration-150 whitespace-nowrap group"
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-600 hover:text-emerald-800 transition-colors duration-150 whitespace-nowrap group"
                         >
                             View all tools
                             <span className="transition-transform duration-200 group-hover:translate-x-1">
-                                <ArrowUp />
+                                <ArrowUp size={14} />
                             </span>
                         </Link>
                     </div>
@@ -334,12 +256,12 @@ export default function GeneratorSinglePage() {
                     <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 px-1">
                         <p className="text-sm text-gray-400">
                             Can't find what you need?{" "}
-                            <Link to="/suggest" className="text-emerald-700 font-semibold hover:underline">
+                            <Link to="/suggest" className="text-cyan-600 font-semibold hover:underline">
                                 Suggest a tool →
                             </Link>
                         </p>
                         <div className="flex items-center gap-2 text-xs text-gray-400">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
                             {relatedTools.length} tools available · New added weekly
                         </div>
                     </div>
