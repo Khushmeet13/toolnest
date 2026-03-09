@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 .field-outline {
   @apply relative rounded-lg border border-slate-300 bg-white px-4 py-2 transition;
 }

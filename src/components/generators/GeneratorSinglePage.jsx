@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import generators from "../../data/generatorTools";
 import { ArrowRight, ArrowUp, ArrowUpIcon, ChevronRightIcon } from "lucide-react";
-import ToolInterface from "./ToolInterface";
+import ToolInterface from "./AITextToolInterface";
 import {
     BoltIcon,
     SparklesIcon,
@@ -15,6 +15,10 @@ import HowItWorks from "./HowItWorks";
 import FeatureSection from "./FeatureSection";
 import ExampleSection from "./ExampleSection";
 import FAQSection from "./FAQSection";
+import InstagramCaptionGenerator from "./InstagramCaption";
+import EmailTemplateGenerator from "./EmailTemplateGenerator";
+import ResumeSummaryTool from "./Resumesummarytool";
+import FakeDataGenerator from "./FakeDataGenerator";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
@@ -37,9 +41,16 @@ const slides = [
     },
 ];
 
+const toolComponents = {
+    "instagram-caption-generator": InstagramCaptionGenerator,
+    "ai-text-generator": ToolInterface,
+};
+
 
 export default function GeneratorSinglePage() {
     const { slug } = useParams();
+    const ToolComponent = toolComponents[slug];
+
 
     const tool = generators.find(
         (t) => slugify(t.title) === slug
@@ -167,7 +178,15 @@ export default function GeneratorSinglePage() {
                 </div>
             </div>
 
-            <ToolInterface tool={tool} />
+            <EmailTemplateGenerator />
+            <ResumeSummaryTool />
+            <FakeDataGenerator />
+
+            {ToolComponent ? (
+                <ToolComponent />
+            ) : (
+                <ToolInterface tool={tool} />
+            )}
             <FeatureSection />
             <HowItWorks />
             <ExampleSection />
@@ -204,52 +223,52 @@ export default function GeneratorSinglePage() {
 
                     {/* Grid */}
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gray-200 border border-gray-200 rounded-xl overflow-hidden">
-                        {relatedTools.map((tool) => (
-                            <Link
-                                key={tool.id}
-                                to={`/generators/${slugify(tool.title)}`}
-                                className="group relative bg-white  p-7 flex flex-col gap-4 transition-colors duration-200 cursor-pointer overflow-hidden"
-                            >
-                                {/* Top hover accent */}
-                                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-cyan-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {relatedTools.map((tool) => {
+                            const Icon = tool.icon;
 
-                                {/* Spotlight */}
-                                <div
-                                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                                    style={{
-                                        background:
-                                            "radial-gradient(circle at 50% 0%, rgba(8,145,178,0.08) 0%, transparent 70%)",
-                                    }}
-                                />
+                            return (
 
-                                {/* Icon + badge row */}
-                                <div className="flex items-start justify-between">
-                                    <div className="w-11 h-11 flex items-center justify-center text-xl bg-gray-50 border border-gray-200 rounded-xl transition-all duration-300 group-hover:border-emerald-200 group-hover:bg-emerald-50">
-                                        {tool.icon}
+                                <Link
+                                    key={tool.id}
+                                    to={`/generators/${slugify(tool.title)}`}
+                                    className="group relative bg-white  p-7 flex flex-col gap-4 transition-colors duration-200 cursor-pointer overflow-hidden"
+                                >
+                                    {/* Top hover accent */}
+                                    <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-cyan-600 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                                    {/* Spotlight */}
+                                    <div
+                                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                                        style={{
+                                            background:
+                                                "radial-gradient(circle at 50% 0%, rgba(8,145,178,0.08) 0%, transparent 70%)",
+                                        }}
+                                    />
+
+                                    {/* Icon + badge row */}
+                                    <div className="flex items-start gap-2">
+                                        <div className="flex items-center justify-center text-xl rounded-xl transition-all duration-300">
+                                            <Icon className="w-5 h-5 text-cyan-600" />
+                                        </div>
+                                        <h3 className="text-sm font-bold text-gray-900 leading-snug tracking-tight group-hover:text-cyan-800 transition-colors duration-150">
+                                            {tool.title}
+                                        </h3>
                                     </div>
-                                    {tool.badge && (
-                                        <span className={`text-[9px] font-bold tracking-[0.15em] uppercase px-2.5 py-1 rounded-full border ${tool.badgeColor}`}>
-                                            {tool.badge}
-                                        </span>
-                                    )}
-                                </div>
 
-                                {/* Text */}
-                                <div>
-                                    <h3 className="text-sm font-bold text-gray-900 leading-snug tracking-tight group-hover:text-cyan-800 transition-colors duration-150">
-                                        {tool.title}
-                                    </h3>
-                                    <p className="mt-1.5 text-xs text-gray-400 group-hover:text-gray-500 leading-relaxed transition-colors duration-150">
-                                        {tool.description}
-                                    </p>
-                                </div>
+                                    {/* Text */}
+                                    <div>
+                                        <p className=" text-xs text-gray-400 group-hover:text-gray-500 leading-relaxed transition-colors duration-150">
+                                            {tool.description}
+                                        </p>
+                                    </div>
 
-                                {/* Arrow — appears on hover */}
-                                <div className="flex items-center gap-1 text-xs font-semibold text-cyan-600 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200">
-                                    Try it free <ArrowUpIcon size={14} />
-                                </div>
-                            </Link>
-                        ))}
+                                    {/* Arrow — appears on hover */}
+                                    <div className="flex items-center gap-1 text-xs font-semibold text-cyan-600 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200">
+                                        Try it free <ArrowUpIcon size={14} />
+                                    </div>
+                                </Link>
+                            );
+                        })}
                     </div>
 
                     {/* Bottom CTA */}
