@@ -18,8 +18,8 @@ function Field({ label, placeholder, value, onChange, required }) {
   const [focused, setFocused] = useState(false);
   return (
     <div className="flex flex-col gap-1.5">
-      <label className={`text-[10px] font-bold tracking-[0.12em] uppercase transition-colors duration-200 ${focused ? "text-amber-300" : "text-slate-500"}`}>
-        {label}{required && <span className="text-amber-300 ml-0.5">*</span>}
+      <label className={`text-[10px] font-bold tracking-[0.12em] uppercase transition-colors duration-200 ${focused ? "text-cyan-300" : "text-slate-500"}`}>
+        {label}{required && <span className="text-cyan-300 ml-0.5">*</span>}
       </label>
       <input
         type="text"
@@ -30,7 +30,7 @@ function Field({ label, placeholder, value, onChange, required }) {
         onBlur={() => setFocused(false)}
         className={`w-full px-3.5 py-2.5 rounded-xl text-[13px] outline-none transition-all duration-200 bg-white/[0.03] text-slate-200 placeholder:text-slate-600
           ${focused
-            ? "border border-amber-400/50 shadow-[0_0_0_3px_rgba(251,191,36,0.07)] bg-amber-400/[0.03]"
+            ? "border border-cyan-400/50 shadow-[0_0_0_3px_rgba(251,191,36,0.07)] bg-cyan-400/[0.03]"
             : "border border-white/[0.07]"}`}
       />
     </div>
@@ -42,7 +42,7 @@ function Textarea({ label, placeholder, value, onChange, rows = 3, maxLen = 500 
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex justify-between items-center">
-        <label className={`text-[10px] font-bold tracking-[0.12em] uppercase transition-colors duration-200 ${focused ? "text-amber-300" : "text-slate-500"}`}>
+        <label className={`text-[10px] font-bold tracking-[0.12em] uppercase transition-colors duration-200 ${focused ? "text-cyan-300" : "text-slate-500"}`}>
           {label}
         </label>
         <span className={`text-[10px] tabular-nums transition-colors ${value.length > maxLen * 0.85 ? "text-red-400" : "text-slate-700"}`}>
@@ -59,7 +59,7 @@ function Textarea({ label, placeholder, value, onChange, rows = 3, maxLen = 500 
         onBlur={() => setFocused(false)}
         className={`w-full px-3.5 py-2.5 rounded-xl text-[13px] outline-none transition-all duration-200 bg-white/[0.03] text-slate-200 placeholder:text-slate-600 resize-none font-[inherit]
           ${focused
-            ? "border border-amber-400/50 shadow-[0_0_0_3px_rgba(251,191,36,0.07)] bg-amber-400/[0.03]"
+            ? "border border-cyan-400/50 shadow-[0_0_0_3px_rgba(251,191,36,0.07)] bg-cyan-400/[0.03]"
             : "border border-white/[0.07]"}`}
       />
     </div>
@@ -197,10 +197,10 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
       `}</style>
 
       {/* ╔══════════════════════════════ CARD ═══════════════════════╗ */}
-      <div className="relative max-w-7xl mx-auto rounded-2xl overflow-hidden border border-white/[0.07] shadow-[0_32px_80px_rgba(0,0,0,0.55)] bg-gradient-to-br from-[#0f1117] via-[#111318] to-[#0d0f14]">
+      <div className="relative max-w-7xl mx-auto my-16 rounded-xl overflow-hidden border border-white/[0.07] shadow-lg shadow-cyan-600/40 bg-gray-900">
 
         {/* gold hairline */}
-        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-amber-300/80 to-transparent" />
+        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-cyan-600/80 to-transparent" />
 
         {/* noise layer */}
         <div
@@ -213,11 +213,11 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
           {/* ── HEADER ── */}
           <div className="flex items-start justify-between mb-7">
             <div>
-              <div className="flex items-center gap-2 mb-2.5">
-                <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-amber-300/20 to-amber-600/10 border border-amber-300/25 text-[13px]">✦</div>
-                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-amber-300">Resume Tool</span>
+              <div className="flex items-center gap-2 mb-5">
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-cyan-300/20 to-cyan-600/10 border border-cyan-300/25 text-[13px] text-cyan-800">✦</div>
+                <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-cyan-600">Resume Tool</span>
               </div>
-              <h2 className="text-[21px] font-bold text-slate-50 tracking-tight leading-tight m-0">Summary Generator</h2>
+              <h2 className="text-[21px] font-medium text-white tracking-tight leading-tight m-0">Summary Generator</h2>
               <p className="text-[12.5px] text-slate-600 mt-1">Upload your resume or fill in manually</p>
             </div>
 
@@ -226,10 +226,10 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
               {[1, 2].map(s => (
                 <div key={s} className="flex items-center gap-1.5">
                   <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-all duration-300
-                    ${step >= s ? "bg-gradient-to-br from-amber-300 to-amber-500 text-[#0f1117]" : "bg-white/5 text-slate-600 border border-white/[0.08]"}`}>
+                    ${step >= s ? "bg-gradient-to-br from-cyan-300 to-cyan-500 text-[#0f1117]" : "bg-gray-200 text-slate-600 border border-cyan-200"}`}>
                     {s}
                   </div>
-                  {s < 2 && <div className={`w-5 h-px transition-all duration-300 ${step > 1 ? "bg-amber-400/50" : "bg-white/[0.08]"}`} />}
+                  {s < 2 && <div className={`w-5 h-px transition-all duration-300 ${step > 1 ? "bg-cyan-600/50" : "bg-gray-200"}`} />}
                 </div>
               ))}
             </div>
@@ -245,7 +245,7 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
                   <button key={t.k} onClick={() => setMode(t.k)}
                     className={`flex-1 py-2.5 px-3 rounded-[9px] text-xs font-semibold cursor-pointer transition-all duration-200
                       ${mode === t.k
-                        ? "bg-gradient-to-br from-amber-300/15 to-amber-600/[0.08] text-amber-300 border border-amber-300/25 shadow-[inset_0_1px_0_rgba(251,191,36,0.15)]"
+                        ? "bg-gradient-to-br from-cyan-300/15 to-cyan-600/[0.08] text-cyan-600 border border-cyan-300/25 shadow-[inset_0_1px_0_rgba(251,191,36,0.15)]"
                         : "text-slate-500 border border-transparent hover:text-slate-400"}`}>
                     {t.label}
                   </button>
@@ -266,17 +266,17 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
                       onClick={() => fileRef.current?.click()}
                       className={`rounded-2xl px-6 py-11 flex flex-col items-center justify-center text-center cursor-pointer transition-all duration-250 border-2 border-dashed
                         ${dragOver
-                          ? "border-amber-400/60 bg-amber-400/[0.05]"
-                          : "border-white/[0.09] bg-white/[0.02] hover:border-amber-400/35 hover:bg-amber-400/[0.03]"}`}>
+                          ? "border-cyan-400/60 bg-cyan-400/[0.05]"
+                          : "border-white/[0.09] bg-white/[0.02] hover:border-cyan-400/35 hover:bg-cyan-400/[0.03]"}`}>
                       {/* icon circle */}
-                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-gradient-to-br from-amber-300/13 to-amber-600/[0.06] border border-amber-300/20">
-                        <svg className="w-6 h-6 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 bg-gradient-to-br from-cyan-300/13 to-cyan-600/[0.06] border border-cyan-300/20">
+                        <svg className="w-6 h-6 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                         </svg>
                       </div>
                       <p className="text-[15px] font-bold text-slate-100 mb-1">Drop your resume here</p>
                       <p className="text-[12.5px] text-slate-600 mb-5">
-                        or <span className="text-amber-300 underline decoration-dotted underline-offset-2">click to browse</span>
+                        or <span className="text-cyan-300 underline decoration-dotted underline-offset-2">click to browse</span>
                       </p>
                       <div className="flex gap-2">
                         {["PDF", "DOCX", "TXT"].map(ext => (
@@ -289,8 +289,8 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
 
                   {/* parsing state */}
                   {uploadState === "parsing" && (
-                    <div className="rounded-2xl px-6 py-11 flex flex-col items-center text-center bg-amber-300/[0.03] border border-amber-300/[0.12]">
-                      <div className="w-12 h-12 rounded-full border-[2.5px] border-amber-300/15 border-t-amber-300 spinner mb-4" />
+                    <div className="rounded-2xl px-6 py-11 flex flex-col items-center text-center bg-cyan-300/[0.03] border border-cyan-300/[0.12]">
+                      <div className="w-12 h-12 rounded-full border-[2.5px] border-cyan-300/15 border-t-cyan-300 spinner mb-4" />
                       <p className="text-sm font-bold text-slate-100 mb-1">Parsing your resume…</p>
                       <p className="text-[12px] text-slate-600 mb-4">AI is reading and extracting your details</p>
                       {uploadedFile && (
@@ -369,8 +369,8 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
                         <button key={t.id} onClick={() => set("tone", t.id)}
                           className={`py-2.5 px-2 rounded-xl text-center text-xs font-semibold cursor-pointer transition-all duration-200
                             ${form.tone === t.id
-                              ? "bg-amber-300/[0.12] border border-amber-400/50 text-amber-300 shadow-[inset_0_1px_0_rgba(251,191,36,0.1)]"
-                              : "bg-white/[0.03] border border-white/[0.06] text-slate-600 hover:border-amber-400/20 hover:text-slate-400"}`}>
+                              ? "bg-cyan-300/[0.12] border border-cyan-400/50 text-cyan-300 shadow-[inset_0_1px_0_rgba(251,191,36,0.1)]"
+                              : "bg-white/[0.03] border border-white/[0.06] text-slate-600 hover:border-cyan-400/20 hover:text-slate-400"}`}>
                           <div className="text-[15px] mb-1">{t.icon}</div>
                           {t.label}
                         </button>
@@ -386,10 +386,10 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
                         <button key={l.id} onClick={() => set("length", l.id)}
                           className={`py-2.5 px-3 rounded-xl text-center cursor-pointer transition-all duration-200
                             ${form.length === l.id
-                              ? "bg-amber-300/[0.12] border border-amber-400/50 text-amber-300"
-                              : "bg-white/[0.03] border border-white/[0.06] text-slate-600 hover:border-amber-400/20 hover:text-slate-400"}`}>
+                              ? "bg-cyan-300/[0.12] border border-cyan-400/50 text-cyan-300"
+                              : "bg-white/[0.03] border border-white/[0.06] text-slate-600 hover:border-cyan-400/20 hover:text-slate-400"}`}>
                           <div className="text-xs font-bold">{l.label}</div>
-                          <div className={`text-[10px] mt-0.5 ${form.length === l.id ? "text-amber-400/60" : "text-slate-700"}`}>{l.sub}</div>
+                          <div className={`text-[10px] mt-0.5 ${form.length === l.id ? "text-cyan-400/60" : "text-slate-700"}`}>{l.sub}</div>
                         </button>
                       ))}
                     </div>
@@ -401,7 +401,7 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
                     disabled={!canGenerate}
                     className={`w-full py-4 rounded-xl text-[13.5px] font-bold tracking-wide flex items-center justify-center gap-2 transition-all duration-200
                       ${canGenerate
-                        ? "bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-[#0f1117] cursor-pointer shadow-[0_4px_20px_rgba(251,191,36,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] hover:shadow-[0_6px_28px_rgba(251,191,36,0.35)] hover:scale-[1.01]"
+                        ? "bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-500 text-[#0f1117] cursor-pointer shadow-[0_4px_20px_rgba(251,191,36,0.25),inset_0_1px_0_rgba(255,255,255,0.1)] hover:shadow-[0_6px_28px_rgba(251,191,36,0.35)] hover:scale-[1.01]"
                         : "bg-white/[0.04] text-slate-600 cursor-not-allowed"}`}>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -427,14 +427,14 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
               </div>
 
               {/* result card */}
-              <div className="relative rounded-2xl p-6 bg-amber-300/[0.03] border border-amber-300/[0.13] min-h-[90px]">
+              <div className="relative rounded-2xl p-6 bg-cyan-300/[0.03] border border-cyan-300/[0.13] min-h-[90px]">
                 {/* corner glow */}
-                <div className="absolute top-0 left-0 w-10 h-10 rounded-tl-2xl bg-gradient-to-br from-amber-300/10 to-transparent pointer-events-none" />
+                <div className="absolute top-0 left-0 w-10 h-10 rounded-tl-2xl bg-gradient-to-br from-cyan-300/10 to-transparent pointer-events-none" />
 
                 {loading ? (
                   <div className="flex flex-col gap-2.5">
                     {[92, 100, 78, 88, 55].map((w, i) => (
-                      <div key={i} className="h-3 rounded-full bg-amber-300/[0.07] skeleton" style={{ width: `${w}%`, animationDelay: `${i * 0.1}s` }} />
+                      <div key={i} className="h-3 rounded-full bg-cyan-300/[0.07] skeleton" style={{ width: `${w}%`, animationDelay: `${i * 0.1}s` }} />
                     ))}
                   </div>
                 ) : (
@@ -458,7 +458,7 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
                       className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold cursor-pointer transition-all duration-200
                         ${copied
                           ? "bg-emerald-400/[0.12] border border-emerald-400/35 text-emerald-400"
-                          : "bg-amber-300/[0.08] border border-amber-400/20 text-amber-300 hover:bg-amber-300/[0.14]"}`}>
+                          : "bg-cyan-300/[0.08] border border-cyan-400/20 text-cyan-300 hover:bg-cyan-300/[0.14]"}`}>
                       {copied ? (
                         <><svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7"/></svg>Copied!</>
                       ) : (
@@ -480,7 +480,7 @@ Length: ${lenMap[form.length]}. First-person voice. ATS-optimized. Return ONLY t
         </div>
 
         {/* gold bottom hairline */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-amber-300/[0.08] to-transparent" />
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-cyan-300/[0.08] to-transparent" />
       </div>
     </>
   );

@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from "react";
+import { faker } from '@faker-js/faker';
 
 const FIELD_TYPES = [
   { id: "fullName",   label: "Full Name",   icon: "👤", cat: "person" },
@@ -114,35 +115,135 @@ export default function FakeDataGenerator() {
   const toggleField = useCallback(id =>
     setSelectedFields(p => p.includes(id) ? p.filter(f=>f!==id) : [...p,id]), []);
 
-  const generate = async () => {
+  // Generate fake data using Faker.js (completely free, no API key needed)
+  const generate = () => {
     if (!selectedFields.length) return;
-    setLoading(true); setData(null);
-    const builtinList = FIELD_TYPES.filter(f=>selectedFields.includes(f.id)).map(f=>f.label).join(", ");
-    const customList  = customFields.filter(f=>selectedFields.includes(f.id))
-      .map(f => f.description ? `${f.label} (${f.description})` : f.label).join(", ");
-    const fieldList = [builtinList, customList].filter(Boolean).join(", ");
-    const allSelectedIds = selectedFields;
-    const prompt = `Generate ${rows} rows of realistic fake data. Each row must have these fields: ${fieldList}. Locale: ${locale}. Return ONLY a valid JSON array of objects. Each object must have exactly these keys: ${allSelectedIds.join(", ")}. For custom fields, generate appropriate realistic values based on the field name/description. No explanation, no markdown, just the JSON array.`;
-    try {
-      const res  = await fetch("https://api.anthropic.com/v1/messages", {
-        method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ model:"claude-sonnet-4-20250514", max_tokens:4000, messages:[{role:"user",content:prompt}] }),
-      });
-      const api  = await res.json();
-      const raw  = api.content?.map(c=>c.text||"").join("").trim();
-      const parsed = JSON.parse(raw.replace(/```json|```/g,"").trim());
-      let formatted = "";
-      if (format==="JSON") formatted = JSON.stringify(parsed,null,2);
-      else if (format==="CSV"||format==="TSV") {
-        const sep = format==="CSV"?",":"\t";
-        formatted = [selectedFields.join(sep), ...parsed.map(r=>selectedFields.map(f=>`"${(r[f]??"").toString().replace(/"/g,'""')}"`).join(sep))].join("\n");
-      } else if (format==="SQL") {
-        formatted = parsed.map(r=>`INSERT INTO fake_data (${selectedFields.join(", ")}) VALUES (${selectedFields.map(f=>`'${(r[f]??"").toString().replace(/'/g,"''")}'`).join(", ")});`).join("\n");
+    
+    setLoading(true);
+    
+    // Simulate loading for better UX
+    setTimeout(() => {
+      try {
+        // Set locale for faker (v8+ way)
+        // Note: In v8+, you need to import specific locales or set globally
+        // For simplicity, we'll just use the default locale
+        
+        // Generate rows
+        const generatedRows = Array.from({ length: rows }, () => {
+          const row = {};
+          
+          selectedFields.forEach(fieldId => {
+            const field = allFields.find(f => f.id === fieldId);
+            
+            // Handle built-in fields with correct v8+ syntax
+            switch(fieldId) {
+              case 'fullName':
+                row.fullName = faker.person.fullName();
+                break;
+              case 'email':
+                row.email = faker.internet.email();
+                break;
+              case 'phone':
+                row.phone = faker.phone.number();
+                break;
+              case 'address':
+                row.address = faker.location.streetAddress();
+                break;
+              case 'city':
+                row.city = faker.location.city();
+                break;
+              case 'country':
+                row.country = faker.location.country();
+                break;
+              case 'company':
+                row.company = faker.company.name();
+                break;
+              case 'jobTitle':
+                row.jobTitle = faker.person.jobTitle();
+                break;
+              case 'username':
+                row.username = faker.internet.userName();
+                break;
+              case 'password':
+                row.password = faker.internet.password();
+                break;
+              case 'ipAddress':
+                row.ipAddress = faker.internet.ip();
+                break;
+              case 'creditCard':
+                row.creditCard = faker.finance.creditCardNumber();
+                break;
+              case 'price':
+                row.price = faker.commerce.price();
+                break;
+              case 'date':
+                row.date = faker.date.past().toISOString().split('T')[0];
+                break;
+              case 'uuid':
+                row.uuid = faker.string.uuid();
+                break;
+              case 'loremText':
+                row.loremText = faker.lorem.sentence();
+                break;
+              default:
+                // Handle custom fields
+                if (fieldId.startsWith('custom_') && field) {
+                  // Generate appropriate data based on field name/description
+                  const fieldName = field.label.toLowerCase();
+                  const desc = field.description?.toLowerCase() || '';
+                  
+                  if (fieldName.includes('age') || desc.includes('age')) {
+                    row[fieldId] = faker.number.int({ min: 18, max: 80 });
+                  } else if (fieldName.includes('color') || desc.includes('color')) {
+                    row[fieldId] = faker.color.human();
+                  } else if (fieldName.includes('product') || desc.includes('product')) {
+                    row[fieldId] = faker.commerce.productName();
+                  } else if (fieldName.includes('animal') || desc.includes('animal')) {
+                    row[fieldId] = faker.animal.type();
+                  } else {
+                    // Default to a generic word
+                    row[fieldId] = faker.lorem.word();
+                  }
+                }
+            }
+          });
+          
+          return row;
+        });
+        
+        console.log("Generated rows:", generatedRows); // Debug log
+        
+        // Format the data based on selected format
+        let formatted = "";
+        if (format === "JSON") {
+          formatted = JSON.stringify(generatedRows, null, 2);
+        } else if (format === "CSV" || format === "TSV") {
+          const sep = format === "CSV" ? "," : "\t";
+          const headers = selectedFields.join(sep);
+          const rows = generatedRows.map(row => 
+            selectedFields.map(f => {
+              const val = row[f]?.toString() || "";
+              return `"${val.replace(/"/g, '""')}"`;
+            }).join(sep)
+          );
+          formatted = [headers, ...rows].join("\n");
+        } else if (format === "SQL") {
+          formatted = generatedRows.map(row => 
+            `INSERT INTO fake_data (${selectedFields.join(", ")}) VALUES (${selectedFields.map(f => `'${(row[f]?.toString() || "").replace(/'/g, "''")}'`).join(", ")});`
+          ).join("\n");
+        }
+        
+        setData({ rows: generatedRows, raw: formatted });
+      } catch (error) {
+        console.error("Generation error:", error);
+        setData({ 
+          rows: [], 
+          raw: "// Error generating data. Please try again." 
+        });
+      } finally {
+        setLoading(false);
       }
-      setData({ rows:parsed, raw:formatted }); setView("table");
-    } catch {
-      setData({ rows:[], raw:"// Error generating data. Please try again." });
-    } finally { setLoading(false); }
+    }, 500); // Small delay for UX
   };
 
   const copy = () => {
@@ -189,7 +290,7 @@ export default function FakeDataGenerator() {
 
           {/* ── Header ── */}
           <div className="mb-8 text-center">
-         
+          
             <h1 className="text-4xl font-medium text-gray-900">Fake data <span className="text-cyan-700">generator</span></h1>
             <p className="text-base text-gray-500 mt-1">Configure your schema, pick a format, and generate realistic test data instantly.</p>
           </div>
@@ -467,7 +568,7 @@ export default function FakeDataGenerator() {
                     {label:"Rows",  val:data.rows.length},
                     {label:"Fields",val:selectedFields.length},
                     {label:"Format",val:format},
-                    {label:"Locale",val:locale.replace("_"," ")},
+                    {label:"Locale",val:locale},
                   ].map(s=>(
                     <div key={s.label} className="flex items-center gap-1.5">
                       <span className="text-[10px] text-gray-400 uppercase tracking-widest font-semibold">{s.label}</span>
