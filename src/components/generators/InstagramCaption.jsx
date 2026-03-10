@@ -272,7 +272,7 @@ Return ONLY a raw JSON array of 3 strings. No markdown, no explanation.`
                                     {PREVIEW_CAPTIONS.map((item, i) => (
                                         <div key={i}
                                             className={`preview-card rounded-lg border p-4 ${activePreview === i
-                                                ? "border-cyan-400/60 bg-cyan-50/50 shadow-md shadow-cyan-100"
+                                                ? "border-cyan-600/60 bg-cyan-50/50 shadow-md shadow-cyan-100"
                                                 : "border-gray-100 bg-gray-50/50"}`}
                                             style={{ opacity: activePreview === i ? 1 : 0.5 }}>
                                             <div className="flex items-center justify-between mb-2">
@@ -280,13 +280,13 @@ Return ONLY a raw JSON array of 3 strings. No markdown, no explanation.`
                                                     {item.niche}
                                                 </span>
                                                 {activePreview === i && (
-                                                    <span className="font-mono-dm text-[8px] text-cyan-400 tracking-widest uppercase flex items-center gap-1">
-                                                        Live <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block cursor-blink" />
+                                                    <span className="font-mono-dm text-[8px] text-cyan-600 tracking-widest uppercase flex items-center gap-1">
+                                                        Live <span className="w-1.5 h-1.5 rounded-full bg-cyan-600 inline-block cursor-blink" />
                                                     </span>
                                                 )}
                                             </div>
                                             <p className="font-display text-[13px] leading-relaxed text-gray-700 mb-1">{item.text}</p>
-                                            <p className="font-mono-dm text-[10px] text-cyan-500/70">{item.tags}</p>
+                                            <p className="font-mono-dm text-[10px] text-cyan-700/70">{item.tags}</p>
                                         </div>
                                     ))}
 
@@ -311,14 +311,14 @@ Return ONLY a raw JSON array of 3 strings. No markdown, no explanation.`
                                 </div>
 
                                 {/* CTA hint */}
-                                <div className="rounded-lg border border-dashed border-cyan-300/60 bg-cyan-50/30 p-4 text-center">
+                                <div className="rounded-lg border border-dashed border-cyan-600/60 bg-cyan-50/30 p-4 text-center">
                                     <div className="text-xl mb-2">✍️</div>
                                     <p className="font-display text-sm text-gray-500 italic">Fill in the form to generate</p>
                                     <p className="font-display text-sm text-gray-400 italic">your own AI-powered captions</p>
                                     <div className="flex items-center justify-center gap-1 mt-2">
-                                        <div className="w-1 h-1 rounded-full bg-cyan-400 cursor-blink" style={{ animationDelay: "0s" }} />
-                                        <div className="w-1 h-1 rounded-full bg-cyan-400 cursor-blink" style={{ animationDelay: "0.3s" }} />
-                                        <div className="w-1 h-1 rounded-full bg-cyan-400 cursor-blink" style={{ animationDelay: "0.6s" }} />
+                                        <div className="w-1 h-1 rounded-full bg-cyan-600 cursor-blink" style={{ animationDelay: "0s" }} />
+                                        <div className="w-1 h-1 rounded-full bg-cyan-600 cursor-blink" style={{ animationDelay: "0.3s" }} />
+                                        <div className="w-1 h-1 rounded-full bg-cyan-600 cursor-blink" style={{ animationDelay: "0.6s" }} />
                                     </div>
                                 </div>
 
