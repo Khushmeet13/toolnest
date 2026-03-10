@@ -117,7 +117,7 @@ export default function HowItWorks() {
 
                     {/* Title */}
                     <h2 className="text-4xl font-medium text-[#1a2318] leading-tight tracking-tight mb-2">
-                        See how it works
+                        See how it <span className="text-cyan-700">works</span> 
                     </h2>
                     <p className="text-base text-[#6b7c69] font-light leading-relaxed">
                         Get inspired by these text generation prompts:

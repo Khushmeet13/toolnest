@@ -76,7 +76,7 @@ export default function ExampleSection() {
         {/* Header */}
         <div className="text-center mb-14">
           <h2 className="text-4xl font-medium text-gray-900 tracking-tight leading-tight">
-            See the <span className="text-cyan-600">difference</span> it makes
+            See the <span className="text-cyan-700">difference</span> it makes
           </h2>
           <p className="mt-2 text-base text-gray-500 max-w-lg mx-auto leading-relaxed">
             Real inputs transformed in seconds. Pick a mode, paste your text — done.

@@ -52,7 +52,7 @@ export default function FAQSection() {
           {/* Left — sticky */}
           <div className="lg:sticky ">
             <h2 className="text-4xl font-medium text-gray-900 tracking-tight leading-tight">
-              Frequently asked questions
+              Frequently <span className="text-cyan-700">asked</span>  questions
             </h2>
 
             <p className="mt-2 text-[15px] text-gray-500 leading-relaxed">

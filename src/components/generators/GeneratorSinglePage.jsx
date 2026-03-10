@@ -44,6 +44,9 @@ const slides = [
 const toolComponents = {
     "instagram-caption-generator": InstagramCaptionGenerator,
     "ai-text-generator": ToolInterface,
+    "email-template-generator": EmailTemplateGenerator,
+    "resume-summary-generator": ResumeSummaryTool,
+    "fake-data-generator": FakeDataGenerator
 };
 
 
@@ -177,10 +180,6 @@ export default function GeneratorSinglePage() {
                     </div>
                 </div>
             </div>
-
-            <EmailTemplateGenerator />
-            <ResumeSummaryTool />
-            <FakeDataGenerator />
 
             {ToolComponent ? (
                 <ToolComponent />
