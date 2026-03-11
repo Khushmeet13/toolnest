@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import generators from "../../data/generatorTools";
 import { ArrowRight, ArrowUp, ArrowUpIcon, ChevronRightIcon } from "lucide-react";
-import ToolInterface from "./AITextToolInterface";
+import ToolInterface from "./tools/AITextToolInterface";
 import {
     BoltIcon,
     SparklesIcon,
@@ -15,10 +15,13 @@ import HowItWorks from "./HowItWorks";
 import FeatureSection from "./FeatureSection";
 import ExampleSection from "./ExampleSection";
 import FAQSection from "./FAQSection";
-import InstagramCaptionGenerator from "./InstagramCaption";
-import EmailTemplateGenerator from "./EmailTemplateGenerator";
-import ResumeSummaryTool from "./Resumesummarytool";
-import FakeDataGenerator from "./FakeDataGenerator";
+import InstagramCaptionGenerator from "./tools/InstagramCaption";
+import EmailTemplateGenerator from "./tools/EmailTemplateGenerator";
+import ResumeSummaryTool from "./tools/ResumeSummaryTool";
+import FakeDataGenerator from "./tools/FakeDataGenerator";
+import PasswordGenerator from "./tools/PasswordGenerator";
+import UUIDGenerator from "./tools/UUIDGenerator";
+import FakeCardGenerator from "./tools/FakeCardGenerator";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
@@ -46,7 +49,10 @@ const toolComponents = {
     "ai-text-generator": ToolInterface,
     "email-template-generator": EmailTemplateGenerator,
     "resume-summary-generator": ResumeSummaryTool,
-    "fake-data-generator": FakeDataGenerator
+    "fake-data-generator": FakeDataGenerator,
+    "password-generator": PasswordGenerator,
+    "uuid-generator": UUIDGenerator,
+    // "fake-credit-card-generator": FakeCardGenerator
 };
 
 

@@ -1,38 +1,43 @@
 import { useState, useEffect, useRef } from "react";
 
-const CATEGORIES = ["Welcome","Promotional","Follow-up","Newsletter","Apology","Announcement","Thank You","Onboarding"];
+const CATEGORIES = ["Welcome", "Promotional", "Follow-up", "Newsletter", "Apology", "Announcement", "Thank You", "Onboarding"];
 const TONES = [
-  { label:"Formal",     emoji:"🎩", desc:"Professional & polished" },
-  { label:"Friendly",   emoji:"😊", desc:"Warm & approachable" },
-  { label:"Urgent",     emoji:"⚡", desc:"Time-sensitive & direct" },
-  { label:"Persuasive", emoji:"🎯", desc:"Compelling & action-driven" },
-  { label:"Empathetic", emoji:"💛", desc:"Caring & understanding" },
-  { label:"Bold",       emoji:"🔥", desc:"Daring & high-impact" },
+  { label: "Formal", emoji: "🎩", desc: "Professional & polished" },
+  { label: "Friendly", emoji: "😊", desc: "Warm & approachable" },
+  { label: "Urgent", emoji: "⚡", desc: "Time-sensitive & direct" },
+  { label: "Persuasive", emoji: "🎯", desc: "Compelling & action-driven" },
+  { label: "Empathetic", emoji: "💛", desc: "Caring & understanding" },
+  { label: "Bold", emoji: "🔥", desc: "Daring & high-impact" },
 ];
 
 const STEPS = [
-  { id:1, key:"purpose",  label:"Purpose",  icon:"M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
-  { id:2, key:"audience", label:"Audience", icon:"M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
-  { id:3, key:"category", label:"Category", icon:"M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" },
-  { id:4, key:"tone",     label:"Tone",     icon:"M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" },
-  { id:5, key:"details",  label:"Details",  icon:"M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" },
+  { id: 1, key: "purpose", label: "Purpose", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
+  { id: 2, key: "audience", label: "Audience", icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" },
+  { id: 3, key: "category", label: "Category", icon: "M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" },
+  { id: 4, key: "tone", label: "Tone", icon: "M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" },
+  { id: 5, key: "details", label: "Details", icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" },
 ];
+
+
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_KEY; // Your API key
+const GEMINI_API_URL = import.meta.env.VITE_GEMINI_API_URL;
 
 export default function EmailTemplateGenerator() {
   const [activeStep, setActiveStep] = useState(1);
-  const [purpose,    setPurpose]    = useState("");
-  const [audience,   setAudience]   = useState("");
-  const [category,   setCategory]   = useState("Welcome");
-  const [tone,       setTone]       = useState("Friendly");
-  const [details,    setDetails]    = useState("");
-  const [result,     setResult]     = useState(null);
-  const [loading,    setLoading]    = useState(false);
-  const [copied,     setCopied]     = useState(null);
-  const [activeTab,  setActiveTab]  = useState("preview");
-  const [visible,    setVisible]    = useState(false);
-  const [typedSubj,  setTypedSubj]  = useState("");
-  const [typedBody,  setTypedBody]  = useState("");
-  const [typing,     setTyping]     = useState(false);
+  const [purpose, setPurpose] = useState("");
+  const [audience, setAudience] = useState("");
+  const [category, setCategory] = useState("Welcome");
+  const [tone, setTone] = useState("Friendly");
+  const [details, setDetails] = useState("");
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [copied, setCopied] = useState(null);
+  const [activeTab, setActiveTab] = useState("preview");
+  const [visible, setVisible] = useState(false);
+  const [typedSubj, setTypedSubj] = useState("");
+  const [typedBody, setTypedBody] = useState("");
+  const [typing, setTyping] = useState(false);
+  const [apiError, setApiError] = useState(null);
 
   useEffect(() => { setTimeout(() => setVisible(true), 80); }, []);
 
@@ -57,7 +62,7 @@ export default function EmailTemplateGenerator() {
   }, [result]);
 
   const stepDone = (s) => {
-    if (s.key === "purpose")  return purpose.trim().length > 0;
+    if (s.key === "purpose") return purpose.trim().length > 0;
     if (s.key === "audience") return audience.trim().length > 0;
     return true;
   };
@@ -66,55 +71,202 @@ export default function EmailTemplateGenerator() {
   const canGenerate = purpose.trim().length > 0;
   const toneObj = TONES.find(t => t.label === tone) || TONES[1];
 
-  const generate = async () => {
-    if (!canGenerate || loading) return;
-    setLoading(true); setResult(null); setActiveTab("preview");
-    try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({
-          model:"claude-sonnet-4-20250514", max_tokens:1000,
-          messages:[{ role:"user", content:`Generate a professional email template.
+  // 🎯 Generate email using Gemini API
+  const generateWithGemini = async () => {
+    const prompt = `Generate a professional email template with the following details:
+
 Purpose: ${purpose}
-Target Audience: ${audience||"general"}
+Target Audience: ${audience || "general audience"}
 Category: ${category}
 Tone: ${tone}
-Additional Details: ${details||"none"}
-Rules: compelling subject, 3-5 paragraph body, use {{first_name}} naturally, clear CTA, match tone, feel human.
-Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
+Additional Details: ${details || "none"}
+
+IMPORTANT RULES:
+1. Create a compelling subject line that grabs attention
+2. Write 3-5 paragraphs for the email body
+3. Use {{first_name}} naturally in the body (at least once)
+4. Include a clear Call-to-Action (CTA)
+5. Match the ${tone} tone perfectly
+6. Make it feel human and personal, not robotic
+7. Keep paragraphs concise and scannable
+8. Use emojis sparingly but effectively if tone allows
+
+Return ONLY a valid JSON object with this exact format:
+{"subject": "Your compelling subject line here", "body": "Your email body here with proper line breaks"}
+
+NO markdown, NO explanations, NO additional text. Just the JSON object.`;
+
+    try {
+      console.log("🔄 Calling Gemini API for email template...");
+
+      const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: prompt
+            }]
+          }],
+          generationConfig: {
+            temperature: 0.8,
+            topK: 40,
+            topP: 0.95,
+            maxOutputTokens: 2048,
+          },
+          safetySettings: [
+            {
+              category: "HARM_CATEGORY_HARASSMENT",
+              threshold: "BLOCK_ONLY_HIGH"
+            },
+            {
+              category: "HARM_CATEGORY_HATE_SPEECH",
+              threshold: "BLOCK_ONLY_HIGH"
+            },
+            {
+              category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+              threshold: "BLOCK_ONLY_HIGH"
+            },
+            {
+              category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+              threshold: "BLOCK_ONLY_HIGH"
+            }
+          ]
         }),
       });
-      const data = await res.json();
-      const text = data.content?.map(b => b.text||"").join("")||"";
-      setResult(JSON.parse(text.replace(/```json|```/g,"").trim()));
-    } catch {
-      setResult({
-        subject:`Your exclusive ${category.toLowerCase()} — just for you, {{first_name}} ✨`,
-        body:`Hi {{first_name}},\n\nThank you for being part of our community. We truly appreciate your continued support.\n\n${purpose}\n\nWe've crafted every detail with your needs in mind. Our team is always here to help.\n\nWarm regards,\nThe Team`,
-      });
+
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error("Gemini API error response:", errorData);
+        throw new Error(`Gemini API failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("✅ Gemini API response received");
+
+      const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+      if (!generatedText) {
+        throw new Error("No text generated from Gemini");
+      }
+
+      // Clean up the response
+      let cleanText = generatedText
+        .replace(/```json\s*/g, '')
+        .replace(/```\s*$/g, '')
+        .replace(/^```/g, '')
+        .trim();
+
+      // Find JSON object in the text
+      const jsonMatch = cleanText.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        cleanText = jsonMatch[0];
+      }
+
+      const parsed = JSON.parse(cleanText);
+
+      // Validate the response has required fields
+      if (!parsed.subject || !parsed.body) {
+        throw new Error("Invalid response format");
+      }
+
+      return parsed;
+
+    } catch (error) {
+      console.error("❌ Gemini API error:", error);
+      throw error;
     }
-    setLoading(false);
+  };
+
+  // 📝 Smart fallback that creates personalized email
+  const getPersonalizedFallback = () => {
+    const toneGreetings = {
+      "Formal": "Dear",
+      "Friendly": "Hi",
+      "Urgent": "ATTENTION",
+      "Persuasive": "Imagine this",
+      "Empathetic": "Hello",
+      "Bold": "Hey"
+    };
+
+    const toneClosings = {
+      "Formal": "Sincerely",
+      "Friendly": "Best regards",
+      "Urgent": "Act now",
+      "Persuasive": "Don't wait",
+      "Empathetic": "Warmly",
+      "Bold": "Onward"
+    };
+
+    const greeting = toneGreetings[tone] || "Hi";
+    const closing = toneClosings[tone] || "Best regards";
+
+    const subject = `${category} Update: ${purpose.substring(0, 50)}${purpose.length > 50 ? '...' : ''}`;
+
+    const body = `${greeting} {{first_name}},
+
+I hope this message finds you well. I'm reaching out because ${purpose.toLowerCase()}.
+
+${audience ? `As a valued member of our ${audience} community, ` : ''}We've crafted this message especially with you in mind. ${details ? `Here are the key details: ${details}` : ''}
+
+We'd love to hear your thoughts on this. Please don't hesitate to reach out if you have any questions or would like to learn more.
+
+${closing},
+The ${category} Team
+
+P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to help anytime!"}`;
+
+    return { subject, body };
+  };
+
+  // 🚀 Main generate function
+  const generate = async () => {
+    if (!canGenerate || loading) return;
+
+    setLoading(true);
+    setResult(null);
+    setApiError(null);
+    setActiveTab("preview");
+
+    try {
+      // Try Gemini API first
+      const generatedEmail = await generateWithGemini();
+
+      if (generatedEmail) {
+        setResult(generatedEmail);
+      } else {
+        // Use personalized fallback
+        setApiError("✨ Using smart generation mode. Your email is personalized based on your input!");
+        setResult(getPersonalizedFallback());
+      }
+    } catch (error) {
+      console.error("Generation failed:", error);
+      setApiError("✨ Using smart fallback. Your email is still personalized!");
+      setResult(getPersonalizedFallback());
+    } finally {
+      setLoading(false);
+    }
   };
 
   const copyText = (text, key) => {
     navigator.clipboard.writeText(text);
-    setCopied(key); setTimeout(()=>setCopied(null), 2200);
+    setCopied(key);
+    setTimeout(() => setCopied(null), 2200);
   };
 
   return (
     <div className=" overflow-hidden py-16">
-      
-      <h1 className="text-4xl font-medium text-gray-900 text-center mb-8">Email template <span className="text-cyan-700">generator</span></h1>
 
-
+      <h1 className="text-4xl font-medium text-gray-900 text-center mb-8">
+        Email template <span className="text-cyan-700">generator</span>
+      </h1>
 
       <div className={`relative max-w-5xl border border-gray-200 shadow-md rounded-lg shadow-cyan-100/50 mx-auto flex h-screen transition-all duration-700 ${visible ? "opacity-100" : "opacity-0"}`}>
 
         {/* ═══════════ SIDEBAR ═══════════ */}
         <aside className="sidebar-bg w-60 flex-shrink-0 flex flex-col h-screen sticky top-0 z-20 border-r border-gray-200">
-
-        
 
           {/* Progress */}
           <div className="px-5 py-4" style={{ borderBottom: "1.5px solid #e0f7fa" }}>
@@ -131,7 +283,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
           <nav className="flex-1 px-3 py-4 overflow-y-auto">
             <div className="flex flex-col">
               {STEPS.map((step, idx) => {
-                const done   = stepDone(step);
+                const done = stepDone(step);
                 const active = activeStep === step.id;
                 return (
                   <div key={step.id} className="flex flex-col items-stretch">
@@ -147,7 +299,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                         }}>
                         {done ? (
                           <svg className="w-3 h-3" style={{ color: "#0891b2" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7"/>
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                           </svg>
                         ) : (
                           <span className="f-code text-[8px] font-bold" style={{ color: active ? "#0891b2" : "#9dd6e5" }}>{step.id}</span>
@@ -185,19 +337,20 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
               className={`w-full py-2.5 rounded-xl f-ui text-[12px] font-semibold flex items-center justify-center gap-2 cursor-pointer transition-all ${canGenerate && !loading ? "gen-btn" : ""}`}
               style={!canGenerate || loading ? { background: "#e0f7fa", color: "#9dd6e5", border: "1.5px solid #cff3fd", cursor: "not-allowed" } : {}}>
               {loading ? (
-                <><div className="w-3.5 h-3.5 rounded-full border-2 border-white/40 border-t-white spin-it" />Generating…</>
+                <><div className="w-3.5 h-3.5 rounded-full border-2 border-white/40 border-t-white spin-it" />Gemini is writing…</>
               ) : (
-                <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Generate Email</>
+                <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>Generate with Gemini</>
               )}
             </button>
             {!canGenerate && <p className="f-code text-[8px] text-center mt-1.5" style={{ color: "#9dd6e5" }}>Add purpose first</p>}
+            {apiError && (
+              <p className="f-code text-[8px] text-center mt-1.5 text-amber-600">{apiError}</p>
+            )}
           </div>
         </aside>
 
         {/* ═══════════ MAIN AREA ═══════════ */}
         <main className="flex-1 flex flex-col h-screen overflow-y-auto">
-
-         
 
           {/* Step content */}
           <div className="flex-1 px-7 py-7 max-w-2xl mx-auto w-full">
@@ -208,7 +361,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                 <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: "linear-gradient(135deg, #e0f9ff, #cff3fd)", border: "1.5px solid #7de8f8" }}>
                   <svg className="w-4 h-4" style={{ color: "#0891b2" }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={STEPS[activeStep - 1]?.icon}/>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={STEPS[activeStep - 1]?.icon} />
                   </svg>
                 </div>
                 <div>
@@ -283,7 +436,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                           {category === c && <div className="w-2 h-2 rounded-full" style={{ background: "#06b6d4" }} />}
                         </div>
                         <p className="f-code text-[9px]" style={{ color: "#9dd6e5" }}>
-                          {{"Welcome": "First impression", "Promotional": "Offers & deals", "Follow-up": "Check-in message", "Newsletter": "Regular updates", "Apology": "Address issues", "Announcement": "Share big news", "Thank You": "Express gratitude", "Onboarding": "Guide new users"}[c]}
+                          {{ "Welcome": "First impression", "Promotional": "Offers & deals", "Follow-up": "Check-in message", "Newsletter": "Regular updates", "Apology": "Address issues", "Announcement": "Share big news", "Thank You": "Express gratitude", "Onboarding": "Guide new users" }[c]}
                         </p>
                       </button>
                     ))}
@@ -347,7 +500,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                 {activeStep > 1 && (
                   <button onClick={() => setActiveStep(s => s - 1)}
                     className="nav-next px-4 py-2.5 rounded-xl f-ui text-[13px] font-medium flex items-center gap-1.5 cursor-pointer">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                     Back
                   </button>
                 )}
@@ -355,7 +508,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                   <button onClick={() => setActiveStep(s => s + 1)}
                     className="ml-auto nav-next px-5 py-2.5 rounded-xl f-ui text-[13px] font-semibold flex items-center gap-1.5 cursor-pointer">
                     Next
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   </button>
                 ) : (
                   <button onClick={generate} disabled={!canGenerate || loading}
@@ -364,7 +517,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                     {loading ? (
                       <><div className="w-3.5 h-3.5 rounded-full border-2 border-white/40 border-t-white spin-it" />Generating…</>
                     ) : (
-                      <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Generate</>
+                      <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>Generate with Gemini</>
                     )}
                   </button>
                 )}
@@ -389,7 +542,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                       <div className="w-3 h-3 rounded-full" style={{ background: "#6ee7b7" }} />
                     </div>
                     <div className="flex-1 rounded-md px-3 py-1 f-code text-[9px] text-center border" style={{ background: "#f0fbff", borderColor: "#cff3fd", color: "#9dd6e5" }}>
-                      compose · {category.toLowerCase()} · {tone.toLowerCase()}
+                      compose · {category.toLowerCase()} · {tone.toLowerCase()} · Gemini AI
                     </div>
                     <div className="flex gap-1">
                       {["preview", "raw"].map(tab => (
@@ -405,7 +558,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                     <div className="scanline-wrap p-10 flex flex-col items-center justify-center min-h-[220px]" style={{ background: "#f8feff" }}>
                       <div className="scanline" />
                       <div className="w-10 h-10 rounded-full border-2 border-t-cyan-500 spin-it mb-4" style={{ borderColor: "#cff3fd", borderTopColor: "#06b6d4" }} />
-                      <p className="f-ui text-sm mb-1" style={{ color: "#3d8fa0" }}>Crafting your email…</p>
+                      <p className="f-ui text-sm mb-1" style={{ color: "#3d8fa0" }}>Gemini is crafting your email…</p>
                       <p className="f-code text-[10px]" style={{ color: "#9dd6e5" }}>{category} · {tone} · {audience || "General"}</p>
                     </div>
 
@@ -447,7 +600,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                       <div className="flex items-center gap-2 flex-wrap">
                         <button onClick={() => copyText(`Subject: ${result.subject}\n\n${result.body}`, "all")}
                           className={`copy-btn px-4 py-2 rounded-lg f-code text-[9px] tracking-wide uppercase flex items-center gap-1.5 ${copied === "all" ? "on" : ""}`}>
-                          {copied === "all" ? <><svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7"/></svg>Copied!</> : "Copy Full Email"}
+                          {copied === "all" ? <><svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>Copied!</> : "Copy Full Email"}
                         </button>
                         <button onClick={() => copyText(result.subject, "subj")} className={`copy-btn px-4 py-2 rounded-lg f-code text-[9px] tracking-wide uppercase ${copied === "subj" ? "on" : ""}`}>
                           {copied === "subj" ? "✓ Subject" : "Copy Subject"}
@@ -457,7 +610,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
                         </button>
                         <button onClick={generate}
                           className="ml-auto copy-btn px-4 py-2 rounded-lg f-code text-[9px] tracking-wide uppercase flex items-center gap-1.5">
-                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                           Regen
                         </button>
                       </div>
@@ -465,7 +618,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
 
                   ) : result && activeTab === "raw" ? (
                     <div className="p-6 f-code text-[11px] leading-loose" style={{ background: "#f8feff" }}>
-                      <div className="text-[8px] tracking-widest mb-4" style={{ color: "#9dd6e5" }}>// raw output — claude-sonnet-4</div>
+                      <div className="text-[8px] tracking-widest mb-4" style={{ color: "#9dd6e5" }}>// raw output — gemini-2.5-flash-lite</div>
                       <div>
                         <span style={{ color: "#0891b2" }}>subject</span>
                         <span style={{ color: "#9dd6e5" }}>: </span>
@@ -498,7 +651,7 @@ Return ONLY raw JSON: {"subject":"...","body":"..."}` }],
             <div className="flex items-center gap-3 f-code text-[8px]" style={{ color: "#9dd6e5" }}>
               <span>MailCraft v2</span>
               <span>·</span>
-              <span>Powered by Claude</span>
+              <span>Powered by Gemini AI</span>
             </div>
             <div className="flex items-center gap-2.5">
               <span className="f-code text-[8px]" style={{ color: "#9dd6e5" }}>{completedCount}/{STEPS.length} steps</span>
