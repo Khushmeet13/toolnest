@@ -492,7 +492,7 @@ export default function ResumeSummaryTool() {
               <div className="flex items-center gap-2 mb-5">
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-cyan-300/20 to-cyan-600/10 border border-cyan-300/25 text-[13px] text-cyan-800">✦</div>
                 <span className="text-[10px] font-bold tracking-[0.14em] uppercase text-cyan-600">
-                  Resume Tool • 100% Free • No API Key
+                  Resume Tool
                 </span>
               </div>
               <h2 className="text-[21px] font-medium text-white tracking-tight leading-tight m-0">Summary Generator</h2>
