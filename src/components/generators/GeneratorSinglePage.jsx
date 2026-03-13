@@ -22,6 +22,8 @@ import FakeDataGenerator from "./tools/FakeDataGenerator";
 import PasswordGenerator from "./tools/PasswordGenerator";
 import UUIDGenerator from "./tools/UUIDGenerator";
 import FakeCardGenerator from "./tools/FakeCardGenerator";
+import QRCodeGenerator from "./tools/Qrcodegenerator";
+import BarcodeGenerator from "./tools/Barcodegenerator";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
@@ -52,7 +54,9 @@ const toolComponents = {
     "fake-data-generator": FakeDataGenerator,
     "password-generator": PasswordGenerator,
     "uuid-generator": UUIDGenerator,
-    // "fake-credit-card-generator": FakeCardGenerator
+    "fake-credit-card-generator": FakeCardGenerator,
+    "qr-code-generator": QRCodeGenerator,
+    "barcode-generator": BarcodeGenerator
 };
 
 
