@@ -24,6 +24,8 @@ import UUIDGenerator from "./tools/UUIDGenerator";
 import FakeCardGenerator from "./tools/FakeCardGenerator";
 import QRCodeGenerator from "./tools/Qrcodegenerator";
 import BarcodeGenerator from "./tools/Barcodegenerator";
+import ColorPaletteGenerator from "./tools/Colorpalettegenerator";
+import GradientGenerator from "./tools/Gradientgenerator";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
@@ -56,7 +58,9 @@ const toolComponents = {
     "uuid-generator": UUIDGenerator,
     "fake-credit-card-generator": FakeCardGenerator,
     "qr-code-generator": QRCodeGenerator,
-    "barcode-generator": BarcodeGenerator
+    "barcode-generator": BarcodeGenerator,
+    "color-palette-generator": ColorPaletteGenerator,
+    "gradient-generator": GradientGenerator
 };
 
 
