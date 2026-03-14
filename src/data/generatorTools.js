@@ -16,6 +16,9 @@ import {
   ReceiptPercentIcon,
   BuildingOfficeIcon,
   FaceSmileIcon,
+  GlobeAltIcon,
+  MegaphoneIcon,
+  CurrencyDollarIcon,
 } from "@heroicons/react/24/outline";
 import { Smile } from "lucide-react";
 
@@ -141,17 +144,46 @@ const generators = [
     category: "Business",
     icon: BuildingOfficeIcon,
   },
+  {
+  id: 17,
+  title: "Domain Name Generator",
+  description: "Generate unique and available domain name ideas for your website or startup.",
+  category: "Business",
+  icon: GlobeAltIcon,
+},
+{
+  id: 18,
+  title: "Brand Name Generator",
+  description: "Create catchy and memorable brand name ideas for your business or product.",
+  category: "Business",
+  icon: SparklesIcon,
+},
+{
+  id: 19,
+  title: "Marketing Strategy Generator",
+  description: "Generate effective marketing strategies and growth ideas for your business.",
+  category: "Business",
+  icon: MegaphoneIcon,
+},
+{
+  id: 20,
+  title: "Pricing Strategy Generator",
+  description: "Get smart pricing model suggestions to maximize profit and attract customers.",
+  category: "Business",
+  icon: CurrencyDollarIcon,
+},
+
 
   // FUN
   {
-    id: 17,
+    id: 21,
     title: "Meme Generator",
     description: "Create funny memes in just a few clicks.",
     category: "Fun",
     icon: FaceSmileIcon,
   },
   {
-    id: 18,
+    id: 22,
     title: "Emoji Generator",
     description: "Generate fun and creative emoji combinations.",
     category: "Fun",

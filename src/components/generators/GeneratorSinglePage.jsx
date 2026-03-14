@@ -26,6 +26,10 @@ import QRCodeGenerator from "./tools/Qrcodegenerator";
 import BarcodeGenerator from "./tools/Barcodegenerator";
 import ColorPaletteGenerator from "./tools/Colorpalettegenerator";
 import GradientGenerator from "./tools/Gradientgenerator";
+import RandomNameGenerator from "./tools/Randomnamegenerator";
+import RandomNumberGenerator from "./tools/Randomnumbergenerator";
+import InvoiceGenerator from "./tools/InvoiceGenerator";
+import DomainNameGenerator from "./tools/DomainNameGenerator";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
@@ -60,7 +64,11 @@ const toolComponents = {
     "qr-code-generator": QRCodeGenerator,
     "barcode-generator": BarcodeGenerator,
     "color-palette-generator": ColorPaletteGenerator,
-    "gradient-generator": GradientGenerator
+    "gradient-generator": GradientGenerator,
+    "random-name-generator": RandomNameGenerator,
+    "random-number-generator": RandomNumberGenerator,
+    "invoice-generator": InvoiceGenerator,
+    "domain-name-generator": DomainNameGenerator
 };
 
 
