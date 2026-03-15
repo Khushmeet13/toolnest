@@ -30,6 +30,9 @@ import RandomNameGenerator from "./tools/Randomnamegenerator";
 import RandomNumberGenerator from "./tools/Randomnumbergenerator";
 import InvoiceGenerator from "./tools/InvoiceGenerator";
 import DomainNameGenerator from "./tools/DomainNameGenerator";
+import BrandNameGenerator from "./tools/BrandNameGenerator";
+import MarketingStrategyGenerator from "./tools/MarketingStrategyGenerator";
+import PricingsStrategyGenerator from "./tools/PricingStrategyGenerator";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
@@ -68,7 +71,10 @@ const toolComponents = {
     "random-name-generator": RandomNameGenerator,
     "random-number-generator": RandomNumberGenerator,
     "invoice-generator": InvoiceGenerator,
-    "domain-name-generator": DomainNameGenerator
+    "domain-name-generator": DomainNameGenerator,
+    "brand-name-generator": BrandNameGenerator,
+    "marketing-strategy-generator": MarketingStrategyGenerator,
+    "pricing-strategy-generator": PricingsStrategyGenerator
 };
 
 

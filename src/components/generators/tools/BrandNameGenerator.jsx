@@ -1,20 +1,33 @@
 import { useState } from "react";
 
-// ─── Font injection ───────────────────────────────────────────────────────────
-const FontStyle = () => (
+// ─── Tailwind + Font injection ────────────────────────────────────────────────
+const GlobalStyles = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap');
     *, *::before, *::after { box-sizing: border-box; }
-    body { font-family: 'DM Sans', sans-serif; }
-    .syne { font-family: 'Syne', sans-serif !important; }
+    body { font-family: 'DM Sans', sans-serif; margin: 0; }
+    input:focus { outline: none; }
+    button { cursor: pointer; font-family: 'DM Sans', sans-serif; }
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
     .fade-up { animation: fadeUp 0.45s cubic-bezier(.22,.68,0,1.2) both; }
-    input:focus { outline: none; }
-    button { cursor: pointer; }
+    .spinner {
+      display: inline-block; width: 17px; height: 17px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-top-color: white; border-radius: 50%;
+      animation: spin 0.65s linear infinite;
+      vertical-align: middle;
+    }
+    .big-spinner {
+      width: 34px; height: 34px;
+      border: 3px solid #cffafe;
+      border-top-color: #06b6d4;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
   `}</style>
 );
 
@@ -28,29 +41,22 @@ const PALETTES = [
   { primary: "#3b82f6", bg: "#eff6ff", light: "#dbeafe", dark: "#1e40af" },
 ];
 
-// ─── SVG icon paths (per shape index) ────────────────────────────────────────
+// ─── SVG icon shapes ──────────────────────────────────────────────────────────
 const SHAPES = [
-  // Hexagon + lightning
   (c) => `
     <polygon points="40,8 72,26 72,62 40,80 8,62 8,26" fill="${c}" opacity="0.13"/>
     <polygon points="40,13 67,29 67,59 40,75 13,59 13,29" fill="none" stroke="${c}" stroke-width="3"/>
     <polygon points="45,22 32,46 41,46 35,64 54,38 45,38" fill="${c}"/>`,
-
-  // Circle + leaf
   (c) => `
     <circle cx="40" cy="40" r="32" fill="${c}" opacity="0.12"/>
     <circle cx="40" cy="40" r="32" fill="none" stroke="${c}" stroke-width="3"/>
     <path d="M25,56 Q25,24 57,24 Q57,56 25,56Z" fill="${c}" opacity="0.85"/>
     <line x1="41" y1="55" x2="41" y2="65" stroke="${c}" stroke-width="2.5" stroke-linecap="round"/>`,
-
-  // Diamond
   (c) => `
     <polygon points="40,5 75,40 40,75 5,40" fill="${c}" opacity="0.12"/>
     <polygon points="40,5 75,40 40,75 5,40" fill="none" stroke="${c}" stroke-width="3"/>
     <polygon points="40,20 60,40 40,60 20,40" fill="${c}" opacity="0.3"/>
     <polygon points="40,28 52,40 40,52 28,40" fill="${c}"/>`,
-
-  // Rocket
   (c) => `
     <circle cx="40" cy="40" r="32" fill="${c}" opacity="0.1"/>
     <circle cx="40" cy="40" r="32" fill="none" stroke="${c}" stroke-width="2.5" opacity="0.4"/>
@@ -58,14 +64,10 @@ const SHAPES = [
     <circle cx="40" cy="35" r="6" fill="white" opacity="0.65"/>
     <path d="M30,52 L22,62 L32,57Z" fill="${c}" opacity="0.65"/>
     <path d="M50,52 L58,62 L48,57Z" fill="${c}" opacity="0.65"/>`,
-
-  // Shield + check
   (c) => `
     <path d="M40,7 L70,20 L70,42 C70,57 57,68 40,76 C23,68 10,57 10,42 L10,20 Z" fill="${c}" opacity="0.12"/>
     <path d="M40,7 L70,20 L70,42 C70,57 57,68 40,76 C23,68 10,57 10,42 L10,20 Z" fill="none" stroke="${c}" stroke-width="3"/>
     <path d="M27,40 L36,50 L54,28" stroke="${c}" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`,
-
-  // Infinity loop
   (c) => `
     <rect x="8" y="8" width="64" height="64" rx="20" fill="${c}" opacity="0.1"/>
     <rect x="8" y="8" width="64" height="64" rx="20" fill="none" stroke="${c}" stroke-width="3"/>
@@ -81,7 +83,12 @@ function buildSVG(name, shapeIdx, palette, size = 320) {
   const iconX = (size - 80) / 2;
   const iconY = size * 0.1;
   const scale = iconSize / 80;
-  const fontSize = name.length > 9 ? Math.round(size * 0.085) : name.length > 6 ? Math.round(size * 0.097) : Math.round(size * 0.11);
+  const fontSize =
+    name.length > 9
+      ? Math.round(size * 0.085)
+      : name.length > 6
+      ? Math.round(size * 0.097)
+      : Math.round(size * 0.11);
 
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
   <defs>
@@ -110,7 +117,7 @@ function buildSVG(name, shapeIdx, palette, size = 320) {
     fill="${palette.primary}"
     opacity="0.45"
     letter-spacing="3"
-  >${name.replace(/[^A-Za-z]/g,"").slice(0,2).toUpperCase()} BRAND</text>
+  >${name.replace(/[^A-Za-z]/g, "").slice(0, 2).toUpperCase()} BRAND</text>
 </svg>`;
 }
 
@@ -121,7 +128,8 @@ function dlPNG(svgStr, name) {
   const img = new Image();
   img.onload = () => {
     const c = document.createElement("canvas");
-    c.width = 600; c.height = 600;
+    c.width = 600;
+    c.height = 600;
     c.getContext("2d").drawImage(img, 0, 0, 600, 600);
     URL.revokeObjectURL(url);
     const a = document.createElement("a");
@@ -147,8 +155,11 @@ function BrandCard({ brand, index, showLogos }) {
   const [copied, setCopied] = useState(false);
 
   const copy = () => {
-    navigator.clipboard.writeText(`Name: ${brand.name}\nTagline: ${brand.tagline}\nLogo idea: ${brand.logo_idea}`);
-    setCopied(true); setTimeout(() => setCopied(false), 2000);
+    navigator.clipboard.writeText(
+      `Name: ${brand.name}\nTagline: ${brand.tagline}\nLogo idea: ${brand.logo_idea}`
+    );
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -156,34 +167,50 @@ function BrandCard({ brand, index, showLogos }) {
       className="fade-up bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5"
       style={{ animationDelay: `${index * 0.06}s`, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}
     >
-      <div style={{ height: 3, background: `linear-gradient(90deg, ${pal.primary}, ${pal.dark})` }} />
+      {/* Top accent gradient bar */}
+      <div
+        className="h-[3px] w-full"
+        style={{ background: `linear-gradient(90deg, ${pal.primary}, ${pal.dark})` }}
+      />
 
       <div className="p-5">
         {/* Logo preview */}
         {showLogos && (
           <div
-            className="w-full rounded-xl mb-4 flex items-center justify-center overflow-hidden"
-            style={{ background: pal.bg, border: `1px solid ${pal.light}`, padding: "20px 0" }}
+            className="w-full rounded-xl mb-4 flex items-center justify-center overflow-hidden py-5"
+            style={{ background: pal.bg, border: `1px solid ${pal.light}` }}
           >
             <div
               dangerouslySetInnerHTML={{ __html: buildSVG(brand.name, index, pal, 150) }}
-              style={{ lineHeight: 0, display: "block" }}
+              className="leading-none block"
             />
           </div>
         )}
 
-        {/* Name & tagline */}
-        <h3 className="syne text-xl font-extrabold text-gray-900 mb-1 tracking-tight">{brand.name}</h3>
+        {/* Name */}
+        <h3
+          className="text-xl font-extrabold text-gray-900 mb-1 tracking-tight"
+          style={{ fontFamily: "'Syne', sans-serif" }}
+        >
+          {brand.name}
+        </h3>
+
+        {/* Tagline */}
         <p className="text-sm text-gray-400 mb-3 leading-relaxed">{brand.tagline}</p>
 
         {/* Logo idea */}
         <div className="rounded-xl p-3 mb-4" style={{ background: pal.bg }}>
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Logo Idea</p>
-          <p className="text-sm leading-relaxed font-medium" style={{ color: pal.dark }}>{brand.logo_idea}</p>
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">
+            Logo Idea
+          </p>
+          <p className="text-sm leading-relaxed font-medium" style={{ color: pal.dark }}>
+            {brand.logo_idea}
+          </p>
         </div>
 
-        {/* Footer */}
+        {/* Footer row */}
         <div className="flex items-center justify-between gap-2 flex-wrap">
+          {/* Industry badge */}
           <span
             className="text-[11px] font-bold px-2.5 py-1 rounded-full"
             style={{ background: pal.light, color: pal.dark }}
@@ -192,9 +219,10 @@ function BrandCard({ brand, index, showLogos }) {
           </span>
 
           <div className="flex gap-2 items-center">
+            {/* Copy button */}
             <button
               onClick={copy}
-              className="text-xs px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 transition-all font-medium"
+              className="text-xs px-3 py-1.5 rounded-lg border border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700 transition-all font-medium bg-white"
             >
               {copied ? "✓ Copied" : "Copy"}
             </button>
@@ -203,11 +231,12 @@ function BrandCard({ brand, index, showLogos }) {
             <div className="relative">
               <button
                 onClick={() => setOpen((o) => !o)}
-                className="text-xs px-3 py-1.5 rounded-lg font-semibold text-white flex items-center gap-1.5 transition-all hover:opacity-90"
+                className="text-xs px-3 py-1.5 rounded-lg font-semibold text-white flex items-center gap-1.5 transition-all hover:opacity-90 border-0"
                 style={{ background: pal.primary }}
               >
                 ↓ Download
               </button>
+
               {open && (
                 <div
                   className="absolute right-0 z-30 bg-white rounded-xl overflow-hidden"
@@ -219,13 +248,13 @@ function BrandCard({ brand, index, showLogos }) {
                   }}
                 >
                   <button
-                    className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2 border-b border-gray-50"
+                    className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2 border-b border-gray-100 bg-white"
                     onClick={() => { dlPNG(svg, brand.name); setOpen(false); }}
                   >
                     <span>🖼</span> PNG (600px)
                   </button>
                   <button
-                    className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                    className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2 bg-white border-0"
                     onClick={() => { dlSVG(svg, brand.name); setOpen(false); }}
                   >
                     <span>🎨</span> SVG Vector
@@ -241,17 +270,9 @@ function BrandCard({ brand, index, showLogos }) {
 }
 
 // ─── Spinner ──────────────────────────────────────────────────────────────────
-const Spinner = () => (
-  <span style={{
-    display: "inline-block", width: 17, height: 17,
-    border: "2.5px solid rgba(255,255,255,0.3)",
-    borderTopColor: "white", borderRadius: "50%",
-    animation: "spin 0.65s linear infinite",
-    verticalAlign: "middle",
-  }} />
-);
+const Spinner = () => <span className="spinner" />;
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+// ─── Main App ─────────────────────────────────────────────────────────────────
 export default function BrandNameGenerator() {
   const [keyword, setKeyword] = useState("");
   const [activeTags, setActiveTags] = useState(["Tech"]);
@@ -261,11 +282,18 @@ export default function BrandNameGenerator() {
   const [showLogos, setShowLogos] = useState(true);
 
   const toggleTag = (tag) =>
-    setActiveTags((p) => p.includes(tag) ? p.filter((t) => t !== tag) : [...p, tag]);
+    setActiveTags((p) =>
+      p.includes(tag) ? p.filter((t) => t !== tag) : [...p, tag]
+    );
 
   const generate = async () => {
-    if (!keyword.trim()) { setError("Please describe your business first."); return; }
-    setError(""); setLoading(true); setBrands([]);
+    if (!keyword.trim()) {
+      setError("Please describe your business first.");
+      return;
+    }
+    setError("");
+    setLoading(true);
+    setBrands([]);
 
     const prompt = `You are a world-class branding expert. Generate exactly 6 unique brand name ideas for: "${keyword}". Industry: ${activeTags.join(", ") || "General"}.
 
@@ -295,167 +323,180 @@ Return ONLY valid JSON array (no markdown). Each item:
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8fafc", fontFamily: "'DM Sans', sans-serif" }}>
-      <FontStyle />
+    <div className="min-h-screen bg-slate-50" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      <GlobalStyles />
 
-      {/* Top stripe */}
-      <div style={{ height: 3, background: "linear-gradient(90deg,#06b6d4,#0891b2,#0e7490)" }} />
+      {/* Top gradient stripe */}
+      <div
+        className="h-[3px] w-full"
+        style={{ background: "linear-gradient(90deg,#06b6d4,#0891b2,#0e7490)" }}
+      />
 
       {/* Navbar */}
-      <nav style={{ background: "white", borderBottom: "1px solid #f1f5f9", padding: "14px 24px" }}>
-        <div style={{ maxWidth: 880, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 30, height: 30, borderRadius: 8, background: "#06b6d4", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ color: "white", fontWeight: 800, fontSize: 14 }}>B</span>
+      <nav className="bg-white border-b border-slate-100 px-6 py-3.5">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          {/* Logo mark */}
+          <div className="flex items-center gap-2.5">
+            <div className="w-[30px] h-[30px] rounded-lg bg-cyan-400 flex items-center justify-center flex-shrink-0">
+              <span
+                className="text-white font-extrabold text-sm"
+                style={{ fontFamily: "'Syne', sans-serif" }}
+              >
+                B
+              </span>
             </div>
-            <span className="syne" style={{ fontWeight: 800, fontSize: 16, color: "#0f172a" }}>BrandForge</span>
+            <span
+              className="font-extrabold text-base text-slate-900"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              BrandForge
+            </span>
           </div>
-          <span style={{ fontSize: 11, fontWeight: 600, color: "#0891b2", background: "#ecfeff", border: "1px solid #a5f3fc", padding: "4px 12px", borderRadius: 99 }}>
+
+          {/* Badge */}
+          <span className="text-[11px] font-semibold text-cyan-600 bg-cyan-50 border border-cyan-200 px-3 py-1 rounded-full">
             AI-Powered ✦
           </span>
         </div>
       </nav>
 
-      <div style={{ maxWidth: 880, margin: "0 auto", padding: "48px 16px 64px" }}>
+      {/* Main content */}
+      <div className="max-w-4xl mx-auto px-4 pt-12 pb-16">
 
-        {/* Hero */}
-        <div style={{ textAlign: "center", marginBottom: 44 }}>
-          <h1 className="syne" style={{ fontSize: "clamp(32px,5vw,48px)", fontWeight: 800, color: "#0f172a", lineHeight: 1.15, marginBottom: 14 }}>
-            Brand Name + <span style={{ color: "#06b6d4" }}>Logo</span> Generator
+        {/* Hero section */}
+        <div className="text-center mb-11">
+          <h1
+            className="font-extrabold text-slate-900 leading-tight mb-3.5"
+            style={{ fontSize: "clamp(32px,5vw,48px)", fontFamily: "'Syne', sans-serif" }}
+          >
+            Brand Name + <span className="text-cyan-400">Logo</span> Generator
           </h1>
-          <p style={{ color: "#94a3b8", fontSize: 15, maxWidth: 420, margin: "0 auto", lineHeight: 1.7 }}>
+          <p className="text-slate-400 text-[15px] max-w-[420px] mx-auto leading-relaxed">
             AI se generate karo professional brand name, tagline aur downloadable logo — seconds mein.
           </p>
         </div>
 
         {/* Input card */}
-        <div style={{ background: "white", borderRadius: 20, border: "1px solid #f1f5f9", padding: 24, marginBottom: 20, boxShadow: "0 1px 4px rgba(0,0,0,0.05)" }}>
-          <p style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>
+        <div className="bg-white rounded-2xl border border-slate-100 p-6 mb-5 shadow-sm">
+
+          {/* Business description label */}
+          <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] mb-2.5">
             Business Describe Karein
           </p>
-          <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
+
+          {/* Input + Generate row */}
+          <div className="flex gap-2.5 mb-5">
             <input
               type="text"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && generate()}
               placeholder="e.g. online tutoring, fitness app, food delivery..."
-              style={{
-                flex: 1, height: 44, padding: "0 16px", fontSize: 14,
-                background: "#f8fafc", border: "1px solid #e2e8f0",
-                borderRadius: 12, color: "#0f172a", transition: "all 0.2s",
-              }}
-              onFocus={(e) => { e.target.style.borderColor = "#06b6d4"; e.target.style.boxShadow = "0 0 0 3px rgba(6,182,212,0.12)"; }}
-              onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
+              className="flex-1 h-11 px-4 text-sm bg-slate-50 border border-slate-200 rounded-xl text-slate-900 transition-all duration-200 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-100"
             />
             <button
               onClick={generate}
               disabled={loading}
-              style={{
-                height: 44, padding: "0 24px", borderRadius: 12, border: "none",
-                background: loading ? "#67e8f9" : "#06b6d4",
-                color: "white", fontSize: 14, fontWeight: 600,
-                display: "flex", alignItems: "center", gap: 8,
-                transition: "background 0.2s", fontFamily: "'DM Sans',sans-serif",
-                opacity: loading ? 0.8 : 1,
-              }}
+              className="h-11 px-6 rounded-xl border-0 text-white text-sm font-semibold flex items-center gap-2 transition-all duration-200 hover:opacity-90 disabled:opacity-80"
+              style={{ background: loading ? "#67e8f9" : "#06b6d4" }}
             >
               {loading ? <Spinner /> : "✦"} {loading ? "Generating..." : "Generate"}
             </button>
           </div>
 
-          <p style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 10 }}>
+          {/* Industry label */}
+          <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] mb-2.5">
             Industry
           </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+
+          {/* Industry tags */}
+          <div className="flex flex-wrap gap-2">
             {INDUSTRIES.map((tag) => (
               <button
                 key={tag}
                 onClick={() => toggleTag(tag)}
+                className="text-xs px-3.5 py-1.5 rounded-full font-medium transition-all duration-150 border"
                 style={{
-                  fontSize: 12, padding: "6px 14px", borderRadius: 99,
-                  border: `1px solid ${activeTags.includes(tag) ? "#06b6d4" : "#e5e7eb"}`,
+                  borderColor: activeTags.includes(tag) ? "#06b6d4" : "#e5e7eb",
                   background: activeTags.includes(tag) ? "#06b6d4" : "white",
                   color: activeTags.includes(tag) ? "white" : "#6b7280",
-                  fontWeight: 500, transition: "all 0.15s", fontFamily: "'DM Sans',sans-serif",
                 }}
-              >{tag}</button>
+              >
+                {tag}
+              </button>
             ))}
           </div>
 
-          {/* Logo toggle */}
+          {/* Logo toggle — only visible after generation */}
           {brands.length > 0 && (
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 18, paddingTop: 16, borderTop: "1px solid #f8fafc" }}>
+            <div className="flex items-center gap-2.5 mt-5 pt-4 border-t border-slate-50">
               <button
                 onClick={() => setShowLogos((s) => !s)}
-                style={{
-                  width: 38, height: 22, borderRadius: 99, border: "none",
-                  background: showLogos ? "#06b6d4" : "#d1d5db",
-                  position: "relative", transition: "background 0.2s",
-                }}
+                className="w-[38px] h-[22px] rounded-full border-0 relative transition-all duration-200 flex-shrink-0"
+                style={{ background: showLogos ? "#06b6d4" : "#d1d5db" }}
               >
-                <span style={{
-                  position: "absolute", top: 3,
-                  left: showLogos ? 18 : 3,
-                  width: 16, height: 16, background: "white",
-                  borderRadius: "50%", transition: "left 0.2s",
-                  boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-                }} />
+                <span
+                  className="absolute top-[3px] w-4 h-4 bg-white rounded-full transition-all duration-200 shadow"
+                  style={{ left: showLogos ? 18 : 3 }}
+                />
               </button>
-              <span style={{ fontSize: 13, color: "#64748b" }}>Logo previews {showLogos ? "on" : "off"}</span>
+              <span className="text-[13px] text-slate-500">
+                Logo previews {showLogos ? "on" : "off"}
+              </span>
             </div>
           )}
         </div>
 
-        {/* Error */}
+        {/* Error message */}
         {error && (
-          <div style={{ background: "#fff1f2", border: "1px solid #fecdd3", color: "#be123c", fontSize: 14, borderRadius: 12, padding: "10px 16px", marginBottom: 16 }}>
+          <div className="bg-rose-50 border border-rose-200 text-rose-700 text-sm rounded-xl px-4 py-2.5 mb-4">
             {error}
           </div>
         )}
 
-        {/* Loading */}
+        {/* Loading state */}
         {loading && (
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "64px 0", gap: 14 }}>
-            <div style={{
-              width: 34, height: 34, borderRadius: "50%",
-              border: "3px solid #cffafe", borderTopColor: "#06b6d4",
-              animation: "spin 0.7s linear infinite",
-            }} />
-            <p style={{ fontSize: 14, color: "#94a3b8" }}>AI is crafting your brand identities...</p>
+          <div className="flex flex-col items-center py-16 gap-3.5">
+            <div className="big-spinner" />
+            <p className="text-sm text-slate-400">AI is crafting your brand identities...</p>
           </div>
         )}
 
         {/* Results grid */}
         {!loading && brands.length > 0 && (
           <>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
-              <span style={{ fontSize: 11, fontWeight: 600, color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.1em" }}>
+            <div className="flex items-center justify-between mb-5">
+              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em]">
                 {brands.length} brand identities generated
               </span>
               <button
                 onClick={generate}
-                style={{ fontSize: 13, fontWeight: 600, color: "#06b6d4", background: "none", border: "none", fontFamily: "'DM Sans',sans-serif" }}
+                className="text-[13px] font-semibold text-cyan-400 bg-transparent border-0"
               >
                 Regenerate →
               </button>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 18 }}>
+
+            <div
+              className="grid gap-[18px]"
+              style={{ gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))" }}
+            >
               {brands.map((b, i) => (
                 <BrandCard key={`${b.name}-${i}`} brand={b} index={i} showLogos={showLogos} />
               ))}
             </div>
-            <p style={{ textAlign: "center", fontSize: 12, color: "#cbd5e1", marginTop: 32 }}>
+
+            <p className="text-center text-xs text-slate-300 mt-8">
               Har card mein ↓ Download se PNG ya SVG download karo
             </p>
           </>
         )}
 
-        {/* Empty */}
+        {/* Empty state */}
         {!loading && brands.length === 0 && !error && (
-          <div style={{ textAlign: "center", padding: "64px 0" }}>
-            <div style={{ fontSize: 48, opacity: 0.12, marginBottom: 14 }}>✦</div>
-            <p style={{ fontSize: 14, color: "#cbd5e1" }}>Apni business describe karo aur Generate karo</p>
+          <div className="text-center py-16">
+            <div className="text-5xl opacity-10 mb-3.5">✦</div>
+            <p className="text-sm text-slate-300">Apni business describe karo aur Generate karo</p>
           </div>
         )}
       </div>
