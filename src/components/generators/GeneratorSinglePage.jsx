@@ -33,6 +33,13 @@ import DomainNameGenerator from "./tools/DomainNameGenerator";
 import BrandNameGenerator from "./tools/BrandNameGenerator";
 import MarketingStrategyGenerator from "./tools/MarketingStrategyGenerator";
 import PricingsStrategyGenerator from "./tools/PricingStrategyGenerator";
+import MemeGenerator from "./tools/MemeGenerator";
+import EmojiGenerator from "./tools/EmojiGenerator";
+import ChallengeGenerator from "./tools/ChallengeGenerator";
+import PollGenerator from "./tools/PollGenerator";
+import TruthOrDare from "./tools/TruthOrDareGenerator";
+import EmojiMovieGuess from "./tools/EmojiMovieGuess";
+import DumbCharades from "./tools/DumbCharades";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
@@ -74,7 +81,14 @@ const toolComponents = {
     "domain-name-generator": DomainNameGenerator,
     "brand-name-generator": BrandNameGenerator,
     "marketing-strategy-generator": MarketingStrategyGenerator,
-    "pricing-strategy-generator": PricingsStrategyGenerator
+    "pricing-strategy-generator": PricingsStrategyGenerator,
+    "meme-generator": MemeGenerator,
+    "emoji-generator": EmojiGenerator,
+    "random-challenge-generator": ChallengeGenerator,
+    "poll-generator": PollGenerator,
+    "truth-or-dare-generator": TruthOrDare,
+    "emoji-movie-guess": EmojiMovieGuess,
+    "dumb-charades-generator": DumbCharades
 };
 
 
