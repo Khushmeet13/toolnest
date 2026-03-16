@@ -1,6 +1,27 @@
-import React from 'react'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import generators from "../../data/generatorTools";
 
 const HeroSection = () => {
+
+    const [query, setQuery] = useState("");
+    const navigate = useNavigate();
+
+    const handleSearch = () => {
+
+        const tool = generators.find((g) =>
+            g.title.toLowerCase().includes(query.toLowerCase())
+        );
+
+        if (tool) {
+            const slug = tool.title
+                .toLowerCase()
+                .replace(/\s+/g, "-");
+
+            navigate(`/generators/${slug}`);
+        }
+    };
+
     return (
         <div>
             <div className="relative isolate overflow-hidden">
@@ -50,7 +71,7 @@ const HeroSection = () => {
 
                         {/* 🔍 BIG SEARCH BAR */}
                         <div className="mt-10 flex justify-center">
-                            <div className="flex w-full max-w-2xl items-center rounded-xl bg-white/10 backdrop-blur border border-white/20 px-4 py-3 shadow-lg">
+                            <div className="flex w-full max-w-2xl items-center rounded-xl bg-white/10 backdrop-blur border border-white/20 pl-4 pr-1.5 py-1.5 shadow-lg">
 
                                 <svg
                                     className="h-5 w-5 text-gray-300 mr-3"
@@ -65,11 +86,19 @@ const HeroSection = () => {
 
                                 <input
                                     type="text"
+                                    value={query}
+                                    onChange={(e) => setQuery(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter") handleSearch();
+                                    }}
                                     placeholder="Search generators (Password, Business Name, QR Code...)"
                                     className="w-full bg-transparent outline-none text-white placeholder-gray-300"
                                 />
 
-                                <button className="ml-3 rounded-lg bg-cyan-500 px-5 py-2 text-sm font-semibold text-white hover:bg-cyan-400 transition">
+                                <button
+                                    onClick={handleSearch}
+                                    className="ml-3 rounded-lg bg-cyan-600 px-5 py-2 text-sm font-semibold text-white hover:bg-cyan-600/80 transition cursor-pointer"
+                                >
                                     Search
                                 </button>
                             </div>
@@ -78,10 +107,11 @@ const HeroSection = () => {
                         {/* Popular quick links */}
                         <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
                             <span className="text-gray-400">Popular:</span>
-                            <a href="#" className="text-cyan-400 hover:underline">Password</a>
-                            <a href="#" className="text-cyan-400 hover:underline">Username</a>
-                            <a href="#" className="text-cyan-400 hover:underline">Business Name</a>
-                            <a href="#" className="text-cyan-400 hover:underline">QR Code</a>
+                            <a href="/generators/password-generator" className="text-cyan-400 hover:underline">Password</a>
+                            <a href="/generators/email-template-generator" className="text-cyan-400 hover:underline">Email</a>
+                            <a href="/generators/invoice-generator" className="text-cyan-400 hover:underline">Invoice</a>
+                            <a href="/generators/qr-code-generator" className="text-cyan-400 hover:underline">QR Code</a>
+                            <a href="/generators/poll-generator" className="text-cyan-400 hover:underline">Poll</a>
                         </div>
 
                     </div>
