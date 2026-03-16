@@ -42,6 +42,7 @@ import EmojiMovieGuess from "./tools/EmojiMovieGuess";
 import DumbCharades from "./tools/DumbCharades";
 import ColorCodeGenerator from "./tools/ColorCodeGenerator";
 import ColorShadesGenerator from "./tools/ColorShadesGenerator";
+import SkeletonLoaderGenerator from "./tools/SkeletonLoaderGenerator";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
@@ -79,6 +80,7 @@ const toolComponents = {
     "gradient-generator": GradientGenerator,
     "color-code-generator": ColorCodeGenerator,
     "color-shades-generator": ColorShadesGenerator,
+    "skeleton-loader-generator": SkeletonLoaderGenerator,
     "random-name-generator": RandomNameGenerator,
     "random-number-generator": RandomNumberGenerator,
     "invoice-generator": InvoiceGenerator,
