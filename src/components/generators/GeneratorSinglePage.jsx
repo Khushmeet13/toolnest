@@ -40,6 +40,8 @@ import PollGenerator from "./tools/PollGenerator";
 import TruthOrDare from "./tools/TruthOrDareGenerator";
 import EmojiMovieGuess from "./tools/EmojiMovieGuess";
 import DumbCharades from "./tools/DumbCharades";
+import ColorCodeGenerator from "./tools/ColorCodeGenerator";
+import ColorShadesGenerator from "./tools/ColorShadesGenerator";
 
 const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-");
@@ -75,6 +77,8 @@ const toolComponents = {
     "barcode-generator": BarcodeGenerator,
     "color-palette-generator": ColorPaletteGenerator,
     "gradient-generator": GradientGenerator,
+    "color-code-generator": ColorCodeGenerator,
+    "color-shades-generator": ColorShadesGenerator,
     "random-name-generator": RandomNameGenerator,
     "random-number-generator": RandomNumberGenerator,
     "invoice-generator": InvoiceGenerator,

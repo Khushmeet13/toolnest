@@ -19,6 +19,7 @@ import {
   GlobeAltIcon,
   MegaphoneIcon,
   CurrencyDollarIcon,
+  SunIcon,
 } from "@heroicons/react/24/outline";
 import { Smile } from "lucide-react";
 
@@ -112,118 +113,125 @@ const generators = [
     category: "Design",
     icon: PaintBrushIcon,
   },
+ {
+  id: 13,
+  title: "Color Code Generator",
+  description: "Generate random HEX, RGB, and HSL color codes for your design projects.",
+  category: "Design",
+  icon: CircleStackIcon,
+},
+{
+  id: 14,
+ title: "Color Shades Generator",
+  description: "Generate lighter and darker shades of any color instantly.",
+  category: "Design",
+  icon: SunIcon,
+},
 
   // RANDOM
-  {
-    id: 13,
-    title: "Random Name Generator",
-    description: "Generate random names for projects or characters.",
-    category: "Random",
-    icon: UserIcon,
-  },
-  {
-    id: 14,
-    title: "Random Number Generator",
-    description: "Generate random numbers instantly.",
-    category: "Random",
-    icon: HashtagIcon,
-  },
+  // {
+  //   id: 14,
+  //   title: "Random Name Generator",
+  //   description: "Generate random names for projects or characters.",
+  //   category: "Random",
+  //   icon: UserIcon,
+  // },
+  // {
+  //   id: 15,
+  //   title: "Random Number Generator",
+  //   description: "Generate random numbers instantly.",
+  //   category: "Random",
+  //   icon: HashtagIcon,
+  // },
 
-  // BUSINESS
-  {
-    id: 15,
-    title: "Invoice Generator",
-    description: "Create professional invoices for your business.",
-    category: "Business",
-    icon: ReceiptPercentIcon,
-  },
+  // // BUSINESS
   // {
   //   id: 16,
-  //   title: "Business Name Generator",
-  //   description: "Find creative and unique business names.",
+  //   title: "Invoice Generator",
+  //   description: "Create professional invoices for your business.",
   //   category: "Business",
-  //   icon: BuildingOfficeIcon,
+  //   icon: ReceiptPercentIcon,
   // },
-  {
-    id: 16,
-    title: "Domain Name Generator",
-    description: "Generate unique and available domain name ideas for your website or startup.",
-    category: "Business",
-    icon: GlobeAltIcon,
-  },
-  {
-    id: 17,
-    title: "Brand Name Generator",
-    description: "Create catchy and memorable brand name ideas for your business or product.",
-    category: "Business",
-    icon: SparklesIcon,
-  },
-  {
-    id: 18,
-    title: "Marketing Strategy Generator",
-    description: "Generate effective marketing strategies and growth ideas for your business.",
-    category: "Business",
-    icon: MegaphoneIcon,
-  },
-  {
-    id: 19,
-    title: "Pricing Strategy Generator",
-    description: "Get smart pricing model suggestions to maximize profit and attract customers.",
-    category: "Business",
-    icon: CurrencyDollarIcon,
-  },
+  // {
+  //   id: 17,
+  //   title: "Domain Name Generator",
+  //   description: "Generate unique and available domain name ideas for your website or startup.",
+  //   category: "Business",
+  //   icon: GlobeAltIcon,
+  // },
+  // {
+  //   id: 18,
+  //   title: "Brand Name Generator",
+  //   description: "Create catchy and memorable brand name ideas for your business or product.",
+  //   category: "Business",
+  //   icon: SparklesIcon,
+  // },
+  // {
+  //   id: 19,
+  //   title: "Marketing Strategy Generator",
+  //   description: "Generate effective marketing strategies and growth ideas for your business.",
+  //   category: "Business",
+  //   icon: MegaphoneIcon,
+  // },
+  // {
+  //   id: 20,
+  //   title: "Pricing Strategy Generator",
+  //   description: "Get smart pricing model suggestions to maximize profit and attract customers.",
+  //   category: "Business",
+  //   icon: CurrencyDollarIcon,
+  // },
 
 
-  // FUN
-  {
-    id: 20,
-    title: "Meme Generator",
-    description: "Create funny memes in just a few clicks.",
-    category: "Fun",
-    icon: FaceSmileIcon,
-  },
-  {
-    id: 21,
-    title: "Emoji Generator",
-    description: "Generate fun and creative emoji combinations.",
-    category: "Fun",
-    icon: Smile,
-  },
-  {
-    id: 22,
-    title: "Random Challenge Generator",
-    description: "Generate fun and creative emoji combinations.",
-    category: "Fun",
-    icon: Smile,
-  },
-  {
-    id: 23,
-    title: "Poll Generator",
-    description: "Generate fun and creative emoji combinations.",
-    category: "Fun",
-    icon: Smile,
-  },
-  {
-    id: 24,
-    title: "Truth Or Dare Generator",
-    description: "Generate fun and creative emoji combinations.",
-    category: "Fun",
-    icon: Smile,
-  },
-  {
-    id: 25,
-    title: "Emoji Movie Guess",
-    description: "Generate fun and creative emoji combinations.",
-    category: "Fun",
-    icon: Smile,
-  },
-  {
-    id: 26,
-    title: "Dumb Charades Generator",
-    description: "Generate fun and creative emoji combinations.",
-    category: "Fun",
-    icon: Smile,
-  },
+  // // FUN
+  // {
+  //   id: 20,
+  //   title: "Meme Generator",
+  //   description: "Create funny memes in just a few clicks.",
+  //   category: "Fun",
+  //   icon: FaceSmileIcon,
+  // },
+  // {
+  //   id: 21,
+  //   title: "Emoji Generator",
+  //   description: "Generate fun and creative emoji combinations.",
+  //   category: "Fun",
+  //   icon: Smile,
+  // },
+  // {
+  //   id: 22,
+  //   title: "Random Challenge Generator",
+  //   description: "Generate fun and creative emoji combinations.",
+  //   category: "Fun",
+  //   icon: Smile,
+  // },
+  // {
+  //   id: 23,
+  //   title: "Poll Generator",
+  //   description: "Generate fun and creative emoji combinations.",
+  //   category: "Fun",
+  //   icon: Smile,
+  // },
+  // {
+  //   id: 24,
+  //   title: "Truth Or Dare Generator",
+  //   description: "Generate fun and creative emoji combinations.",
+  //   category: "Fun",
+  //   icon: Smile,
+  // },
+  // {
+  //   id: 25,
+  //   title: "Emoji Movie Guess",
+  //   description: "Generate fun and creative emoji combinations.",
+  //   category: "Fun",
+  //   icon: Smile,
+  // },
+  // {
+  //   id: 26,
+  //   title: "Dumb Charades Generator",
+  //   description: "Generate fun and creative emoji combinations.",
+  //   category: "Fun",
+  //   icon: Smile,
+  // },
 ];
 
 export default generators;
