@@ -12,11 +12,11 @@ const FORMATS = ["Standard", "Uppercase", "No Dashes", "Braces", "URN"];
 
 function formatUUID(uuid, fmt) {
   switch (fmt) {
-    case "Uppercase":  return uuid.toUpperCase();
-    case "No Dashes":  return uuid.replace(/-/g, "");
-    case "Braces":     return `{${uuid.toUpperCase()}}`;
-    case "URN":        return `urn:uuid:${uuid}`;
-    default:           return uuid;
+    case "Uppercase": return uuid.toUpperCase();
+    case "No Dashes": return uuid.replace(/-/g, "");
+    case "Braces": return `{${uuid.toUpperCase()}}`;
+    case "URN": return `urn:uuid:${uuid}`;
+    default: return uuid;
   }
 }
 
@@ -90,16 +90,7 @@ export default function UUIDGenerator() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden"
-      style={{
-        fontFamily: "'JetBrains Mono', monospace",
-        background: "#0e0e10",
-        backgroundImage: `
-          linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)
-        `,
-        backgroundSize: "32px 32px",
-      }}
+      className="min-h-screen flex items-center justify-center relative overflow-hidden "
     >
       <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap"
@@ -135,16 +126,13 @@ export default function UUIDGenerator() {
 
         {/* Header */}
         <div className="mb-10">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-lg" style={{ boxShadow: "0 0 8px #22c55e" }} />
-            <span className="text-xs text-zinc-500 uppercase tracking-widest">v4 · RFC 4122</span>
-          </div>
+
           <h1
-            className="text-5xl font-extrabold text-white mb-3 leading-none"
-            style={{ fontFamily: "'Syne', sans-serif", letterSpacing: "-1px" }}
+            className="text-4xl font-medium text-gray-900 mb-3 leading-none"
+
           >
             UUID
-            <span className="text-emerald-400"> /</span>
+            <span className="text-cyan-600"> /</span>
             <br />
             Generator
           </h1>
@@ -157,16 +145,16 @@ export default function UUIDGenerator() {
         {/* Controls Row */}
         <div className="flex flex-wrap gap-3 mb-6">
           {/* Count Selector */}
-          <div className="flex items-center gap-2 bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2.5">
-            <span className="text-xs text-zinc-500 mr-1">Count</span>
+          <div className="flex items-center gap-2 bg-gray-900 border border-gray-900 rounded-xl px-4 py-2">
+            <span className="text-xs text-white mr-1">Count</span>
             {[1, 5, 10, 25].map((n) => (
               <button
                 key={n}
                 onClick={() => setCount(n)}
                 className="fmt-btn w-8 h-7 rounded-lg text-xs font-medium"
                 style={{
-                  background: count === n ? "#22c55e" : "transparent",
-                  color: count === n ? "#000" : "#71717a",
+                  background: count === n ? "#06b6d4" : "transparent", // cyan-400
+                  color: count === n ? "#374151" : "#fff",
                   border: count === n ? "none" : "1px solid transparent",
                 }}
               >
@@ -176,7 +164,7 @@ export default function UUIDGenerator() {
           </div>
 
           {/* Format Selector */}
-          <div className="flex items-center gap-1 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2">
+          <div className="flex items-center gap-1 bg-gray-900 border border-zinc-800 rounded-xl px-3 py-2">
             {FORMATS.map((f) => (
               <button
                 key={f}
@@ -184,8 +172,8 @@ export default function UUIDGenerator() {
                 className="fmt-btn px-3 py-1 rounded-lg text-xs font-medium"
                 style={{
                   background: format === f ? "#18181b" : "transparent",
-                  color: format === f ? "#d4d4d8" : "#52525b",
-                  border: format === f ? "1px solid #3f3f46" : "1px solid transparent",
+                  color: format === f ? "#0891b2" : "#52525b",
+                  border: format === f ? "1px solid #0891b2" : "1px solid transparent",
                 }}
               >
                 {f}
@@ -197,14 +185,7 @@ export default function UUIDGenerator() {
         {/* Generate Button */}
         <button
           onClick={generate}
-          className="gen-btn w-full py-4 rounded-2xl text-sm font-bold tracking-widest uppercase mb-6 border"
-          style={{
-            background: "transparent",
-            color: "#22c55e",
-            border: "1px solid #22c55e",
-            letterSpacing: "0.12em",
-            textShadow: "0 0 12px rgba(34,197,94,0.4)",
-          }}
+          className=" w-full py-4 rounded-xl text-sm font-medium tracking-widest uppercase mb-6 border border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white cursor-pointer"
         >
           ⟳ &nbsp; Generate {count > 1 ? `${count} UUIDs` : "UUID"}
         </button>
@@ -222,7 +203,7 @@ export default function UUIDGenerator() {
               </div>
               <button
                 onClick={copyAll}
-                className="copy-btn text-xs px-3 py-1 rounded-lg border text-zinc-500 border-zinc-700"
+                className="copy-btn text-xs px-3 py-1 rounded-lg border text-zinc-500 border-zinc-700 cursor-pointer"
                 style={{ background: "transparent" }}
               >
                 {copied === "all" ? "✓ All copied" : `Copy all`}

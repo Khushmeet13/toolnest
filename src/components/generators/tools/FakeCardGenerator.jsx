@@ -364,9 +364,12 @@ export default function App() {
   return (
     <>
       <div className="pt-16">
-        <h1 className="text-4xl font-medium text-gray-900 text-center mb-8">
+        <h1 className="text-4xl font-medium text-gray-900 text-center mb-2">
           Credit card <span className="text-cyan-700">generator</span>
         </h1>
+        <p className="text-center text-gray-600 max-w-2xl mx-auto  mb-8">
+          Generate valid-format credit card numbers for testing and development purposes.
+        </p>
       </div>
 
       <div className="flex max-w-4xl mx-auto mb-16 border border-blue-200 rounded-xl">
@@ -402,18 +405,15 @@ export default function App() {
               return (
                 <div
                   key={t}
-                  className="tab-item flex items-center gap-2.5 px-3 py-2.5 rounded-xl mb-0.5"
+                  className={`tab-item flex items-center gap-2.5 px-3 py-2.5 rounded-xl mb-0.5 ${active ? "border border-cyan-600 bg-cyan-600/10 text-cyan-600" : "1px solid transparent"}`}
                   onClick={() => setTab(t)}
-                  style={{
-                    background: active ? "rgba(99,102,241,0.18)" : "transparent",
-                    border: active ? "1px solid rgba(99,102,241,0.3)" : "1px solid transparent",
-                  }}
+                  
                 >
-                  <span className="text-sm" style={{ opacity: active ? 1 : 0.4 }}>{TAB_ICONS[t]}</span>
-                  <span className="text-[13px]" style={{ fontWeight: active ? 600 : 400, color: active ? "#a5b4fc" : "rgba(255,255,255,0.45)" }}>
+                  <span className="text-sm text-cyan-600" style={{ opacity: active ? 1 : 0.4 }}>{TAB_ICONS[t]}</span>
+                  <span className={`text-[13px] ${active ? " text-cyan-600" : "text-gray-500"}`} style={{ fontWeight: active ? 600 : 400, }}>
                     {t}
                   </span>
-                  {active && <div className="ml-auto w-1.5 h-1.5 rounded-full" style={{ background: "#818cf8" }} />}
+                  {active && <div className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-600"/>}
                 </div>
               );
             })}
@@ -442,7 +442,7 @@ export default function App() {
                 {/* Left column */}
                 <div>
                   {/* Network */}
-                  <div className="bg-white rounded-2xl p-4 mb-3.5 border border-black/[0.06]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+                  <div className="bg-white rounded-xl p-4 mb-3.5 border border-black/[0.06]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
                     <div className="text-[11px] font-semibold tracking-widest uppercase text-gray-400 mb-3">Network</div>
                     <div className="grid grid-cols-2 gap-2">
                       {Object.keys(NETWORKS).map(n => (
@@ -451,9 +451,9 @@ export default function App() {
                           className="net-pill flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs"
                           onClick={() => setNet(n)}
                           style={{
-                            border: net === n ? "1.5px solid #6366f1" : "1.5px solid #eee",
+                            border: net === n ? "1.5px solid #0891b2" : "1.5px solid #eee",
                             background: net === n ? "#eef2ff" : "#fafafa",
-                            color: net === n ? "#4f46e5" : "#555",
+                            color: net === n ? "#0891b2" : "#555",
                             fontWeight: net === n ? 600 : 400,
                           }}
                         >
@@ -464,7 +464,7 @@ export default function App() {
                   </div>
 
                   {/* Theme */}
-                  <div className="bg-white rounded-2xl p-4 mb-3.5 border border-black/[0.06]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+                  <div className="bg-white rounded-xl p-4 mb-3.5 border border-black/[0.06]" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
                     <div className="text-[11px] font-semibold tracking-widest uppercase text-gray-400 mb-3">Card Theme</div>
                     <div className="flex gap-2">
                       {Object.keys(THEMES).map(t => {
@@ -475,13 +475,13 @@ export default function App() {
                             className="theme-card flex-1 py-3 px-2 rounded-xl text-center"
                             onClick={() => setTheme(t)}
                             style={{
-                              border: active ? "1.5px solid #6366f1" : "1.5px solid #eee",
+                              border: active ? "1.5px solid #0891b2" : "1.5px solid #eee",
                               background: active ? "#eef2ff" : "#fafafa",
                               boxShadow: active ? "0 4px 14px rgba(99,102,241,0.12)" : "0 2px 6px rgba(0,0,0,0.04)",
                             }}
                           >
                             <div className="text-xl mb-1">{themeEmoji[t]}</div>
-                            <div className="text-[11px]" style={{ fontWeight: active ? 600 : 400, color: active ? "#4f46e5" : "#666" }}>{t}</div>
+                            <div className="text-[11px]" style={{ fontWeight: active ? 600 : 400, color: active ? "#0891b2" : "#666" }}>{t}</div>
                           </button>
                         );
                       })}
@@ -490,9 +490,9 @@ export default function App() {
 
                   {/* Generate */}
                   <button
-                    className="action-btn w-full py-3.5 rounded-2xl text-white text-[13px] font-bold tracking-wider border-none"
+                    className="action-btn w-full py-3.5 rounded-xl text-white text-[13px] font-bold tracking-wider border-none"
                     onClick={generate}
-                    style={{ background: "linear-gradient(135deg,#4f46e5,#6366f1)", boxShadow: "0 6px 20px rgba(79,70,229,0.3)" }}
+                    style={{ background: "linear-gradient(135deg,#0891b2,#06b6d4)", boxShadow: "0 6px 20px rgba(79,70,229,0.3)" }}
                   >
                     {card ? "↺  Regenerate Card" : "⚡  Generate Card"}
                   </button>
@@ -528,7 +528,7 @@ export default function App() {
                       </div>
 
                       {/* Fields */}
-                      <div className="bg-white rounded-2xl border border-black/[0.06] overflow-hidden" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+                      <div className="bg-white rounded-xl border border-black/[0.06] overflow-hidden" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
                         <div className="px-4 py-3 border-b border-gray-50">
                           <span className="text-[10px] font-semibold tracking-widest uppercase text-gray-400">Card Details</span>
                         </div>
@@ -566,7 +566,7 @@ export default function App() {
                       </div>
                     </>
                   ) : (
-                    <div className="h-72 rounded-2xl flex flex-col items-center justify-center gap-2 border-2 border-dashed" style={{ background: "rgba(255,255,255,0.6)", borderColor: "#e0ddd8" }}>
+                    <div className="h-72 rounded-xl flex flex-col items-center justify-center gap-2 border-2 border-dashed" style={{ background: "rgba(255,255,255,0.6)", borderColor: "#e0ddd8" }}>
                       <div className="text-5xl opacity-15">💳</div>
                       <p className="text-xs text-gray-300">Generate a card to preview</p>
                     </div>
@@ -580,11 +580,11 @@ export default function App() {
           {tab === "Bulk" && (
             <div className="appear max-w-3xl">
               <div className="mb-7">
-                <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-1" style={{ fontFamily: "'Syne',sans-serif" }}>Bulk Generator</h1>
+                <h1 className="text-2xl font-medium text-gray-900 tracking-tight mb-1" >Bulk Generator</h1>
                 <p className="text-sm font-light" style={{ color: "#999" }}>Generate multiple test cards at once</p>
               </div>
 
-              <div className="bg-white rounded-2xl p-5 mb-4 border border-black/[0.06] flex flex-wrap gap-4 items-center" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+              <div className="bg-white rounded-xl p-5 mb-4 border border-black/[0.06] flex flex-wrap gap-4 items-center" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
                 <div>
                   <div className="text-[11px] font-semibold tracking-widest uppercase text-gray-400 mb-2">Network</div>
                   <div className="flex gap-1.5 flex-wrap">
@@ -594,9 +594,9 @@ export default function App() {
                         className="net-pill px-3 py-1 rounded-lg text-[11px]"
                         onClick={() => setBulkNet(n)}
                         style={{
-                          border: bulkNet === n ? "1.5px solid #6366f1" : "1.5px solid #e5e5e5",
+                          border: bulkNet === n ? "1.5px solid #0891b2" : "1.5px solid #e5e5e5",
                           background: bulkNet === n ? "#eef2ff" : "#fafafa",
-                          color: bulkNet === n ? "#4f46e5" : "#666",
+                          color: bulkNet === n ? "#0891b2" : "#666",
                           fontWeight: bulkNet === n ? 600 : 400,
                         }}
                       >
@@ -614,9 +614,9 @@ export default function App() {
                         className="net-pill px-3 py-1 rounded-lg text-[11px]"
                         onClick={() => setBulkCount(n)}
                         style={{
-                          border: bulkCount === n ? "1.5px solid #6366f1" : "1.5px solid #e5e5e5",
+                          border: bulkCount === n ? "1.5px solid #0891b2" : "1.5px solid #e5e5e5",
                           background: bulkCount === n ? "#eef2ff" : "#fafafa",
-                          color: bulkCount === n ? "#4f46e5" : "#666",
+                          color: bulkCount === n ? "#0891b2" : "#666",
                           fontWeight: bulkCount === n ? 600 : 400,
                         }}
                       >
@@ -627,7 +627,7 @@ export default function App() {
                 </div>
                 <button
                   className="action-btn ml-auto px-5 py-2.5 rounded-xl text-white text-xs font-bold border-none"
-                  style={{ background: "linear-gradient(135deg,#4f46e5,#6366f1)", boxShadow: "0 4px 14px rgba(79,70,229,0.25)" }}
+                  style={{ background: "linear-gradient(135deg,#0891b2,#06b6d4)", boxShadow: "0 4px 14px rgba(79,70,229,0.25)" }}
                   onClick={() => {
                     const nets = bulkNet === "Random" ? Object.keys(NETWORKS) : null;
                     setBulkCards(Array.from({ length: bulkCount }, () => genCard(nets ? pick(nets) : bulkNet)));
@@ -638,7 +638,7 @@ export default function App() {
               </div>
 
               {bulkCards.length > 0 && (
-                <div className="bg-white rounded-2xl border border-black/[0.06] overflow-hidden" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+                <div className="bg-white rounded-xl border border-black/[0.06] overflow-hidden" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
                   <div className="px-4 py-3 border-b border-gray-50 flex items-center justify-between">
                     <span className="text-[11px] font-semibold tracking-widest uppercase text-gray-400">{bulkCards.length} Cards Generated</span>
                     <button className="action-btn text-[10px] text-gray-300 bg-transparent border-none p-0" onClick={() => setBulkCards([])}>Clear all</button>
@@ -678,11 +678,11 @@ export default function App() {
           {tab === "Validator" && (
             <div className="appear max-w-lg">
               <div className="mb-7">
-                <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-1" style={{ fontFamily: "'Syne',sans-serif" }}>Card Validator</h1>
+                <h1 className="text-2xl font-medium text-gray-900 tracking-tight mb-1">Card Validator</h1>
                 <p className="text-sm font-light" style={{ color: "#999" }}>Check any card number using the Luhn algorithm</p>
               </div>
 
-              <div className="bg-white rounded-2xl p-6 border border-black/[0.06] mb-4" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+              <div className="bg-white rounded-xl p-6 border border-black/[0.06] mb-4" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
                 <div className="text-[11px] font-semibold tracking-widest uppercase text-gray-400 mb-2.5">Card Number</div>
                 <div className="flex gap-2.5">
                   <input
@@ -702,7 +702,7 @@ export default function App() {
                   />
                   <button
                     className="action-btn px-5 py-3 rounded-xl text-white text-[13px] font-bold border-none whitespace-nowrap"
-                    style={{ background: "linear-gradient(135deg,#4f46e5,#6366f1)", boxShadow: "0 4px 14px rgba(79,70,229,0.25)" }}
+                    style={{ background: "linear-gradient(135deg,#0891b2,#06b6d4)", boxShadow: "0 4px 14px rgba(79,70,229,0.25)" }}
                     onClick={handleValidate}
                   >
                     Validate
@@ -761,12 +761,12 @@ export default function App() {
           {tab === "Export" && (
             <div className="appear max-w-xl">
               <div className="mb-7">
-                <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight mb-1" style={{ fontFamily: "'Syne',sans-serif" }}>Export Data</h1>
+                <h1 className="text-2xl font-medium text-gray-900 tracking-tight mb-1">Export Data</h1>
                 <p className="text-sm font-light" style={{ color: "#999" }}>Download your generated cards as JSON or CSV</p>
               </div>
 
               {/* Source */}
-              <div className="bg-white rounded-2xl p-5 border border-black/[0.06] mb-3.5" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+              <div className="bg-white rounded-xl p-5 border border-black/[0.06] mb-3.5" style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
                 <div className="text-[11px] font-semibold tracking-widest uppercase text-gray-400 mb-3">Data Source</div>
                 <div className="flex gap-2.5">
                   {[
@@ -778,13 +778,13 @@ export default function App() {
                       className="theme-card flex-1 p-3.5 rounded-xl text-left"
                       onClick={() => setExportSrc(v)}
                       style={{
-                        border: exportSrc === v ? "1.5px solid #6366f1" : "1.5px solid #eee",
+                        border: exportSrc === v ? "1.5px solid #0891b2" : "1.5px solid #eee",
                         background: exportSrc === v ? "#eef2ff" : "#fafafa",
                         boxShadow: exportSrc === v ? "0 4px 14px rgba(99,102,241,0.12)" : "none",
                       }}
                     >
                       <span className="text-xl">{icon}</span>
-                      <div className="mt-1.5 text-[13px] font-semibold" style={{ color: exportSrc === v ? "#4f46e5" : "#333" }}>{label}</div>
+                      <div className="mt-1.5 text-[13px] font-semibold" style={{ color: exportSrc === v ? "#0891b2" : "#333" }}>{label}</div>
                       <div className="text-[11px] text-gray-400 mt-0.5" style={{ fontFamily: "'IBM Plex Mono',monospace" }}>{desc}</div>
                     </button>
                   ))}
