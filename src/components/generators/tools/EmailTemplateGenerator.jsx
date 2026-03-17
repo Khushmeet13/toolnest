@@ -259,19 +259,23 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
   return (
     <div className=" overflow-hidden py-16">
 
-      <h1 className="text-4xl font-medium text-gray-900 text-center mb-8">
+      <h1 className="text-4xl font-medium text-gray-900 text-center mb-2">
         Email template <span className="text-cyan-700">generator</span>
       </h1>
+      <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
+        Instantly create professional and ready-to-use email templates for business, marketing, or personal use.
 
-      <div className={`relative max-w-5xl border border-gray-200 shadow-md rounded-lg shadow-cyan-100/50 mx-auto flex h-screen transition-all duration-700 ${visible ? "opacity-100" : "opacity-0"}`}>
+      </p>
+
+      <div className={`relative max-w-5xl border border-cyan-600 shadow-md shadow-cyan-100 rounded-lg  mx-auto flex transition-all duration-700 ${visible ? "opacity-100" : "opacity-0"}`}>
 
         {/* ═══════════ SIDEBAR ═══════════ */}
-        <aside className="sidebar-bg w-60 flex-shrink-0 flex flex-col h-screen sticky top-0 z-20 border-r border-gray-200">
+        <aside className="sidebar-bg w-60 flex-shrink-0 flex flex-col sticky top-0 z-20 border-r border-cyan-600">
 
           {/* Progress */}
-          <div className="px-5 py-4" style={{ borderBottom: "1.5px solid #e0f7fa" }}>
+          <div className="px-5 py-4 border-b border-cyan-600" >
             <div className="flex items-center justify-between mb-2">
-              <span className="f-code text-[8px] tracking-widest uppercase" style={{ color: "#9dd6e5" }}>Progress</span>
+              <span className="f-code text-[8px] tracking-widest uppercase text-cyan-700">Progress</span>
               <span className="f-code text-[9px] font-medium" style={{ color: "#06b6d4" }}>{completedCount}/{STEPS.length}</span>
             </div>
             <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "#e0f7fa" }}>
@@ -289,8 +293,8 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
                   <div key={step.id} className="flex flex-col items-stretch">
                     <button
                       onClick={() => setActiveStep(step.id)}
-                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 cursor-pointer text-left group border ${active ? "step-active" : "hover:bg-cyan-50 border-transparent"}`}
-                      style={{ borderColor: active ? "#7de8f8" : "transparent" }}>
+                      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 cursor-pointer text-left group border ${active ? "step-active border-cyan-600" : "hover:bg-cyan-50 border-transparent"}`}
+                    >
                       {/* Dot */}
                       <div className={`relative w-6 h-6 rounded-full flex items-center justify-center shrink-0 transition-all`}
                         style={{
@@ -309,8 +313,8 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="f-ui text-[12px] font-semibold transition-colors"
-                          style={{ color: active ? "#0891b2" : done ? "#3d8fa0" : "#9dd6e5" }}>
+                        <p className={`f-ui text-[12px] font-semibold transition-colors  ${active ? "text-cyan-700" : "text-cyan-500"}`}
+                        >
                           {step.label}
                         </p>
                       </div>
@@ -326,23 +330,27 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
           </nav>
 
           {/* Sidebar footer */}
-          <div className="p-4" style={{ borderTop: "1.5px solid #cff3fd" }}>
+          <div className="p-4 border-t border-cyan-600">
             <div className="flex gap-1.5 flex-wrap mb-3">
-              <span className="f-code text-[8px] px-2 py-1 rounded-lg border truncate max-w-full" style={{ background: "#f0fbff", border: "1.5px solid #cff3fd", color: "#5bb8cb" }}>{category}</span>
-              <span className="f-code text-[8px] px-2 py-1 rounded-lg border" style={{ background: "#f0fbff", border: "1.5px solid #cff3fd", color: "#5bb8cb" }}>{toneObj.emoji} {tone}</span>
+              <span className="f-code text-[8px] px-2 py-1 rounded-lg border truncate max-w-full border-cyan-600 bg-cyan-50/30 text-cyan-600">{category}</span>
+              <span className="f-code text-[8px] px-2 py-1 rounded-lg border border-cyan-600 bg-cyan-50/30 text-cyan-600">{toneObj.emoji} {tone}</span>
             </div>
             <button
               onClick={generate}
               disabled={!canGenerate || loading}
-              className={`w-full py-2.5 rounded-xl f-ui text-[12px] font-semibold flex items-center justify-center gap-2 cursor-pointer transition-all ${canGenerate && !loading ? "gen-btn" : ""}`}
-              style={!canGenerate || loading ? { background: "#e0f7fa", color: "#9dd6e5", border: "1.5px solid #cff3fd", cursor: "not-allowed" } : {}}>
+              className={`w-full py-2.5 rounded-xl text-[12px] font-semibold flex items-center justify-center gap-2 transition-all
+                ${canGenerate && !loading
+                  ? "bg-cyan-600 text-white hover:bg-cyan-700 active:scale-[0.98] cursor-pointer shadow-md hover:shadow-lg"
+                  : "bg-cyan-100 text-cyan-300 border border-cyan-200 cursor-not-allowed"
+                }`}
+            >
               {loading ? (
                 <><div className="w-3.5 h-3.5 rounded-full border-2 border-white/40 border-t-white spin-it" />Gemini is writing…</>
               ) : (
-                <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>Generate with Gemini</>
+                <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>Generate</>
               )}
             </button>
-            {!canGenerate && <p className="f-code text-[8px] text-center mt-1.5" style={{ color: "#9dd6e5" }}>Add purpose first</p>}
+            {!canGenerate && <p className="f-code text-[8px] text-center mt-1.5 text-cyan-600">Add purpose first</p>}
             {apiError && (
               <p className="f-code text-[8px] text-center mt-1.5 text-amber-600">{apiError}</p>
             )}
@@ -350,10 +358,10 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
         </aside>
 
         {/* ═══════════ MAIN AREA ═══════════ */}
-        <main className="flex-1 flex flex-col h-screen overflow-y-auto">
+        <main className="flex-1 flex flex-col overflow-y-auto">
 
           {/* Step content */}
-          <div className="flex-1 px-7 py-7 max-w-2xl mx-auto w-full">
+          <div className="flex-1 p-5  mx-auto w-full">
             <div key={activeStep} className="fade-up">
 
               {/* Step heading */}
@@ -372,24 +380,24 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
 
               {/* ── Step 1 ── */}
               {activeStep === 1 && (
-                <div className="space-y-4">
-                  <p className="f-ui text-sm leading-relaxed" style={{ color: "#3d8fa0" }}>What is this email trying to achieve? Be specific — better context = better output.</p>
+                <div className="">
+                  <p className="text-sm leading-relaxed text-gray-800">What is this email trying to achieve? Be specific — better context = better output.</p>
                   <div className="field-box rounded-2xl overflow-hidden">
-                    <div className="px-4 pt-4 pb-1">
-                      <label className="f-code text-[8px] tracking-[3px] uppercase block mb-2.5" style={{ color: "#22d3ee" }}>Email Purpose *</label>
+                    <div className=" pt-4 pb-1">
+                      <label className="f-code text-[8px] tracking-[3px] uppercase block mb-2.5 text-cyan-600">Email Purpose *</label>
                       <textarea value={purpose} onChange={e => setPurpose(e.target.value)} rows={4}
                         placeholder="e.g. Announce our new product launch to existing customers and drive sign-ups for the beta program..."
-                        className="w-full f-ui text-sm leading-relaxed resize-none" style={{ color: "#0e4f5c" }} />
+                         className="w-full text-sm leading-relaxed resize-none border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-cyan-500 focus:border-cyan-600" />
                     </div>
-                    <div className="px-4 py-2.5 flex items-center justify-between" style={{ borderTop: "1.5px solid #e0f7fa" }}>
-                      <span className="f-code text-[8px]" style={{ color: "#9dd6e5" }}>{purpose.length} chars</span>
-                      {purpose.length > 0 && <span className="f-code text-[8px]" style={{ color: "#10b981" }}>✓ Looks good</span>}
+                    <div className="px-4 py-2.5 flex items-center justify-between border-t border-cyan-600">
+                      <span className="f-code text-xs text-cyan-600">{purpose.length} chars</span>
+                      {purpose.length > 0 && <span className="f-code text-xs" style={{ color: "#10b981" }}>✓ Looks good</span>}
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {["Product launch", "Sale announcement", "Re-engagement", "Event invite", "Feature update"].map(ex => (
                       <button key={ex} onClick={() => setPurpose(p => p ? p : ex + " — ")}
-                        className="suggest-pill px-3 py-1.5 text-[9px] rounded-lg">
+                        className="suggest-pill px-3 py-1.5 text-[9px] rounded-lg border border-cyan-600 bg-cyan-50/30">
                         {ex}
                       </button>
                     ))}
@@ -399,17 +407,17 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
 
               {/* ── Step 2 ── */}
               {activeStep === 2 && (
-                <div className="space-y-4">
-                  <p className="f-ui text-sm leading-relaxed" style={{ color: "#3d8fa0" }}>Who will receive this email? Defining your audience tailors the language and messaging.</p>
+                <div className="">
+                  <p className="f-ui text-sm leading-relaxed text-gray-800">Who will receive this email? Defining your audience tailors the language and messaging.</p>
                   <div className="field-box rounded-2xl overflow-hidden">
-                    <div className="px-4 pt-4 pb-1">
-                      <label className="f-code text-[8px] tracking-[3px] uppercase block mb-2.5" style={{ color: "#22d3ee" }}>Target Audience</label>
+                    <div className=" pt-4 pb-1">
+                      <label className="f-code text-[8px] tracking-[3px] uppercase block mb-2.5 text-cyan-600">Target Audience</label>
                       <input value={audience} onChange={e => setAudience(e.target.value)}
                         placeholder="e.g. SaaS founders, fashion lovers, gym beginners..."
-                        className="w-full f-ui text-sm py-1.5" style={{ color: "#0e4f5c" }} />
+                         className="w-full f-ui text-sm py-1.5 leading-relaxed resize-none  rounded-lg focus:outline-none focus:ring-cyan-500 focus:border-cyan-600" />
                     </div>
-                    <div className="px-4 py-2.5" style={{ borderTop: "1.5px solid #e0f7fa" }}>
-                      <span className="f-code text-[8px]" style={{ color: "#9dd6e5" }}>Leave blank for general audience</span>
+                    <div className="px-2 py-2.5 border-t border-cyan-600">
+                      <span className="f-code text-xs text-cyan-600">Leave blank for general audience</span>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
@@ -506,7 +514,7 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
                 )}
                 {activeStep < STEPS.length ? (
                   <button onClick={() => setActiveStep(s => s + 1)}
-                    className="ml-auto nav-next px-5 py-2.5 rounded-xl f-ui text-[13px] font-semibold flex items-center gap-1.5 cursor-pointer">
+                    className="ml-auto nav-next px-3 py-1.5 rounded-lg f-ui text-[13px] font-semibold flex items-center gap-1.5 cursor-pointer border border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white">
                     Next
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   </button>
@@ -648,11 +656,7 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
 
           {/* Status bar */}
           <div className="statusbar sticky bottom-0 px-7 py-2.5 flex items-center justify-between">
-            <div className="flex items-center gap-3 f-code text-[8px]" style={{ color: "#9dd6e5" }}>
-              <span>MailCraft v2</span>
-              <span>·</span>
-              <span>Powered by Gemini AI</span>
-            </div>
+            
             <div className="flex items-center gap-2.5">
               <span className="f-code text-[8px]" style={{ color: "#9dd6e5" }}>{completedCount}/{STEPS.length} steps</span>
               <div className="w-14 h-1 rounded-full overflow-hidden" style={{ background: "#e0f7fa" }}>
