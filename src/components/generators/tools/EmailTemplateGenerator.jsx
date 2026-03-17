@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const CATEGORIES = ["Welcome", "Promotional", "Follow-up", "Newsletter", "Apology", "Announcement", "Thank You", "Onboarding"];
+const CATEGORIES = ["Welcome", "Promotional", "Follow-up", "Newsletter", "Apology", "Announcement", "Thank You", "Onboarding", "Enquiry", "Compliant"];
 const TONES = [
   { label: "Formal", emoji: "🎩", desc: "Professional & polished" },
   { label: "Friendly", emoji: "😊", desc: "Warm & approachable" },
@@ -420,12 +420,12 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
                       <span className="f-code text-xs text-cyan-600">Leave blank for general audience</span>
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-4 gap-2">
                     {[["B2B Professionals", "Executives, founders, managers"], ["E-commerce Shoppers", "Online buyers, deal-hunters"], ["Tech Enthusiasts", "Developers, early adopters"], ["Health & Wellness", "Wellness-focused individuals"]].map(([lbl, desc]) => (
                       <button key={lbl} onClick={() => setAudience(lbl)}
-                        className={`aud-card p-3.5 rounded-xl text-left ${audience === lbl ? "sel" : ""}`}>
-                        <p className="f-ui text-[12px] font-semibold mb-0.5" style={{ color: "#0e4f5c" }}>{lbl}</p>
-                        <p className="f-code text-[9px]" style={{ color: "#9dd6e5" }}>{desc}</p>
+                        className={`aud-card p-3 py-1.5 rounded-lg text-left border border-cyan-600 cursor-pointer ${audience === lbl ? "sel" : ""}`}>
+                        <p className="f-ui text-xs font-semibold mb-0.5" style={{ color: "#0e4f5c" }}>{lbl}</p>
+                        <p className="f-code text-[9px] text-cyan-600">{desc}</p>
                       </button>
                     ))}
                   </div>
@@ -434,17 +434,17 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
 
               {/* ── Step 3 ── */}
               {activeStep === 3 && (
-                <div className="space-y-4">
-                  <p className="f-ui text-sm leading-relaxed" style={{ color: "#3d8fa0" }}>Select the category that best describes this template's intent.</p>
-                  <div className="grid grid-cols-2 gap-2">
+                <div className="space-y-5">
+                  <p className="f-ui text-sm leading-relaxed text-gray-800">Select the category that best describes this template's intent.</p>
+                  <div className="grid grid-cols-3 gap-4">
                     {CATEGORIES.map(c => (
-                      <button key={c} onClick={() => setCategory(c)} className={`cat-btn p-4 rounded-xl text-left ${category === c ? "sel" : ""}`}>
-                        <div className="flex items-center justify-between mb-1.5">
+                      <button key={c} onClick={() => setCategory(c)} className={`cat-btn px-2 py-1.5 rounded-lg border border-cyan-600 text-left ${category === c ? "sel" : ""}`}>
+                        <div className="flex items-center justify-between ">
                           <span className="f-ui text-[13px] font-semibold" style={{ color: "#0e4f5c" }}>{c}</span>
                           {category === c && <div className="w-2 h-2 rounded-full" style={{ background: "#06b6d4" }} />}
                         </div>
-                        <p className="f-code text-[9px]" style={{ color: "#9dd6e5" }}>
-                          {{ "Welcome": "First impression", "Promotional": "Offers & deals", "Follow-up": "Check-in message", "Newsletter": "Regular updates", "Apology": "Address issues", "Announcement": "Share big news", "Thank You": "Express gratitude", "Onboarding": "Guide new users" }[c]}
+                        <p className="f-code text-[9px] text-cyan-600">
+                          {{ "Welcome": "First impression", "Promotional": "Offers & deals", "Follow-up": "Check-in message", "Newsletter": "Regular updates", "Apology": "Address issues", "Announcement": "Share big news", "Thank You": "Express gratitude", "Onboarding": "Guide new users", "Enquiry": "Raise Questions", "Compliant": "Raise issues" }[c]}
                         </p>
                       </button>
                     ))}
@@ -455,16 +455,16 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
               {/* ── Step 4 ── */}
               {activeStep === 4 && (
                 <div className="space-y-4">
-                  <p className="f-ui text-sm leading-relaxed" style={{ color: "#3d8fa0" }}>Choose the voice and energy your email should carry.</p>
-                  <div className="grid grid-cols-2 gap-3">
+                  <p className="f-ui text-sm leading-relaxed text-gray-800">Choose the voice and energy your email should carry.</p>
+                  <div className="grid grid-cols-3 gap-3">
                     {TONES.map(({ label, emoji, desc }) => (
-                      <button key={label} onClick={() => setTone(label)} className={`tone-card p-4 rounded-xl text-left ${tone === label ? "sel" : ""}`}>
-                        <div className="flex items-center gap-2.5 mb-2">
+                      <button key={label} onClick={() => setTone(label)} className={`tone-card px-2 py-1.5 rounded-lg border border-cyan-600 text-left ${tone === label ? "sel" : ""}`}>
+                        <div className="flex items-center gap-2.5">
                           <span className="text-xl">{emoji}</span>
                           <span className="f-ui text-[13px] font-semibold" style={{ color: "#0e4f5c" }}>{label}</span>
                           {tone === label && <div className="ml-auto w-2 h-2 rounded-full" style={{ background: "#06b6d4" }} />}
                         </div>
-                        <p className="f-code text-[9px]" style={{ color: "#9dd6e5" }}>{desc}</p>
+                        <p className="f-code text-[9px] text-cyan-600">{desc}</p>
                       </button>
                     ))}
                   </div>
@@ -473,29 +473,29 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
 
               {/* ── Step 5 ── */}
               {activeStep === 5 && (
-                <div className="space-y-4">
-                  <p className="f-ui text-sm leading-relaxed" style={{ color: "#3d8fa0" }}>Any finishing touches? Brand name, specific offer, deadline, or CTA link.</p>
+                <div className="">
+                  <p className="f-ui text-sm leading-relaxed text-gray-800">Any finishing touches? Brand name, specific offer, deadline, or CTA link.</p>
                   <div className="field-box rounded-2xl overflow-hidden">
-                    <div className="px-4 pt-4 pb-1">
-                      <label className="f-code text-[8px] tracking-[3px] uppercase block mb-2.5" style={{ color: "#22d3ee" }}>
+                    <div className=" pt-4 pb-1">
+                      <label className="f-code text-[8px] tracking-[3px] uppercase block mb-2.5 text-cyan-600">
                         Extra Details <span className="normal-case tracking-normal text-[8px]" style={{ color: "#9dd6e5" }}>(optional)</span>
                       </label>
                       <input value={details} onChange={e => setDetails(e.target.value)}
                         placeholder="Brand name, offer %, deadline, CTA URL..."
-                        className="w-full f-ui text-sm py-1.5" style={{ color: "#0e4f5c" }} />
+                        className="w-full f-ui text-sm py-1.5 leading-relaxed resize-none  rounded-lg focus:outline-none focus:ring-cyan-500 focus:border-cyan-600" />
                     </div>
-                    <div className="px-4 py-2.5" style={{ borderTop: "1.5px solid #e0f7fa" }}>
-                      <span className="f-code text-[8px]" style={{ color: "#9dd6e5" }}>Woven naturally into the copy</span>
+                    <div className="py-2.5 border-t border-cyan-600">
+                      <span className="f-code text-xs text-cyan-600">Woven naturally into the copy</span>
                     </div>
                   </div>
                   {/* Summary */}
-                  <div className="summary-card rounded-xl p-5">
-                    <p className="f-code text-[8px] tracking-widest uppercase mb-3" style={{ color: "#9dd6e5" }}>Configuration Summary</p>
+                  <div className="summary-card rounded-xl p-5 border border-cyan-600">
+                    <p className="f-code text-[10px] tracking-widest uppercase mb-3 text-cyan-600">Configuration Summary</p>
                     <div className="grid grid-cols-2 gap-y-2.5 gap-x-4">
                       {[{ l: "Category", v: category }, { l: "Tone", v: `${toneObj.emoji} ${tone}` }, { l: "Audience", v: audience || "General" }, { l: "Purpose", v: purpose.slice(0, 36) + (purpose.length > 36 ? "…" : "") }].map(row => (
                         <div key={row.l} className="flex items-start gap-2">
-                          <span className="f-code text-[8px] w-14 shrink-0 pt-px" style={{ color: "#9dd6e5" }}>{row.l}</span>
-                          <span className="f-code text-[9px] leading-tight" style={{ color: "#0891b2" }}>{row.v}</span>
+                          <span className="f-code text-[12px] w-14 shrink-0  text-gray-700">{row.l}</span>
+                          <span className="f-code text-[10px] leading-tight text-cyan-600">{row.v}</span>
                         </div>
                       ))}
                     </div>
@@ -507,7 +507,7 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
               <div className="flex items-center gap-3 mt-7">
                 {activeStep > 1 && (
                   <button onClick={() => setActiveStep(s => s - 1)}
-                    className="nav-next px-4 py-2.5 rounded-xl f-ui text-[13px] font-medium flex items-center gap-1.5 cursor-pointer">
+                    className="nav-next px-3 py-1.5 rounded-lg f-ui text-[13px] font-medium flex items-center gap-1.5 cursor-pointer border border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                     Back
                   </button>
@@ -520,12 +520,12 @@ P.S. ${tone === "Urgent" ? "This opportunity won't last long!" : "We're here to 
                   </button>
                 ) : (
                   <button onClick={generate} disabled={!canGenerate || loading}
-                    className={`ml-auto px-6 py-2.5 rounded-xl f-ui text-[13px] font-semibold flex items-center gap-2 cursor-pointer ${canGenerate && !loading ? "gen-btn" : ""}`}
+                    className={`ml-auto px-3 py-1.5 rounded-lg f-ui text-[13px] font-semibold flex items-center gap-2 cursor-pointer border border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white ${canGenerate && !loading ? "gen-btn" : ""}`}
                     style={!canGenerate || loading ? { background: "#e0f7fa", color: "#9dd6e5", border: "1.5px solid #cff3fd", cursor: "not-allowed" } : {}}>
                     {loading ? (
                       <><div className="w-3.5 h-3.5 rounded-full border-2 border-white/40 border-t-white spin-it" />Generating…</>
                     ) : (
-                      <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>Generate with Gemini</>
+                      <><svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>Generate</>
                     )}
                   </button>
                 )}

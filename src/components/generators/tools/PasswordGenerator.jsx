@@ -19,11 +19,11 @@ function getStrength(password, options) {
 }
 
 const strengthConfig = [
-  { label: "Too Weak",    color: "text-red-400",    bar: "bg-red-400",    count: 1 },
-  { label: "Weak",        color: "text-orange-400",  bar: "bg-orange-400", count: 2 },
-  { label: "Fair",        color: "text-yellow-400",  bar: "bg-yellow-400", count: 3 },
-  { label: "Strong",      color: "text-teal-400",    bar: "bg-teal-400",   count: 4 },
-  { label: "Very Strong", color: "text-green-500",   bar: "bg-green-500",  count: 5 },
+  { label: "Too Weak", color: "text-red-400", bar: "bg-red-400", count: 1 },
+  { label: "Weak", color: "text-orange-400", bar: "bg-orange-400", count: 2 },
+  { label: "Fair", color: "text-yellow-400", bar: "bg-yellow-400", count: 3 },
+  { label: "Strong", color: "text-teal-400", bar: "bg-teal-400", count: 4 },
+  { label: "Very Strong", color: "text-green-500", bar: "bg-green-500", count: 5 },
 ];
 
 export default function PasswordGenerator() {
@@ -67,14 +67,14 @@ export default function PasswordGenerator() {
   const optionList = [
     { key: "uppercase", label: "Uppercase", example: "A–Z" },
     { key: "lowercase", label: "Lowercase", example: "a–z" },
-    { key: "numbers",   label: "Numbers",   example: "0–9" },
-    { key: "symbols",   label: "Symbols",   example: "!@#$" },
+    { key: "numbers", label: "Numbers", example: "0–9" },
+    { key: "symbols", label: "Symbols", example: "!@#$" },
   ];
 
   const pct = ((length - 4) / (64 - 4)) * 100;
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-6" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <div className=" bg-white flex items-center justify-center py-16" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
       <style>{`
@@ -91,7 +91,7 @@ export default function PasswordGenerator() {
 
         {/* Header */}
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-semibold text-stone-900 mb-1.5 tracking-tight">Password Generator</h1>
+          <h1 className="text-4xl font-medium text-stone-900 mb-1.5 tracking-tight">Password <span className="text-cyan-600">Generator</span> </h1>
           <p className="text-sm text-stone-400 font-light">Cryptographically secure. Zero logging.</p>
         </div>
 
@@ -100,7 +100,7 @@ export default function PasswordGenerator() {
 
           {/* Password Output */}
           <div className="px-6 pt-6 pb-5 border-b border-stone-100">
-            <div className="bg-stone-50 rounded-xl border border-stone-200 px-4 py-4 flex items-center gap-3 min-h-16">
+            <div className="bg-stone-50 rounded-lg border border-stone-200 p-2.5 flex items-center gap-3">
               <span
                 className={`flex-1 text-sm leading-relaxed break-all tracking-wide ${password ? "text-stone-800 font-medium" : "text-stone-300 font-normal"}`}
                 style={{ fontFamily: "'DM Mono', monospace" }}
@@ -126,8 +126,8 @@ export default function PasswordGenerator() {
                   <span className={`text-xs font-semibold ${sc.color}`}>{sc.label}</span>
                 </div>
                 <div className="flex gap-1">
-                  {[1,2,3,4,5].map((i) => (
-                    <div key={i} className={`flex-1 h-1 rounded-full transition-all duration-300 ${i <= sc.count ? sc.bar : "bg-stone-150"}`}
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div key={i} className={`flex-1 h-1 rounded-full transition-all duration-300 ${i <= sc.count ? sc.bar : "bg-stone-150 "}`}
                       style={{ background: i <= sc.count ? undefined : "#ebebeb" }} />
                   ))}
                 </div>
@@ -146,10 +146,11 @@ export default function PasswordGenerator() {
             </div>
             <input
               type="range"
-              className="pw-range"
-              min={4} max={64}
+              min={4}
+              max={64}
               value={length}
               onChange={(e) => setLength(+e.target.value)}
+              className="w-full accent-cyan-600 h-1.5"
             />
             <div className="flex justify-between mt-1.5">
               <span className="text-xs text-stone-300" style={{ fontFamily: "'DM Mono', monospace" }}>4</span>
@@ -171,7 +172,7 @@ export default function PasswordGenerator() {
                       ${active ? "border-stone-300 bg-stone-50" : "border-stone-100 bg-white hover:border-stone-200"}`}
                   >
                     <div className={`w-4 h-4 rounded-md flex items-center justify-center shrink-0 border transition-all duration-150
-                      ${active ? "bg-stone-900 border-stone-900" : "border-stone-300 bg-transparent"}`}>
+                      ${active ? "bg-cyan-600 border-cyan-600" : "border-stone-300 bg-transparent"}`}>
                       {active && (
                         <svg width="9" height="7" viewBox="0 0 10 7" fill="none">
                           <path d="M1 3.5L3.8 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -192,7 +193,7 @@ export default function PasswordGenerator() {
           <div className="px-6 py-5">
             <button
               onClick={generate}
-              className="w-full py-3.5 bg-stone-900 hover:bg-stone-700 active:bg-stone-800 text-white rounded-xl text-sm font-semibold tracking-wide transition-all duration-150 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 cursor-pointer"
+              className="w-full py-3.5 bg-cyan-600 hover:bg-cyan-600/80 active:bg-stone-800 text-white rounded-xl text-sm font-semibold tracking-wide transition-all duration-150 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 cursor-pointer"
             >
               {generated ? "↺ Regenerate Password" : "⚡ Generate Password"}
             </button>
@@ -201,10 +202,10 @@ export default function PasswordGenerator() {
 
         {/* History */}
         {history.length > 0 && (
-          <div className="mt-4 bg-white rounded-2xl border border-stone-200 overflow-hidden">
+          <div className="mt-4 bg-white rounded-xl border border-stone-200 overflow-hidden">
             <div className="px-5 py-3.5 border-b border-stone-100 flex justify-between items-center">
               <span className="text-xs font-medium text-stone-400 uppercase tracking-widest">Recent</span>
-              <button onClick={() => setHistory([])} className="text-xs text-stone-300 hover:text-stone-500 transition-colors bg-transparent border-none cursor-pointer">
+              <button onClick={() => setHistory([])} className="text-xs text-stone-500 hover:text-stone-500 transition-colors bg-transparent border-none cursor-pointer">
                 Clear
               </button>
             </div>
@@ -218,7 +219,7 @@ export default function PasswordGenerator() {
                 </span>
                 <button
                   onClick={() => navigator.clipboard.writeText(pw)}
-                  className="text-xs text-stone-300 hover:text-stone-500 transition-colors bg-transparent border-none cursor-pointer shrink-0"
+                  className="text-xs text-stone-400 hover:text-stone-500 transition-colors bg-transparent border-none cursor-pointer shrink-0"
                 >
                   copy
                 </button>
