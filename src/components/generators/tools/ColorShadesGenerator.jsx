@@ -164,10 +164,10 @@ export default function ColorShadesGenerator() {
       .join("");
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 font-sans">
+    <div className=" py-16 font-sans">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
-        <h1 className="text-2xl font-medium text-gray-900 mb-1">Color Shades Generator</h1>
+        <h1 className="text-4xl font-medium text-gray-900 mb-1">Color <span className="text-cyan-600">Shades</span>  Generator</h1>
         <p className="text-sm text-gray-500 mb-6">
           Generate tints, shades, tones, or a full Tailwind-style palette from any base color.
         </p>
@@ -216,7 +216,7 @@ export default function ColorShadesGenerator() {
                     onClick={() => { setMode(m); if (m === "palette" && steps > 11) setSteps(11); }}
                     className={`px-3 py-1.5 text-xs rounded-lg border capitalize transition-all ${
                       mode === m
-                        ? "bg-white border-blue-400 text-blue-600 font-medium"
+                        ? "bg-white border-cyan-600 text-cyan-600 font-medium"
                         : "bg-gray-50 border-gray-200 text-gray-600 hover:bg-white hover:border-gray-300"
                     }`}
                   >

@@ -6,34 +6,34 @@ import { useState, useCallback } from "react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const ELEMENT_TYPES = [
-  { key: "line",   icon: "—",  label: "Line" },
-  { key: "title",  icon: "T",  label: "Title" },
-  { key: "rect",   icon: "▭",  label: "Rect" },
-  { key: "circle", icon: "●",  label: "Circle" },
+  { key: "line", icon: "—", label: "Line" },
+  { key: "title", icon: "T", label: "Title" },
+  { key: "rect", icon: "▭", label: "Rect" },
+  { key: "circle", icon: "●", label: "Circle" },
   { key: "avatar", icon: "👤", label: "Avatar" },
-  { key: "image",  icon: "🖼", label: "Image" },
+  { key: "image", icon: "🖼", label: "Image" },
   { key: "button", icon: "⬜", label: "Button" },
-  { key: "row",    icon: "≡",  label: "Row" },
+  { key: "row", icon: "≡", label: "Row" },
 ];
 
 const ANIMATIONS = ["shimmer", "pulse", "wave", "none"];
 const COLOR_THEMES = [
   { key: "default", bg: "#e2e8f0" },
-  { key: "dark",    bg: "#334155" },
-  { key: "blue",    bg: "#dbeafe" },
-  { key: "green",   bg: "#d1fae5" },
-  { key: "rose",    bg: "#ffe4e6" },
+  { key: "dark", bg: "#334155" },
+  { key: "blue", bg: "#dbeafe" },
+  { key: "green", bg: "#d1fae5" },
+  { key: "rose", bg: "#ffe4e6" },
 ];
 
 const DEFAULTS = {
-  line:   { type: "line",   width: 80,  height: 12,  radius: 4,  label: "Text line" },
-  title:  { type: "title",  width: 60,  height: 20,  radius: 4,  label: "Title" },
-  rect:   { type: "rect",   width: 100, height: 80,  radius: 8,  label: "Rectangle" },
-  circle: { type: "circle", width: 48,  height: 48,  radius: 50, label: "Circle" },
-  avatar: { type: "avatar", width: 44,  height: 44,  radius: 50, label: "Avatar" },
-  image:  { type: "image",  width: 100, height: 160, radius: 8,  label: "Image" },
-  button: { type: "button", width: 40,  height: 36,  radius: 8,  label: "Button" },
-  row:    { type: "row",    width: 100, height: 12,  radius: 4,  label: "Row", cols: 3, colGap: 8 },
+  line: { type: "line", width: 80, height: 12, radius: 4, label: "Text line" },
+  title: { type: "title", width: 60, height: 20, radius: 4, label: "Title" },
+  rect: { type: "rect", width: 100, height: 80, radius: 8, label: "Rectangle" },
+  circle: { type: "circle", width: 48, height: 48, radius: 50, label: "Circle" },
+  avatar: { type: "avatar", width: 44, height: 44, radius: 50, label: "Avatar" },
+  image: { type: "image", width: 100, height: 160, radius: 8, label: "Image" },
+  button: { type: "button", width: 40, height: 36, radius: 8, label: "Button" },
+  row: { type: "row", width: 100, height: 12, radius: 4, label: "Row", cols: 3, colGap: 8 },
 };
 
 let _idCounter = 0;
@@ -42,7 +42,7 @@ const uid = () => ++_idCounter;
 // ─── Skeleton Block ───────────────────────────────────────────────────────────
 function SkBlock({ anim, color, width, height, radius, style = {} }) {
   const colorCls = color === "default" ? "" : `sk-${color}`;
-  const animCls  = anim  === "none"    ? "sk-static" : `sk-${anim}`;
+  const animCls = anim === "none" ? "sk-static" : `sk-${anim}`;
   return (
     <div
       className={`sk-b ${animCls} ${colorCls}`}
@@ -162,8 +162,8 @@ function PropsPanel({ el, onUpdate, onDelete }) {
 function buildJSX(elements, anim, color, gap, pad) {
   if (!elements.length) return "// Add elements to generate code";
   const colorCls = color === "default" ? "" : ` sk-${color}`;
-  const animCls  = anim  === "none"    ? "sk-static" : `sk-${anim}`;
-  const skCls    = `sk-b ${animCls}${colorCls}`;
+  const animCls = anim === "none" ? "sk-static" : `sk-${anim}`;
+  const skCls = `sk-b ${animCls}${colorCls}`;
   const lines = [
     `function SkeletonBlock({ width, height, radius, style = {} }) {`,
     `  return (`,
@@ -198,8 +198,8 @@ function buildJSX(elements, anim, color, gap, pad) {
 function buildHTML(elements, anim, color, gap, pad) {
   if (!elements.length) return "<!-- Add elements to generate code -->";
   const colorCls = color === "default" ? "" : ` sk-${color}`;
-  const animCls  = anim  === "none"    ? "sk-static" : `sk-${anim}`;
-  const skCls    = `sk-b ${animCls}${colorCls}`;
+  const animCls = anim === "none" ? "sk-static" : `sk-${anim}`;
+  const skCls = `sk-b ${animCls}${colorCls}`;
   const css = `/* ── Add to global CSS ── */
 @keyframes shimmer { 0% { background-position: -500px 0 } 100% { background-position: 500px 0 } }
 @keyframes pulse   { 0%, 100% { opacity: 1 } 50% { opacity: .35 } }
@@ -245,15 +245,15 @@ function Toggle({ checked, onChange }) {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function SkeletonBuilder() {
-  const [elements, setElements]   = useState([]);
-  const [selected, setSelected]   = useState(null);
-  const [anim, setAnim]           = useState("shimmer");
-  const [color, setColor]         = useState("default");
-  const [gap, setGap]             = useState(10);
-  const [pad, setPad]             = useState(20);
-  const [repeat, setRepeat]       = useState(false);
-  const [tab, setTab]             = useState("canvas");
-  const [copied, setCopied]       = useState(false);
+  const [elements, setElements] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [anim, setAnim] = useState("shimmer");
+  const [color, setColor] = useState("default");
+  const [gap, setGap] = useState(10);
+  const [pad, setPad] = useState(20);
+  const [repeat, setRepeat] = useState(false);
+  const [tab, setTab] = useState("canvas");
+  const [copied, setCopied] = useState(false);
 
   const addElem = useCallback((type) => {
     const el = { ...DEFAULTS[type], id: uid() };
@@ -291,15 +291,22 @@ export default function SkeletonBuilder() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 font-sans">
+    <div className=" py-16 font-sans">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-baseline gap-3 mb-1">
-          <h1 className="text-2xl font-medium text-gray-900">Skeleton Loader Builder</h1>
-          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-medium">Custom</span>
+        <div className="text-center">
+          <div className="flex items-baseline justify-center gap-3 mb-1">
+            <h1 className="text-4xl font-medium text-gray-900">
+              Skeleton Loader Builder
+            </h1>
+            <span className="text-xs bg-blue-100 text-cyan-600 px-2 py-0.5 rounded font-medium">
+              Custom
+            </span>
+          </div>
+
+          <p className="text-sm text-gray-500 mb-6 max-w-xl mx-auto">
+            Add elements, configure each one individually, then export React or HTML+CSS code.
+          </p>
         </div>
-        <p className="text-sm text-gray-500 mb-6">
-          Add elements, configure each one individually, then export React or HTML+CSS code.
-        </p>
 
         <div className="grid grid-cols-[220px_1fr_230px] gap-3 items-start">
           {/* ── LEFT PANEL ── */}
@@ -333,7 +340,7 @@ export default function SkeletonBuilder() {
               <div className="grid grid-cols-2 gap-1.5 mb-4">
                 {ANIMATIONS.map((a) => (
                   <button key={a} onClick={() => setAnim(a)}
-                    className={`py-1.5 text-xs rounded-lg border capitalize transition-all ${anim === a ? "border-blue-400 text-blue-600 bg-blue-50 font-medium" : "border-gray-200 text-gray-500 bg-gray-50 hover:bg-white"}`}
+                    className={`py-1.5 text-xs rounded-lg border capitalize transition-all ${anim === a ? "border-cyan-600 text-cyan-600 bg-blue-50 font-medium" : "border-gray-200 text-gray-500 bg-gray-50 hover:bg-white"}`}
                   >{a}</button>
                 ))}
               </div>
@@ -419,8 +426,8 @@ export default function SkeletonBuilder() {
                             <ElemRow
                               key={`r-${el.id}`} el={el} index={i} total={elements.length}
                               anim={anim} color={color} gap={gap}
-                              selected={false} onSelect={() => {}} onDelete={() => {}}
-                              onMove={() => {}} onUpdate={() => {}}
+                              selected={false} onSelect={() => { }} onDelete={() => { }}
+                              onMove={() => { }} onUpdate={() => { }}
                             />
                           ))}
                         </div>

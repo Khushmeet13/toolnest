@@ -148,7 +148,7 @@ export default function RandomNumberGenerator() {
   const countOptions = [1, 5, 10, 20, 50];
   const decimalOptions = [0, 1, 2, 3];
 
-  const cardCls = "bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm";
+  const cardCls = "bg-white border border-neutral-200 rounded-xl p-7 shadow-sm";
 
   const features = [
     { icon: "🎲", title: "True random",       desc: "Cryptographically seeded" },
@@ -158,7 +158,7 @@ export default function RandomNumberGenerator() {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <div className=" bg-white text-neutral-900" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
         @keyframes fadeUp {
@@ -174,26 +174,15 @@ export default function RandomNumberGenerator() {
         .pop-in { animation: popIn 0.3s ease forwards; }
       `}</style>
 
-      {/* ── Navbar ── */}
-      <nav className="sticky top-0 z-10 bg-white border-b border-neutral-100 h-14 px-8 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="w-7 h-7 bg-neutral-900 rounded-lg flex items-center justify-center text-white text-xs font-black">T</span>
-          <span className="font-bold text-[15px] tracking-tight">ToolNest</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-50 text-green-600 tracking-wide">Free Tool</span>
-          <button className="text-[13px] font-medium px-3.5 py-1.5 rounded-lg border border-neutral-200 text-neutral-500 hover:bg-neutral-50 transition-colors">All Tools</button>
-          <button className="text-[13px] font-bold px-3.5 py-1.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-700 transition-colors">Get Pro</button>
-        </div>
-      </nav>
+     
 
       {/* ── Hero ── */}
       <div className="max-w-lg mx-auto text-center pt-14 pb-8 px-6">
-        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-violet-500 bg-violet-50 px-3 py-1.5 rounded-full mb-5 tracking-wide">
+        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-cyan-500 bg-cyan-50 px-3 py-1.5 rounded-full mb-5 tracking-wide">
           🎲 Random Number Generator
         </span>
-        <h1 className="text-[42px] font-black tracking-[-1.5px] leading-[1.1] text-neutral-950 mb-3.5">
-          Generate numbers<br />on demand
+        <h1 className="text-[42px] font-medium tracking-[-1.5px] leading-[1.1] text-neutral-950 mb-3.5">
+          Generate <span className="text-cyan-600">numbers</span> <br />on demand
         </h1>
         <p className="text-[15px] text-neutral-400 leading-relaxed">
           Instantly generate random numbers with full control over range, count, decimals, and uniqueness.
@@ -244,7 +233,7 @@ export default function RandomNumberGenerator() {
                     className={[
                       "px-3.5 py-2 rounded-lg border text-[13px] font-semibold transition-all duration-150",
                       count === n
-                        ? "bg-neutral-900 border-neutral-900 text-white"
+                        ? "bg-cyan-600 border-cyan-600 text-white"
                         : "bg-transparent border-neutral-200 text-neutral-500 hover:border-neutral-300 hover:bg-neutral-50",
                     ].join(" ")}
                   >{n}</button>
@@ -272,7 +261,7 @@ export default function RandomNumberGenerator() {
                     className={[
                       "w-10 h-10 rounded-lg border text-[13px] font-semibold flex items-center justify-center transition-all duration-150",
                       decimals === d
-                        ? "bg-neutral-900 border-neutral-900 text-white"
+                        ? "bg-cyan-600 border-cyan-600 text-white"
                         : "bg-transparent border-neutral-200 text-neutral-500 hover:border-neutral-300 hover:bg-neutral-50",
                     ].join(" ")}
                   >{d}</button>
@@ -295,7 +284,7 @@ export default function RandomNumberGenerator() {
                     onClick={() => t.set(v => !v)}
                     className={[
                       "w-10 h-6 rounded-full relative transition-colors duration-200 flex-shrink-0",
-                      t.val ? "bg-neutral-900" : "bg-neutral-200",
+                      t.val ? "bg-cyan-600" : "bg-neutral-200",
                     ].join(" ")}
                   >
                     <span className={[
@@ -317,7 +306,7 @@ export default function RandomNumberGenerator() {
             {/* CTA */}
             <button
               onClick={generate}
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-neutral-900 text-white text-[14px] font-bold tracking-tight hover:bg-neutral-700 active:scale-[0.99] transition-all duration-150"
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-cyan-600 text-white text-[14px] font-bold tracking-tight hover:bg-cyan-700 active:scale-[0.99] transition-all duration-150"
             >
               <RefreshIcon spinning={spinning} />
               Generate Numbers
@@ -357,7 +346,7 @@ export default function RandomNumberGenerator() {
                   className={[
                     "text-[13px] font-semibold px-4 py-2.5 -mb-px border-b-2 transition-all duration-150",
                     activeTab === t.key
-                      ? "text-neutral-900 border-neutral-900"
+                      ? "text-cyan-600 border-cyan-600"
                       : "text-neutral-300 border-transparent hover:text-neutral-500",
                   ].join(" ")}
                 >{t.label}</button>

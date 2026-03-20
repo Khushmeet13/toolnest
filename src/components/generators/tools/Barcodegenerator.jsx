@@ -132,7 +132,7 @@ export default function BarcodeGenerator() {
       <div className="syne min-h-screen bg-white text-neutral-900">
 
         {/* ── HERO ── */}
-        <div className="bg-white border-b border-stone-200 px-7 pt-9 pb-7 text-center">
+        <div className="bg-white px-7 pt-9 pb-7 text-center">
           <div className="max-w-5xl mx-auto text-center">
           
             <h1 className="text-4xl font-medium  text-neutral-900 mb-2">

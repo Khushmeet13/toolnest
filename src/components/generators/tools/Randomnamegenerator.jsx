@@ -134,10 +134,10 @@ export default function RandomNameGenerator() {
   ];
 
   // shared card shadow
-  const cardCls = "bg-white border border-neutral-200 rounded-2xl p-7 shadow-sm";
+  const cardCls = "bg-white border border-neutral-200 rounded-xl p-7 shadow-sm";
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <div className=" bg-white text-neutral-900" style={{ fontFamily: "'DM Sans', sans-serif" }}>
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
@@ -149,32 +149,11 @@ export default function RandomNameGenerator() {
       `}</style>
 
       {/* ── Navbar ── */}
-      <nav className="sticky top-0 z-10 bg-white border-b border-neutral-100 h-14 px-8 flex items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <span className="w-7 h-7 bg-neutral-900 rounded-lg flex items-center justify-center text-white text-xs font-black">
-            T
-          </span>
-          <span className="font-bold text-[15px] tracking-tight">ToolNest</span>
-        </div>
-
-        {/* Right */}
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-50 text-green-600 tracking-wide">
-            Free Tool
-          </span>
-          <button className="text-[13px] font-medium px-3.5 py-1.5 rounded-lg border border-neutral-200 text-neutral-500 hover:bg-neutral-50 transition-colors">
-            All Tools
-          </button>
-          <button className="text-[13px] font-bold px-3.5 py-1.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-700 transition-colors">
-            Get Pro
-          </button>
-        </div>
-      </nav>
+     
 
       {/* ── Hero ── */}
       <div className="max-w-lg mx-auto text-center pt-14 pb-8 px-6">
-        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-indigo-500 bg-indigo-50 px-3 py-1.5 rounded-full mb-5 tracking-wide">
+        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-cyan-600 bg-cyan-50 px-3 py-1.5 rounded-full mb-5 tracking-wide">
           ✦ Random Name Generator
         </span>
         <h1 className="text-[42px] font-black tracking-[-1.5px] leading-[1.1] text-neutral-950 mb-3.5">
@@ -207,7 +186,7 @@ export default function RandomNameGenerator() {
                     className={[
                       "text-[13px] font-medium px-4 py-2 rounded-lg border transition-all duration-150",
                       gender === o.value
-                        ? "bg-neutral-900 border-neutral-900 text-white"
+                        ? "bg-cyan-600 border-cyan-600 text-white"
                         : "bg-transparent border-neutral-200 text-neutral-500 hover:border-neutral-300 hover:bg-neutral-50",
                     ].join(" ")}
                   >
@@ -252,7 +231,7 @@ export default function RandomNameGenerator() {
                     className={[
                       "w-9 h-9 rounded-lg border text-[13px] font-semibold flex items-center justify-center transition-all duration-150",
                       count === n
-                        ? "bg-neutral-900 border-neutral-900 text-white"
+                        ? "bg-cyan-600 border-cyan-600 text-white"
                         : "bg-transparent border-neutral-200 text-neutral-500 hover:border-neutral-300 hover:bg-neutral-50",
                     ].join(" ")}
                   >
@@ -265,7 +244,7 @@ export default function RandomNameGenerator() {
             {/* CTA */}
             <button
               onClick={generate}
-              className="mt-6 w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-neutral-900 text-white text-[14px] font-bold tracking-tight hover:bg-neutral-700 active:scale-[0.99] transition-all duration-150"
+              className="mt-6 w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-cyan-600 text-white text-[14px] font-bold tracking-tight hover:bg-neutral-700 active:scale-[0.99] transition-all duration-150"
             >
               <RefreshIcon spinning={spinning} />
               Generate Names
@@ -302,7 +281,7 @@ export default function RandomNameGenerator() {
                   className={[
                     "text-[13px] font-semibold px-4 py-2.5 -mb-px border-b-2 transition-all duration-150",
                     activeTab === t.key
-                      ? "text-neutral-900 border-neutral-900"
+                      ? "text-cyan-600 border-cyan-600"
                       : "text-neutral-300 border-transparent hover:text-neutral-500",
                   ].join(" ")}
                 >
@@ -469,20 +448,10 @@ export default function RandomNameGenerator() {
           </div>
         </div>
 
-        {/* ── Feature Strip ── */}
-        <div className="grid grid-cols-4 gap-3 mt-5">
-          {features.map((f, i) => (
-            <div key={i} className="p-4 bg-neutral-50 rounded-xl border border-neutral-100">
-              <div className="text-lg mb-1.5 leading-none">{f.icon}</div>
-              <div className="text-[13px] font-bold text-neutral-800 mb-0.5">{f.title}</div>
-              <div className="text-[12px] text-neutral-400">{f.desc}</div>
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-neutral-100 py-5 text-center text-[12px] text-neutral-300">
+      <footer className="border-t border-neutral-100 py-5 text-center text-[12px] text-neutral-500">
         ToolNest · Random Name Generator · Free forever · No signup required
       </footer>
     </div>

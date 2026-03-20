@@ -127,16 +127,16 @@ export default function ColorCodeGenerator() {
   const result = rgb ? formatColor(rgb.r, rgb.g, rgb.b, rgb.a, activeFmt) : "";
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 font-sans">
+    <div className=" py-16 font-sans">
       <div className="max-w-xl mx-auto">
         {/* Header */}
-        <h1 className="text-2xl font-medium text-gray-900 mb-1">Color Converter</h1>
+        <h1 className="text-4xl font-medium text-gray-900 mb-1">Color Converter</h1>
         <p className="text-sm text-gray-500 mb-6">
           Enter any CSS color — convert it to HEX, RGB, HSL, HWB and more.
         </p>
 
         {/* Preview Card */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-5 mb-4 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-xl p-5 mb-4 shadow-sm">
           {/* Color Preview */}
           <div
             className="w-full h-24 rounded-xl mb-4 flex items-center justify-center transition-colors duration-300"
@@ -195,7 +195,7 @@ export default function ColorCodeGenerator() {
         </div>
 
         {/* Format Selector + Result */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-5 mb-4 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-xl p-5 mb-4 shadow-sm">
           <p className="text-xs text-gray-400 mb-3">Select output format</p>
           <div className="grid grid-cols-3 gap-2 mb-4 sm:grid-cols-6">
             {ALL_FORMATS.map((fmt) => (
@@ -204,7 +204,7 @@ export default function ColorCodeGenerator() {
                 onClick={() => setActiveFmt(fmt)}
                 className={`py-2 text-xs font-semibold rounded-lg border transition-all ${
                   activeFmt === fmt
-                    ? "border-violet-400 text-violet-600 bg-violet-50"
+                    ? "border-cyan-600 text-cyan-600 bg-white"
                     : "border-gray-200 text-gray-600 bg-gray-50 hover:bg-white hover:border-gray-300"
                 }`}
               >
@@ -229,7 +229,7 @@ export default function ColorCodeGenerator() {
         </div>
 
         {/* All Formats */}
-        <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm">
           <p className="text-xs text-gray-400 mb-3">All formats</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {ALL_FORMATS.map((fmt) => {
