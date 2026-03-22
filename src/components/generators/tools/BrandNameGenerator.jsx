@@ -323,51 +323,17 @@ Return ONLY valid JSON array (no markdown). Each item:
   };
 
   return (
-    <div className="min-h-screen bg-slate-50" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <div className="min-h-screen bg-white py-16" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <GlobalStyles />
 
-      {/* Top gradient stripe */}
-      <div
-        className="h-[3px] w-full"
-        style={{ background: "linear-gradient(90deg,#06b6d4,#0891b2,#0e7490)" }}
-      />
-
-      {/* Navbar */}
-      <nav className="bg-white border-b border-slate-100 px-6 py-3.5">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          {/* Logo mark */}
-          <div className="flex items-center gap-2.5">
-            <div className="w-[30px] h-[30px] rounded-lg bg-cyan-400 flex items-center justify-center flex-shrink-0">
-              <span
-                className="text-white font-extrabold text-sm"
-                style={{ fontFamily: "'Syne', sans-serif" }}
-              >
-                B
-              </span>
-            </div>
-            <span
-              className="font-extrabold text-base text-slate-900"
-              style={{ fontFamily: "'Syne', sans-serif" }}
-            >
-              BrandForge
-            </span>
-          </div>
-
-          {/* Badge */}
-          <span className="text-[11px] font-semibold text-cyan-600 bg-cyan-50 border border-cyan-200 px-3 py-1 rounded-full">
-            AI-Powered ✦
-          </span>
-        </div>
-      </nav>
-
       {/* Main content */}
-      <div className="max-w-4xl mx-auto px-4 pt-12 pb-16">
+      <div className="max-w-4xl mx-auto px-4 ">
 
         {/* Hero section */}
         <div className="text-center mb-11">
           <h1
-            className="font-extrabold text-slate-900 leading-tight mb-3.5"
-            style={{ fontSize: "clamp(32px,5vw,48px)", fontFamily: "'Syne', sans-serif" }}
+            className="font-medium text-4xl text-slate-900 leading-tight mb-2"
+            
           >
             Brand Name + <span className="text-cyan-400">Logo</span> Generator
           </h1>
@@ -377,7 +343,7 @@ Return ONLY valid JSON array (no markdown). Each item:
         </div>
 
         {/* Input card */}
-        <div className="bg-white rounded-2xl border border-slate-100 p-6 mb-5 shadow-sm">
+        <div className="bg-white rounded-xl border border-slate-100 p-6 mb-5 shadow-sm">
 
           {/* Business description label */}
           <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] mb-2.5">
@@ -456,7 +422,7 @@ Return ONLY valid JSON array (no markdown). Each item:
 
         {/* Loading state */}
         {loading && (
-          <div className="flex flex-col items-center py-16 gap-3.5">
+          <div className="flex flex-col items-center pt-16 gap-3.5">
             <div className="big-spinner" />
             <p className="text-sm text-slate-400">AI is crafting your brand identities...</p>
           </div>
@@ -494,9 +460,9 @@ Return ONLY valid JSON array (no markdown). Each item:
 
         {/* Empty state */}
         {!loading && brands.length === 0 && !error && (
-          <div className="text-center py-16">
-            <div className="text-5xl opacity-10 mb-3.5">✦</div>
-            <p className="text-sm text-slate-300">Apni business describe karo aur Generate karo</p>
+          <div className="text-center pt-16">
+            <div className="text-5xl opacity-80 mb-3.5 text-cyan-600">✦</div>
+            <p className="text-sm text-slate-300">Describe your business and generate</p>
           </div>
         )}
       </div>

@@ -7,12 +7,12 @@ const PREFIXES = ["get", "try", "use", "go", "my", "the", "we", "hey", "join", "
 const SUFFIXES = ["hq", "hub", "app", "base", "labs", "ly", "ify", "fy", "io", "co", "pro", "plus", "now", "ai"];
 
 const INDUSTRY_WORDS = {
-  tech:     ["stack", "node", "loop", "flux", "byte", "grid", "sync", "core", "forge", "nest", "shift", "pulse", "spark", "wave"],
-  finance:  ["vault", "ledger", "bloom", "grow", "yield", "mint", "coin", "fount", "atlas", "apex", "crest", "peak"],
-  health:   ["vitae", "pulse", "calm", "zen", "bloom", "glow", "helio", "sera", "viva", "aura", "rise", "vita"],
+  tech: ["stack", "node", "loop", "flux", "byte", "grid", "sync", "core", "forge", "nest", "shift", "pulse", "spark", "wave"],
+  finance: ["vault", "ledger", "bloom", "grow", "yield", "mint", "coin", "fount", "atlas", "apex", "crest", "peak"],
+  health: ["vitae", "pulse", "calm", "zen", "bloom", "glow", "helio", "sera", "viva", "aura", "rise", "vita"],
   creative: ["craft", "canvas", "studio", "hue", "flow", "inkwell", "prism", "mosaic", "frame", "render", "brush"],
-  ecom:     ["cart", "shelf", "crate", "market", "shop", "fetch", "haul", "depot", "trunk", "bay", "hub", "loot"],
-  saas:     ["dash", "board", "track", "launch", "build", "deploy", "push", "pull", "ship", "send", "pipe", "relay"],
+  ecom: ["cart", "shelf", "crate", "market", "shop", "fetch", "haul", "depot", "trunk", "bay", "hub", "loot"],
+  saas: ["dash", "board", "track", "launch", "build", "deploy", "push", "pull", "ship", "send", "pipe", "relay"],
 };
 
 const ADJECTIVES = ["swift", "bright", "sharp", "clear", "bold", "fresh", "smart", "lean", "pure", "open", "solid", "neat", "sleek", "prime", "true"];
@@ -213,20 +213,20 @@ function DomainCard({ domain, saved, onSave, copied, onCopy, index }) {
 
 // ── Main ───────────────────────────────────────────────────────────────────────
 export default function DomainNameGenerator() {
-  const [keyword, setKeyword]   = useState("");
+  const [keyword, setKeyword] = useState("");
   const [industry, setIndustry] = useState("tech");
-  const [style, setStyle]       = useState("brandable");
+  const [style, setStyle] = useState("brandable");
   const [selectedTlds, setSelectedTlds] = useState([".com", ".io", ".co", ".net", ".app"]);
-  const [count, setCount]       = useState(8);
+  const [count, setCount] = useState(8);
   const [filterAvail, setFilterAvail] = useState(false);
   const [activeTab, setActiveTab] = useState("all");
 
-  const [domains, setDomains]   = useState([]);
-  const [saved, setSaved]       = useState([]);
-  const [copied, setCopied]     = useState(null);
+  const [domains, setDomains] = useState([]);
+  const [saved, setSaved] = useState([]);
+  const [copied, setCopied] = useState(null);
   const [spinning, setSpinning] = useState(false);
   const [generated, setGenerated] = useState(false);
-  const [loading, setLoading]   = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const inputRef = useRef(null);
 
@@ -272,25 +272,25 @@ export default function DomainNameGenerator() {
   const availCount = domains.filter(d => d.available).length;
 
   const industries = [
-    { key: "tech",     label: "Tech" },
-    { key: "saas",     label: "SaaS" },
-    { key: "finance",  label: "Finance" },
-    { key: "health",   label: "Health" },
+    { key: "tech", label: "Tech" },
+    { key: "saas", label: "SaaS" },
+    { key: "finance", label: "Finance" },
+    { key: "health", label: "Health" },
     { key: "creative", label: "Creative" },
-    { key: "ecom",     label: "E-com" },
+    { key: "ecom", label: "E-com" },
   ];
 
   const styles = [
     { key: "brandable", label: "Brandable", desc: "Prefix/suffix combos" },
-    { key: "short",     label: "Short",     desc: "≤8 characters" },
-    { key: "keyword",   label: "Keyword",   desc: "Based on input" },
-    { key: "creative",  label: "Creative",  desc: "Unexpected blends" },
+    { key: "short", label: "Short", desc: "≤8 characters" },
+    { key: "keyword", label: "Keyword", desc: "Based on input" },
+    { key: "creative", label: "Creative", desc: "Unexpected blends" },
   ];
 
-  const cardCls = "bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm";
+  const cardCls = "bg-white border border-neutral-200 rounded-xl p-5 shadow-sm";
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-900" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <div className="min-h-screen bg-white text-neutral-900" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
         @keyframes fadeUp {
@@ -311,29 +311,15 @@ export default function DomainNameGenerator() {
         input[type=range] { accent-color: #0f172a; }
       `}</style>
 
-      {/* ── Navbar ── */}
-      <nav className="sticky top-0 z-20 bg-white border-b border-neutral-100 h-14 px-8 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="w-7 h-7 bg-neutral-900 rounded-lg flex items-center justify-center text-white text-xs font-black">T</span>
-          <span className="font-bold text-[15px] tracking-tight">ToolNest</span>
-          <span className="text-neutral-300 mx-1.5 text-sm">/</span>
-          <span className="text-[13px] font-semibold text-neutral-500">Domain Name Generator</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-50 text-green-600 tracking-wide">Free Tool</span>
-          <button className="text-[13px] font-medium px-3.5 py-1.5 rounded-lg border border-neutral-200 text-neutral-500 hover:bg-neutral-50 transition-colors">All Tools</button>
-          <button className="text-[13px] font-bold px-3.5 py-1.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-700 transition-colors">Get Pro</button>
-        </div>
-      </nav>
 
       {/* ── Hero ── */}
       <div className="max-w-2xl mx-auto text-center pt-12 pb-8 px-6">
-        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-sky-500 bg-sky-50 px-3 py-1.5 rounded-full mb-5 tracking-wide">
+        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-cyan-600 bg-sky-50 px-3 py-1.5 rounded-full mb-5 tracking-wide">
           <GlobeIcon /> Domain Name Generator
         </span>
-        <h1 className="text-[42px] font-black tracking-[-1.6px] leading-[1.08] text-neutral-950 mb-3.5">
-          Find the perfect domain<br />
-          <span className="text-neutral-400 font-black">for your next idea</span>
+        <h1 className="text-4xl font-medium tracking-[-1.6px] leading-[1.08] text-neutral-950 mb-3.5">
+          Find the perfect <span className="text-cyan-600">domain</span> <br />
+          <span className=" font-medium">for your next idea</span>
         </h1>
         <p className="text-[15px] text-neutral-400 leading-relaxed">
           Enter a keyword, pick your style, and instantly discover available domain names across every major TLD.
@@ -342,7 +328,7 @@ export default function DomainNameGenerator() {
 
       {/* ── Search bar ── */}
       <div className="max-w-2xl mx-auto px-5 mb-8">
-        <div className="flex gap-3 items-center bg-white border border-neutral-200 rounded-2xl p-2 shadow-sm">
+        <div className="flex gap-3 items-center bg-white border border-neutral-200 rounded-xl p-1 shadow-sm">
           <div className="flex items-center gap-3 flex-1 px-3">
             <span className="text-neutral-300"><SearchIcon /></span>
             <input
@@ -360,7 +346,7 @@ export default function DomainNameGenerator() {
           </div>
           <button
             onClick={generate}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-neutral-900 text-white text-[14px] font-bold hover:bg-neutral-700 active:scale-[0.98] transition-all"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-cyan-600 text-white text-[14px] font-bold hover:bg-cyan-700 active:scale-[0.98] transition-all cursor-pointer"
           >
             <RefreshIcon spinning={spinning} />
             Generate
@@ -386,7 +372,7 @@ export default function DomainNameGenerator() {
                     className={[
                       "text-[12px] font-semibold px-3 py-2 rounded-lg border transition-all duration-150",
                       industry === ind.key
-                        ? "bg-neutral-900 border-neutral-900 text-white"
+                        ? "bg-cyan-600 border-cyan-600 text-white"
                         : "bg-transparent border-neutral-200 text-neutral-500 hover:border-neutral-300 hover:bg-neutral-50",
                     ].join(" ")}
                   >{ind.label}</button>
@@ -405,51 +391,18 @@ export default function DomainNameGenerator() {
                     className={[
                       "w-full text-left px-3 py-2.5 rounded-lg border transition-all duration-150",
                       style === s.key
-                        ? "bg-neutral-900 border-neutral-900 text-white"
+                        ? "bg-cyan-600 border-cyan-600 text-white"
                         : "bg-transparent border-neutral-100 text-neutral-600 hover:border-neutral-200 hover:bg-neutral-50",
                     ].join(" ")}
                   >
                     <div className={["text-[13px] font-semibold", style === s.key ? "text-white" : "text-neutral-800"].join(" ")}>{s.label}</div>
-                    <div className={["text-[11px] mt-0.5", style === s.key ? "text-neutral-400" : "text-neutral-400"].join(" ")}>{s.desc}</div>
+                    <div className={["text-[11px] mt-0.5", style === s.key ? "text-neutral-200" : "text-neutral-400"].join(" ")}>{s.desc}</div>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* TLDs */}
-            <div className={cardCls}>
-              <div className="text-[11px] font-black uppercase tracking-widest text-neutral-400 mb-3">Extensions</div>
-              <div className="flex flex-wrap gap-1.5">
-                {TLDS.map(tld => (
-                  <button
-                    key={tld}
-                    onClick={() => toggleTld(tld)}
-                    className={[
-                      "text-[12px] font-bold px-2.5 py-1 rounded-lg border transition-all duration-150",
-                      selectedTlds.includes(tld)
-                        ? "bg-neutral-900 border-neutral-900 text-white"
-                        : "bg-white border-neutral-200 text-neutral-500 hover:border-neutral-400",
-                    ].join(" ")}
-                  >{tld}</button>
-                ))}
-              </div>
-            </div>
 
-            {/* Count */}
-            <div className={cardCls}>
-              <div className="flex items-center justify-between mb-3">
-                <div className="text-[11px] font-black uppercase tracking-widest text-neutral-400">Results per TLD</div>
-                <span className="text-[13px] font-black text-neutral-900">{count}</span>
-              </div>
-              <input
-                type="range" min="4" max="20" step="1" value={count}
-                onChange={e => setCount(Number(e.target.value))}
-                className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-neutral-200"
-              />
-              <div className="flex justify-between text-[10px] text-neutral-400 font-medium mt-1.5">
-                <span>4</span><span>20</span>
-              </div>
-            </div>
 
             {/* Saved quick-view */}
             {saved.length > 0 && (
@@ -477,22 +430,22 @@ export default function DomainNameGenerator() {
           <div>
 
             {/* Results header */}
-            <div className="bg-white border border-neutral-200 rounded-2xl shadow-sm overflow-hidden">
+            <div className="bg-white border border-neutral-200 rounded-xl shadow-sm overflow-hidden">
 
               {/* Tabs + filter bar */}
               <div className="flex items-center justify-between px-5 border-b border-neutral-100">
                 <div className="flex">
                   {[
-                    { key: "all",   label: `All${domains.length > 0 ? ` (${domains.length})` : ""}` },
+                    { key: "all", label: `All${domains.length > 0 ? ` (${domains.length})` : ""}` },
                     { key: "saved", label: `Saved${saved.length > 0 ? ` (${saved.length})` : ""}` },
                   ].map(t => (
                     <button
                       key={t.key}
                       onClick={() => setActiveTab(t.key)}
                       className={[
-                        "text-[13px] font-semibold px-4 py-3.5 -mb-px border-b-2 transition-all duration-150",
+                        "text-[13px] font-semibold px-4 py-3.5 -mb-px border-b-2 transition-all duration-150 cursor-pointer",
                         activeTab === t.key
-                          ? "text-neutral-900 border-neutral-900"
+                          ? "text-cyan-600 border-cyan-600"
                           : "text-neutral-300 border-transparent hover:text-neutral-500",
                       ].join(" ")}
                     >{t.label}</button>
@@ -560,8 +513,8 @@ export default function DomainNameGenerator() {
                 ) : !generated ? (
                   /* Empty state */
                   <div className="text-center py-20 px-5">
-                    <div className="w-16 h-16 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center mx-auto mb-4">
-                      <span className="text-sky-400"><GlobeIcon /></span>
+                    <div className=" flex items-center justify-center mx-auto mb-4">
+                      <span className="text-sky-400"><GlobeIcon size={28} /></span>
                     </div>
                     <p className="text-[15px] font-bold text-neutral-300 mb-1">No domains yet</p>
                     <p className="text-[13px] text-neutral-300">
@@ -606,7 +559,51 @@ export default function DomainNameGenerator() {
                     ));
                   })()
                 )}
+
               </div>
+
+
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 pt-4">
+
+
+
+              {/* TLDs */}
+              <div className={cardCls}>
+                <div className="text-[11px] font-black uppercase tracking-widest text-neutral-400 mb-3">Extensions</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {TLDS.map(tld => (
+                    <button
+                      key={tld}
+                      onClick={() => toggleTld(tld)}
+                      className={[
+                        "text-[12px] font-bold px-2.5 py-1 rounded-lg border transition-all duration-150",
+                        selectedTlds.includes(tld)
+                          ? "bg-cyan-600 border-cyan-600 text-white"
+                          : "bg-white border-neutral-200 text-neutral-500 hover:border-neutral-400",
+                      ].join(" ")}
+                    >{tld}</button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Count */}
+              <div className={cardCls}>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-[11px] font-black uppercase tracking-widest text-neutral-400">Results per TLD</div>
+                  <span className="text-[13px] font-black text-neutral-900">{count}</span>
+                </div>
+                <input
+                  type="range" min="4" max="20" step="1" value={count}
+                  onChange={e => setCount(Number(e.target.value))}
+                  className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-neutral-200"
+                />
+                <div className="flex justify-between text-[10px] text-neutral-400 font-medium mt-1.5">
+                  <span>4</span><span>20</span>
+                </div>
+              </div>
+
             </div>
 
             {/* Pro tip banner */}
@@ -621,27 +618,9 @@ export default function DomainNameGenerator() {
           </div>
         </div>
 
-        {/* ── Feature strip ── */}
-        <div className="grid grid-cols-4 gap-3 mt-8">
-          {[
-            { icon: "⚡", title: "Instant results",    desc: "Hundreds of ideas in seconds" },
-            { icon: "🌐", title: "10+ TLD extensions", desc: ".com .io .ai .dev and more" },
-            { icon: "💚", title: "Availability check", desc: "Green = likely available" },
-            { icon: "❤️", title: "Save favourites",    desc: "Shortlist your top picks" },
-          ].map((f, i) => (
-            <div key={i} className="p-4 bg-white rounded-xl border border-neutral-100 shadow-sm">
-              <div className="text-lg mb-1.5">{f.icon}</div>
-              <div className="text-[13px] font-bold text-neutral-800 mb-0.5">{f.title}</div>
-              <div className="text-[12px] text-neutral-400">{f.desc}</div>
-            </div>
-          ))}
-        </div>
+
       </div>
 
-      {/* ── Footer ── */}
-      <footer className="border-t border-neutral-100 py-5 text-center text-[12px] text-neutral-300">
-        ToolNest · Domain Name Generator · Free forever · No signup required
-      </footer>
     </div>
   );
 }

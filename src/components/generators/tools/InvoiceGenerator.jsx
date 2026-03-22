@@ -56,11 +56,11 @@ const newItem = () => ({ id: Date.now(), desc: "", qty: 1, rate: 0, tax: 0 });
 
 const CURRENCIES = ["USD", "EUR", "GBP", "INR", "CAD", "AUD", "JPY"];
 const THEMES = [
-  { key: "slate",  accent: "#0f172a", light: "#f8fafc", label: "Slate" },
-  { key: "blue",   accent: "#1d4ed8", light: "#eff6ff", label: "Blue" },
-  { key: "emerald",accent: "#065f46", light: "#ecfdf5", label: "Emerald" },
-  { key: "rose",   accent: "#9f1239", light: "#fff1f2", label: "Rose" },
-  { key: "amber",  accent: "#92400e", light: "#fffbeb", label: "Amber" },
+  { key: "slate", accent: "#0f172a", light: "#f8fafc", label: "Slate" },
+  { key: "blue", accent: "#1d4ed8", light: "#eff6ff", label: "Blue" },
+  { key: "emerald", accent: "#065f46", light: "#ecfdf5", label: "Emerald" },
+  { key: "rose", accent: "#9f1239", light: "#fff1f2", label: "Rose" },
+  { key: "amber", accent: "#92400e", light: "#fffbeb", label: "Amber" },
 ];
 
 // ── Invoice Preview Component ──────────────────────────────────────────────────
@@ -72,7 +72,7 @@ function InvoicePreview({ data, theme }) {
   const total = subtotal + taxTotal - discount;
 
   return (
-    <div className="bg-white rounded-2xl overflow-hidden border border-neutral-200 shadow-sm text-[13px]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <div className="bg-white rounded-xl overflow-hidden border border-neutral-200 shadow-sm text-[13px]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       {/* Header band */}
       <div className="px-10 py-8 flex justify-between items-start" style={{ background: accent, color: "#fff" }}>
         <div>
@@ -257,7 +257,7 @@ export default function InvoiceGenerator() {
   );
 
   return (
-    <div className="min-h-screen bg-neutral-50 text-neutral-900" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <div className="min-h-screen bg-white py-16 text-neutral-900" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&display=swap');
         @keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
@@ -269,43 +269,34 @@ export default function InvoiceGenerator() {
         }
       `}</style>
 
-      {/* ── Navbar ── */}
-      <nav className="no-print sticky top-0 z-20 bg-white border-b border-neutral-100 h-14 px-8 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="w-7 h-7 bg-neutral-900 rounded-lg flex items-center justify-center text-white text-xs font-black">T</span>
-          <span className="font-bold text-[15px] tracking-tight">ToolNest</span>
-          <span className="text-neutral-300 mx-1">/</span>
-          <span className="text-[13px] font-semibold text-neutral-500">Invoice Generator</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-green-50 text-green-600 tracking-wide">Free Tool</span>
-          <button onClick={() => setView(v => v === "edit" ? "preview" : "edit")}
-            className="flex items-center gap-1.5 text-[13px] font-semibold px-3.5 py-1.5 rounded-lg border border-neutral-200 text-neutral-600 hover:bg-neutral-50 transition-colors">
-            {view === "edit" ? <><EyeIcon /> Preview</> : <><EditIcon /> Edit</>}
-          </button>
-          <button onClick={handlePrint}
-            className="flex items-center gap-1.5 text-[13px] font-semibold px-3.5 py-1.5 rounded-lg border border-neutral-200 text-neutral-600 hover:bg-neutral-50 transition-colors">
-            <PrintIcon /> Print / PDF
-          </button>
-          <button className="flex items-center gap-1.5 text-[13px] font-bold px-3.5 py-1.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-700 transition-colors">
-            <DownloadIcon /> Download
-          </button>
-        </div>
-      </nav>
-
       {/* ── Hero ── */}
-      <div className="no-print max-w-2xl mx-auto text-center pt-10 pb-6 px-6">
-        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-blue-500 bg-blue-50 px-3 py-1.5 rounded-full mb-4 tracking-wide">
+      <div className="no-print max-w-2xl mx-auto text-center px-6">
+        <span className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-cyan-600 bg-blue-50 px-3 py-1.5 rounded-full mb-4 tracking-wide">
           🧾 Invoice Generator
         </span>
-        <h1 className="text-[36px] font-black tracking-[-1.2px] leading-[1.1] text-neutral-950 mb-2.5">
-          Create professional invoices<br />in seconds
+        <h1 className="text-4xl font-medium  text-neutral-950 mb-2.5">
+          Create professiona <span className="text-cyan-600">invoices</span> <br />in seconds
         </h1>
         <p className="text-[14px] text-neutral-400">Fill in the form, see a live preview, then print or download as PDF.</p>
       </div>
 
+      <div className="flex items-center gap-2 justify-end max-w-6xl mx-auto py-5">
+
+        <button onClick={() => setView(v => v === "edit" ? "preview" : "edit")}
+          className="flex items-center gap-1.5 text-[13px] font-semibold px-3.5 py-1.5 rounded-lg border border-neutral-200 text-neutral-600 hover:bg-neutral-50 transition-colors">
+          {view === "edit" ? <><EyeIcon /> Preview</> : <><EditIcon /> Edit</>}
+        </button>
+        <button onClick={handlePrint}
+          className="flex items-center gap-1.5 text-[13px] font-semibold px-3.5 py-1.5 rounded-lg border border-neutral-200 text-neutral-600 hover:bg-neutral-50 transition-colors">
+          <PrintIcon /> Print / PDF
+        </button>
+        <button className="flex items-center gap-1.5 text-[13px] font-bold px-3.5 py-1.5 rounded-lg bg-cyan-600 text-white hover:bg-cyan-700 transition-colors">
+          <DownloadIcon /> Download
+        </button>
+      </div>
+
       {/* ── Layout ── */}
-      <div className="max-w-[1200px] mx-auto px-5 pb-16">
+      <div className="max-w-[1200px] mx-auto px-5">
 
         {view === "edit" ? (
           <div className="grid gap-6 items-start" style={{ gridTemplateColumns: "380px 1fr" }}>
@@ -314,7 +305,7 @@ export default function InvoiceGenerator() {
             <div className="no-print space-y-4">
 
               {/* Theme picker */}
-              <div className="bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm">
+              <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm">
                 <div className="text-[11px] font-black uppercase tracking-widest text-neutral-400 mb-3">Invoice Theme</div>
                 <div className="flex gap-2">
                   {THEMES.map(t => (
@@ -328,7 +319,7 @@ export default function InvoiceGenerator() {
               </div>
 
               {/* From */}
-              <div className="bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm fade-up">
+              <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm fade-up">
                 {sectionHead("From (Your Business)")}
 
                 {/* Logo upload */}
@@ -350,39 +341,17 @@ export default function InvoiceGenerator() {
               </div>
 
               {/* To */}
-              <div className="bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm fade-up">
+              <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm fade-up">
                 {sectionHead("Bill To (Client)")}
                 <Input label="Client Name" value={data.toName} onChange={set("toName")} placeholder="Client Ltd." />
                 <Input label="Address" value={data.toAddress} onChange={set("toAddress")} placeholder={"456 Client Ave\nCity, State 20002"} rows={2} />
                 <Input label="Email" value={data.toEmail} onChange={set("toEmail")} placeholder="accounts@client.com" />
               </div>
 
-              {/* Invoice Details */}
-              <div className="bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm fade-up">
-                {sectionHead("Invoice Details")}
-                <div className="grid grid-cols-2 gap-3">
-                  <Input label="Invoice No." value={data.invoiceNo} onChange={set("invoiceNo")} placeholder="INV-001" />
-                  <Input label="PO Number" value={data.poNumber} onChange={set("poNumber")} placeholder="Optional" />
-                  <Input label="Issue Date" type="date" value={data.issueDate} onChange={set("issueDate")} />
-                  <Input label="Due Date" type="date" value={data.dueDate} onChange={set("dueDate")} />
-                </div>
 
-                <div className="mb-4">
-                  <label className="block text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-1.5">Currency</label>
-                  <div className="relative">
-                    <select value={data.currency} onChange={e => set("currency")(e.target.value)}
-                      className="w-full text-[13px] font-semibold px-3 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50 text-neutral-900 appearance-none outline-none focus:border-neutral-400 focus:bg-white transition-colors pr-8">
-                      {CURRENCIES.map(c => <option key={c}>{c}</option>)}
-                    </select>
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"><ChevronIcon /></span>
-                  </div>
-                </div>
-
-                <Input label="Discount %" type="number" value={data.discount} onChange={val => set("discount")(parseFloat(val) || 0)} placeholder="0" />
-              </div>
 
               {/* Notes */}
-              <div className="bg-white border border-neutral-200 rounded-2xl p-5 shadow-sm fade-up">
+              <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm fade-up">
                 {sectionHead("Notes & Terms")}
                 <Input label="Notes" value={data.notes} onChange={set("notes")} placeholder="Thank you for your business!" rows={2} />
                 <Input label="Payment Terms" value={data.terms} onChange={set("terms")} placeholder="Payment due within 30 days." rows={2} />
@@ -393,11 +362,11 @@ export default function InvoiceGenerator() {
             <div className="space-y-5">
 
               {/* Line Items */}
-              <div className="no-print bg-white border border-neutral-200 rounded-2xl p-6 shadow-sm fade-up">
+              <div className="no-print bg-white border border-neutral-200 rounded-xl p-6 shadow-sm fade-up">
                 <div className="flex items-center justify-between mb-5">
                   <span className="text-[11px] font-black uppercase tracking-widest text-neutral-400">Line Items</span>
                   <button onClick={addItem}
-                    className="flex items-center gap-1.5 text-[12px] font-bold px-3 py-1.5 rounded-lg bg-neutral-900 text-white hover:bg-neutral-700 transition-colors">
+                    className="flex items-center gap-1.5 text-[12px] font-bold px-3 py-1.5 rounded-lg bg-cyan-600 text-white hover:bg-cyan-700 transition-colors">
                     <PlusIcon /> Add Item
                   </button>
                 </div>
@@ -468,6 +437,30 @@ export default function InvoiceGenerator() {
                   <span className="text-[11px] font-black uppercase tracking-widest text-neutral-400">Live Preview</span>
                 </div>
                 <InvoicePreview data={data} theme={theme} />
+
+                {/* Invoice Details */}
+                <div className="bg-white border border-neutral-200 rounded-xl p-5 shadow-sm fade-up mt-5">
+                  {sectionHead("Invoice Details")}
+                  <div className="grid grid-cols-2 gap-3">
+                    <Input label="Invoice No." value={data.invoiceNo} onChange={set("invoiceNo")} placeholder="INV-001" />
+                    <Input label="PO Number" value={data.poNumber} onChange={set("poNumber")} placeholder="Optional" />
+                    <Input label="Issue Date" type="date" value={data.issueDate} onChange={set("issueDate")} />
+                    <Input label="Due Date" type="date" value={data.dueDate} onChange={set("dueDate")} />
+                  </div>
+
+                  <div className="mb-4">
+                    <label className="block text-[11px] font-semibold text-neutral-400 uppercase tracking-widest mb-1.5">Currency</label>
+                    <div className="relative">
+                      <select value={data.currency} onChange={e => set("currency")(e.target.value)}
+                        className="w-full text-[13px] font-semibold px-3 py-2.5 rounded-lg border border-neutral-200 bg-neutral-50 text-neutral-900 appearance-none outline-none focus:border-neutral-400 focus:bg-white transition-colors pr-8">
+                        {CURRENCIES.map(c => <option key={c}>{c}</option>)}
+                      </select>
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"><ChevronIcon /></span>
+                    </div>
+                  </div>
+
+                  <Input label="Discount %" type="number" value={data.discount} onChange={val => set("discount")(parseFloat(val) || 0)} placeholder="0" />
+                </div>
               </div>
             </div>
           </div>
@@ -475,32 +468,15 @@ export default function InvoiceGenerator() {
           /* ── Full Preview Mode ── */
           <div className="max-w-[720px] mx-auto fade-up print-area">
             <InvoicePreview data={data} theme={theme} />
+
           </div>
+
         )}
 
-        {/* ── Feature Strip ── */}
-        {view === "edit" && (
-          <div className="no-print grid grid-cols-4 gap-3 mt-8">
-            {[
-              { icon: "🎨", title: "5 color themes",     desc: "Match your brand identity" },
-              { icon: "🖨️",  title: "Print-ready PDF",   desc: "Clean browser print output" },
-              { icon: "🧮", title: "Auto calculations",  desc: "Tax, discount & totals" },
-              { icon: "📎", title: "Logo upload",        desc: "Add your company logo" },
-            ].map((f, i) => (
-              <div key={i} className="p-4 bg-white rounded-xl border border-neutral-100 shadow-sm">
-                <div className="text-lg mb-1.5">{f.icon}</div>
-                <div className="text-[13px] font-bold text-neutral-800 mb-0.5">{f.title}</div>
-                <div className="text-[12px] text-neutral-400">{f.desc}</div>
-              </div>
-            ))}
-          </div>
-        )}
+
       </div>
 
-      {/* ── Footer ── */}
-      <footer className="no-print border-t border-neutral-100 py-5 text-center text-[12px] text-neutral-300">
-        ToolNest · Invoice Generator · Free forever · No signup required
-      </footer>
+
     </div>
   );
 }
