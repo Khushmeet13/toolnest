@@ -21,8 +21,8 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li><a href="/image-compressor" className="hover:text-white transition">Image Compressor</a></li>
               <li><a href="/pdf-to-word" className="hover:text-white transition">PDF to Word</a></li>
-              <li><a href="/qr-generator" className="hover:text-white transition">QR Generator</a></li>
-              <li><a href="/password-generator" className="hover:text-white transition">Password Generator</a></li>
+              <li><a href="/generators/qr-code-generator" className="hover:text-white transition">QR Generator</a></li>
+              <li><a href="/generators/password-generator" className="hover:text-white transition">Password Generator</a></li>
             </ul>
           </div>
 
