@@ -162,7 +162,7 @@ export default function DumbCharades() {
   const wordCount = current ? current.split(" ").length : 0;
 
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: "'DM Sans', 'Segoe UI', sans-serif" }}>
+    <div className=" bg-white py-16" style={{ fontFamily: "'DM Sans', 'Segoe UI', sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;900&family=Syne:wght@700;800&display=swap');
         @keyframes slideUp { from{transform:translateY(24px);opacity:0} to{transform:translateY(0);opacity:1} }
@@ -183,19 +183,14 @@ export default function DumbCharades() {
           style={{ left:`${c.x}%`, width:c.size, height:c.size*1.4, background:c.color, animationDelay:`${c.delay}s` }} />
       ))}
 
-      <div className="max-w-sm mx-auto px-5 py-8 min-h-screen flex flex-col">
+      <div className="max-w-sm mx-auto px-5  flex flex-col">
 
         {/* ── HOME ── */}
         {screen === "home" && (
           <div className="flex-1 flex flex-col slide-up">
             {/* Header */}
             <div className="mb-8">
-              <div className="flex items-center gap-2 mb-1">
-                <div className="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center">
-                  <span style={{fontSize:16}}>🤫</span>
-                </div>
-                <span className="text-xs font-600 tracking-widest text-cyan-500 uppercase">Dumb Charades</span>
-              </div>
+              
               <h1 style={{fontFamily:"'Syne',sans-serif",fontSize:36,fontWeight:800,lineHeight:1.1,color:"#0c1a2e"}}>
                 Pick. Act.<br/>Win! 🏆
               </h1>
@@ -210,7 +205,7 @@ export default function DumbCharades() {
                   const active = selectedCats.includes(cat);
                   return (
                     <button key={cat} onClick={() => toggleCat(cat)}
-                      className="relative overflow-hidden text-left p-4 rounded-2xl border-2 transition-all active:scale-95"
+                      className="relative overflow-hidden text-left p-4 rounded-xl border-2 transition-all active:scale-95 cursor-pointer"
                       style={{
                         borderColor: active ? meta.color : "#e2e8f0",
                         background: active ? `${meta.color}10` : "#f8fafc",
@@ -233,7 +228,7 @@ export default function DumbCharades() {
             </div>
 
             {/* Timer setting */}
-            <div className="bg-slate-50 rounded-2xl p-4 mb-6 border border-slate-100">
+            <div className="bg-slate-50 rounded-xl p-4 mb-6 border border-slate-100">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-semibold tracking-widest text-slate-400 uppercase">Timer</span>
                 <span className="text-sm font-bold text-cyan-600">{customTime}s</span>
@@ -241,7 +236,7 @@ export default function DumbCharades() {
               <input type="range" min={30} max={120} step={15} value={customTime}
                 onChange={(e) => setCustomTime(Number(e.target.value))}
                 className="w-full accent-cyan-500" />
-              <div className="flex justify-between text-xs text-slate-300 mt-1">
+              <div className="flex justify-between text-xs text-slate-500 mt-1">
                 <span>30s</span><span>60s</span><span>90s</span><span>120s</span>
               </div>
             </div>
@@ -261,7 +256,7 @@ export default function DumbCharades() {
             )}
 
             <button onClick={startRound}
-              className="w-full py-4 rounded-2xl font-bold text-base text-white transition-all active:scale-95 mt-auto"
+              className="w-full py-4 rounded-xl font-bold text-base text-white transition-all active:scale-95 mt-auto cursor-pointer"
               style={{background:"linear-gradient(135deg,#06b6d4,#0891b2)"}}>
               Start Round 🎬
             </button>
@@ -311,7 +306,7 @@ export default function DumbCharades() {
             {/* Card */}
             <div key={animKey} className={`flex-1 flex flex-col justify-center ${cardFlip ? "flip-card" : "slide-up"}`}>
               {!revealed ? (
-                <div className="rounded-3xl border-2 border-dashed border-cyan-200 bg-cyan-50 p-8 text-center mb-5 cursor-pointer active:scale-95 transition-all"
+                <div className="rounded-xl border-2 border-dashed border-cyan-200 bg-cyan-50 p-8 text-center mb-5 cursor-pointer active:scale-95 transition-all"
                   onClick={revealAndStart}>
                   <div className="w-16 h-16 rounded-2xl bg-cyan-100 flex items-center justify-center mx-auto mb-4">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round">
@@ -329,7 +324,7 @@ export default function DumbCharades() {
                   </div>
                 </div>
               ) : (
-                <div className="rounded-3xl bg-white border-2 p-6 text-center mb-5 shadow-sm"
+                <div className="rounded-xl bg-white border-2 p-6 text-center mb-5 shadow-sm"
                   style={{borderColor:"#06b6d4"}}>
                   {/* Word count indicators */}
                   <div className="flex items-center justify-center gap-1.5 mb-4">
@@ -359,21 +354,21 @@ export default function DumbCharades() {
                 </div>
               )}
 
-              {/* Tip ticker */}
+              {/* Tip ticker
               <div className="flex items-center gap-2 bg-slate-50 rounded-xl px-4 py-2.5 mb-5">
                 <span className="text-slate-300 text-sm">💡</span>
                 <span key={tipIdx} className="text-xs text-slate-400 fade-in">{TIPS[tipIdx]}</span>
-              </div>
+              </div> */}
 
               {/* Action buttons */}
               {revealed && (
                 <div className="grid grid-cols-2 gap-3 fade-in">
                   <button onClick={markPass}
-                    className="py-4 rounded-2xl border-2 border-red-100 bg-red-50 text-red-400 font-bold text-sm active:scale-95 transition-all">
+                    className="py-4 rounded-xl border-2 border-red-100 bg-red-50 text-red-400 font-bold text-sm active:scale-95 transition-all cursor-pointer">
                     ✗ Pass
                   </button>
                   <button onClick={markCorrect}
-                    className="py-4 rounded-2xl text-white font-bold text-sm active:scale-95 transition-all"
+                    className="py-4 rounded-xl text-white font-bold text-sm active:scale-95 transition-all cursor-pointer"
                     style={{background:"linear-gradient(135deg,#06b6d4,#0891b2)"}}>
                     ✓ Correct!
                   </button>
@@ -382,7 +377,7 @@ export default function DumbCharades() {
 
               {!revealed && (
                 <button onClick={revealAndStart}
-                  className="w-full py-4 rounded-2xl text-white font-bold text-sm active:scale-95 transition-all"
+                  className="w-full py-4 rounded-xl text-white font-bold text-sm active:scale-95 transition-all cursor-pointer"
                   style={{background:"linear-gradient(135deg,#06b6d4,#0891b2)"}}>
                   Reveal & Start Timer ▶
                 </button>
@@ -394,7 +389,7 @@ export default function DumbCharades() {
         {/* ── DONE ── */}
         {screen === "done" && (
           <div className="flex-1 flex flex-col items-center justify-center text-center slide-up">
-            <div className="w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-5"
+            <div className="w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-5"
               style={{background: score.correct > score.pass ? "linear-gradient(135deg,#06b6d4,#0891b2)" : "#fef2f2",
                       border: score.correct > score.pass ? "none" : "2px solid #fecaca"}}>
               <span style={{fontSize:36}}>{score.correct > (score.correct + score.pass - 1) ? "🎉" : "😬"}</span>
@@ -407,18 +402,18 @@ export default function DumbCharades() {
 
             {/* Stats */}
             <div className="w-full grid grid-cols-2 gap-3 mb-6">
-              <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-4">
+              <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4">
                 <div className="text-3xl font-black text-emerald-500">{score.correct}</div>
                 <div className="text-xs font-semibold text-emerald-400 mt-1">Correct ✓</div>
               </div>
-              <div className="bg-red-50 border border-red-100 rounded-2xl p-4">
+              <div className="bg-red-50 border border-red-100 rounded-xl p-4">
                 <div className="text-3xl font-black text-red-400">{score.pass}</div>
                 <div className="text-xs font-semibold text-red-400 mt-1">Passed ✗</div>
               </div>
             </div>
 
             {/* Seen phrases */}
-            <div className="w-full bg-slate-50 rounded-2xl p-4 mb-6 text-left border border-slate-100">
+            <div className="w-full bg-slate-50 rounded-xl p-4 mb-6 text-left border border-slate-100">
               <p className="text-xs font-semibold tracking-widest text-slate-400 uppercase mb-3">Phrases seen</p>
               <div className="space-y-2 max-h-32 overflow-y-auto">
                 {history.slice().reverse().map((p, i) => (
@@ -432,11 +427,11 @@ export default function DumbCharades() {
 
             <div className="flex gap-3 w-full">
               <button onClick={() => { setScore({correct:0,pass:0}); setHistory([]); setScreen("home"); }}
-                className="flex-1 py-3.5 rounded-2xl border-2 border-slate-200 text-slate-500 font-semibold text-sm active:scale-95 transition-all">
+                className="flex-1 py-3.5 rounded-xl border-2 border-slate-200 text-slate-500 font-semibold text-sm active:scale-95 transition-all cursor-pointer">
                 ← Home
               </button>
               <button onClick={startRound}
-                className="flex-1 py-3.5 rounded-2xl text-white font-bold text-sm active:scale-95 transition-all"
+                className="flex-1 py-3.5 rounded-xl text-white font-bold text-sm active:scale-95 transition-all cursor-pointer"
                 style={{background:"linear-gradient(135deg,#06b6d4,#0891b2)"}}>
                 Next Round →
               </button>

@@ -41,8 +41,8 @@ export default function PollGenerator() {
   const createPoll = () => {
     const q = question.trim();
     const validOpts = options.map((o) => o.trim()).filter(Boolean);
-    if (!q) return showToast("Pehle sawaal likhein!", "error");
-    if (validOpts.length < 2) return showToast("Kam se kam 2 options chahiye!", "error");
+    if (!q) return showToast("First write your question", "error");
+    if (validOpts.length < 2) return showToast("Give at least two options", "error");
 
     const pollId = generateId();
     const poll = {
@@ -101,7 +101,7 @@ export default function PollGenerator() {
   const maxVotes = (poll) => Math.max(...(poll?.votes || [0]));
 
   return (
-    <div className="min-h-screen bg-stone-50 p-4 sm:p-8" style={{ fontFamily: "'Courier New', monospace" }}>
+    <div className=" bg-white py-16" style={{ fontFamily: "'Courier New', monospace" }}>
       <div className="max-w-md mx-auto">
 
         {/* Toast */}
@@ -117,7 +117,7 @@ export default function PollGenerator() {
 
         {/* Brand */}
         <div className="flex items-center gap-2 mb-6">
-          <div className="w-2.5 h-2.5 rounded-full bg-pink-500" />
+          <div className="w-2.5 h-2.5 rounded-full bg-cyan-500" />
           <span className="text-xs tracking-[3px] text-stone-400">POLLSTUDIO</span>
         </div>
 
@@ -127,7 +127,7 @@ export default function PollGenerator() {
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`flex-1 py-2.5 text-xs tracking-[2px] transition-all ${
+              className={`flex-1 py-2.5 text-xs tracking-[2px] transition-all cursor-pointer ${
                 tab === t
                   ? "bg-stone-100 text-stone-800 font-medium"
                   : "bg-white text-stone-400 hover:text-stone-600"
@@ -154,7 +154,7 @@ export default function PollGenerator() {
               <textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Aapka sawaal yahan likhein..."
+                placeholder="Write your question..."
                 rows={2}
                 className="w-full bg-stone-100 border border-stone-200 rounded-lg px-4 py-3 text-sm text-stone-800 outline-none focus:border-stone-400 resize-none placeholder-stone-400 transition-colors"
               />
@@ -199,7 +199,7 @@ export default function PollGenerator() {
 
             <button
               onClick={createPoll}
-              className="w-full py-3.5 bg-pink-500 hover:bg-pink-600 active:scale-95 text-white text-xs tracking-[2px] rounded-lg transition-all"
+              className="w-full py-3.5 bg-cyan-600 hover:bg-cyan-700 active:scale-95 text-white text-xs tracking-[2px] rounded-lg transition-all cursor-pointer"
             >
               CREATE & GET SHARE CODE →
             </button>
@@ -212,7 +212,7 @@ export default function PollGenerator() {
                   <div className="text-3xl italic text-pink-500 tracking-[4px] mb-1" style={{ fontFamily: "Georgia, serif" }}>
                     {createdPoll.id}
                   </div>
-                  <div className="text-xs text-stone-400">Ye code dusron ko bhejo — woh vote kar sakte hain</div>
+                  <div className="text-xs text-stone-400">Share this code - to vote together</div>
                 </div>
                 <div className="flex gap-2">
                   <button
@@ -283,17 +283,17 @@ export default function PollGenerator() {
                       key={i}
                       onClick={() => setSelectedOpt(i)}
                       className={`w-full flex items-center gap-3 px-5 py-3.5 border-b border-stone-100 last:border-0 text-left transition-all ${
-                        selectedOpt === i ? "bg-pink-50" : "hover:bg-stone-50"
+                        selectedOpt === i ? "bg-cyan-50" : "hover:bg-stone-50"
                       }`}
                     >
                       <div className={`w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 transition-all ${
-                        selectedOpt === i ? "border-pink-500 bg-pink-500" : "border-stone-300"
+                        selectedOpt === i ? "border-cyan-500 bg-cyan-500" : "border-stone-300"
                       }`}>
                         {selectedOpt === i && <div className="w-2 h-2 rounded-full bg-white" />}
                       </div>
                       <span className="text-sm text-stone-700">{opt}</span>
                       {selectedOpt === i && (
-                        <span className="ml-auto text-xs text-pink-400 tracking-wide">SELECTED</span>
+                        <span className="ml-auto text-xs text-cyan-600 tracking-wide">SELECTED</span>
                       )}
                     </button>
                   ))}
@@ -301,7 +301,7 @@ export default function PollGenerator() {
                 <button
                   onClick={castVote}
                   disabled={selectedOpt === null}
-                  className="w-full py-3.5 bg-pink-500 hover:bg-pink-600 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed text-white text-xs tracking-[2px] rounded-lg transition-all"
+                  className="w-full py-3.5 bg-cyan-600 hover:bg-cyan-700 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed text-white text-xs tracking-[2px] rounded-lg transition-all"
                 >
                   SUBMIT VOTE →
                 </button>
@@ -327,14 +327,14 @@ export default function PollGenerator() {
                     return (
                       <div key={i} className="relative px-5 py-3.5 border-b border-stone-100 last:border-0 overflow-hidden">
                         <div
-                          className={`absolute inset-y-0 left-0 transition-all duration-700 ${isWinner ? "bg-pink-100" : "bg-stone-100"}`}
+                          className={`absolute inset-y-0 left-0 transition-all duration-700 ${isWinner ? "bg-cyan-50" : "bg-stone-100"}`}
                           style={{ width: `${pct}%` }}
                         />
                         <div className="relative flex items-center gap-2">
-                          {isWinner && <span className="text-pink-400 text-sm">★</span>}
+                          {isWinner && <span className="text-cyan-400 text-sm">★</span>}
                           <span className="flex-1 text-sm text-stone-700">{opt}</span>
                           <span className="text-xs text-stone-400">{foundPoll.votes[i]}</span>
-                          <span className={`text-sm font-medium min-w-[36px] text-right ${isWinner ? "text-pink-600" : "text-stone-500"}`}>
+                          <span className={`text-sm font-medium min-w-[36px] text-right ${isWinner ? "text-cyan-600" : "text-stone-500"}`}>
                             {pct}%
                           </span>
                         </div>
@@ -350,7 +350,7 @@ export default function PollGenerator() {
                     { num: foundPoll.options.length, label: "OPTIONS" },
                   ].map(({ num, label }) => (
                     <div key={label} className="bg-stone-100 rounded-lg p-3 text-center">
-                      <div className="text-2xl italic text-pink-500 mb-0.5" style={{ fontFamily: "Georgia, serif" }}>{num}</div>
+                      <div className="text-2xl italic text-cyan-600 mb-0.5" style={{ fontFamily: "Georgia, serif" }}>{num}</div>
                       <div className="text-xs tracking-[1px] text-stone-400">{label}</div>
                     </div>
                   ))}

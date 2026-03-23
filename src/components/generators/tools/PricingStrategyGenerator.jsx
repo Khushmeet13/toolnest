@@ -191,27 +191,9 @@ export default function PricingsStrategyGenerator() {
           style={{ backgroundImage: "radial-gradient(#06b6d4 1px,transparent 1px)", backgroundSize: "30px 30px" }} />
       </div>
 
-      {/* Navbar */}
-      <nav className="relative z-20 bg-white/90 backdrop-blur-md border-b border-cyan-100 sticky top-0">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-teal-500 flex items-center justify-center shadow-md shadow-cyan-200">
-              <span className="text-white font-extrabold text-base">$</span>
-            </div>
-            <span className="font-extrabold text-gray-900 text-lg tracking-tight">PricerAI</span>
-          </div>
-          <div className="hidden md:flex gap-7 text-sm font-medium text-gray-400">
-            {["Features", "Pricing", "Docs"].map(l => (
-              <a key={l} href="#" className="hover:text-cyan-600 transition-colors">{l}</a>
-            ))}
-          </div>
-          <button className="text-sm font-bold bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-5 py-2.5 rounded-full shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 transition-all">
-            Try Free →
-          </button>
-        </div>
-      </nav>
 
-      <main className="relative z-10 max-w-5xl mx-auto px-6 py-14">
+
+      <main className="relative z-10 max-w-5xl mx-auto px-6 py-16">
 
         {/* Hero */}
         {!result && (
@@ -220,13 +202,13 @@ export default function PricingsStrategyGenerator() {
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
               AI Pricing Intelligence
             </div>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-[1.1] tracking-tight mb-5">
+            <h1 className="text-4xl font-medium text-gray-900 leading-[1.1] tracking-tight mb-2">
               Find the pricing model<br />
-              <span className="bg-gradient-to-r from-cyan-500 to-teal-400 bg-clip-text text-transparent">
+              <span className="text-cyan-600">
                 that maximizes revenue.
               </span>
             </h1>
-            <p className="text-gray-400 text-lg max-w-lg mx-auto leading-relaxed">
+            <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
               Enter your product type and cost structure. Get instant pricing recommendations with fit scores, tier tables, and strategic rationale.
             </p>
           </div>
@@ -241,7 +223,7 @@ export default function PricingsStrategyGenerator() {
                   onClick={() => step > s.id && setStep(s.id)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all ${
                     step === s.id
-                      ? "bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-md shadow-cyan-200"
+                      ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white shadow-md shadow-cyan-200"
                       : step > s.id
                         ? "bg-cyan-100 text-cyan-700 cursor-pointer hover:bg-cyan-200"
                         : "bg-gray-100 text-gray-400 cursor-default"
@@ -264,7 +246,7 @@ export default function PricingsStrategyGenerator() {
 
         {/* ── STEP 1 ── */}
         {!result && step === 1 && (
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-2xl shadow-gray-100/60 p-8 md:p-10">
+          <div className="bg-white rounded-xl border border-gray-100 shadow-2xl shadow-gray-100/60 p-8 md:p-10">
             <div className="mb-8">
               <h2 className="text-2xl font-extrabold text-gray-900">What kind of product are you pricing?</h2>
               <p className="text-sm text-gray-400 mt-1.5">Select the category that best describes your offering</p>
@@ -274,7 +256,7 @@ export default function PricingsStrategyGenerator() {
                 <button
                   key={p.id}
                   onClick={() => setProduct(p.id)}
-                  className={`p-5 rounded-2xl border-2 text-left transition-all group ${
+                  className={`p-5 rounded-xl border-2 text-left transition-all group cursor-pointer ${
                     product === p.id
                       ? "border-cyan-500 bg-gradient-to-br from-cyan-50 to-teal-50 shadow-md shadow-cyan-100"
                       : "border-gray-100 hover:border-cyan-200 hover:bg-cyan-50/40"
@@ -290,7 +272,7 @@ export default function PricingsStrategyGenerator() {
             <button
               onClick={() => setStep(2)}
               disabled={!product}
-              className="w-full py-4 rounded-2xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-full py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-cyan-600 text-white shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
             >
               Continue →
             </button>
@@ -299,7 +281,7 @@ export default function PricingsStrategyGenerator() {
 
         {/* ── STEP 2 ── */}
         {!result && step === 2 && (
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-2xl shadow-gray-100/60 p-8 md:p-10">
+          <div className="bg-white rounded-xl border border-gray-100 shadow-2xl shadow-gray-100/60 p-6">
             <div className="mb-8">
               <h2 className="text-2xl font-extrabold text-gray-900">Cost structure & goals</h2>
               <p className="text-sm text-gray-400 mt-1.5">Include CAC, COGS, hosting, and overhead per unit or per month</p>
@@ -307,7 +289,7 @@ export default function PricingsStrategyGenerator() {
 
             <div className="mb-8">
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-3">Unit / Monthly Cost (USD)</label>
-              <div className="flex items-center border-2 border-gray-200 focus-within:border-cyan-400 rounded-2xl overflow-hidden transition-colors">
+              <div className="flex items-center border-2 border-gray-200 focus-within:border-cyan-400 rounded-xl overflow-hidden transition-colors">
                 <span className="px-5 text-cyan-500 font-extrabold text-xl border-r border-gray-100 py-4 bg-cyan-50/50">$</span>
                 <input
                   type="number"
@@ -328,7 +310,7 @@ export default function PricingsStrategyGenerator() {
                   <button
                     key={m}
                     onClick={() => setMargin(m)}
-                    className={`py-4 px-3 rounded-2xl border-2 text-sm font-bold transition-all ${
+                    className={`py-4 px-3 rounded-xl border-2 text-sm font-bold transition-all cursor-pointer ${
                       margin === m
                         ? "border-cyan-500 bg-gradient-to-br from-cyan-50 to-teal-50 text-cyan-700 shadow-md shadow-cyan-100"
                         : "border-gray-100 text-gray-500 hover:border-cyan-200 hover:bg-cyan-50/30"
@@ -340,13 +322,13 @@ export default function PricingsStrategyGenerator() {
 
             <div className="flex gap-3">
               <button onClick={() => setStep(1)}
-                className="flex-1 py-4 rounded-2xl border-2 border-gray-100 text-gray-500 font-bold text-sm hover:border-cyan-200 hover:text-cyan-600 transition-all">
+                className="flex-1 py-4 rounded-xl border-2 border-gray-100 text-gray-500 font-bold text-sm hover:border-cyan-200 hover:text-cyan-600 transition-all cursor-pointer">
                 ← Back
               </button>
               <button
                 onClick={() => setStep(3)}
                 disabled={!cost || !margin}
-                className="flex-[3] py-4 rounded-2xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                className="flex-[3] py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
               >
                 Continue →
               </button>
@@ -356,7 +338,7 @@ export default function PricingsStrategyGenerator() {
 
         {/* ── STEP 3 ── */}
         {!result && step === 3 && (
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-2xl shadow-gray-100/60 p-8 md:p-10">
+          <div className="bg-white rounded-xl border border-gray-100 shadow-2xl shadow-gray-100/60 p-6">
             <div className="mb-8">
               <h2 className="text-2xl font-extrabold text-gray-900">Market & customer details</h2>
               <p className="text-sm text-gray-400 mt-1.5">Helps calibrate competitive positioning and pricing power</p>
@@ -369,7 +351,7 @@ export default function PricingsStrategyGenerator() {
                   <button
                     key={c}
                     onClick={() => setCompetition(c)}
-                    className={`py-4 rounded-2xl border-2 text-sm font-bold transition-all ${
+                    className={`py-4 rounded-xl border-2 text-sm font-bold transition-all cursor-pointer ${
                       competition === c
                         ? "border-cyan-500 bg-gradient-to-br from-cyan-50 to-teal-50 text-cyan-700 shadow-md shadow-cyan-100"
                         : "border-gray-100 text-gray-500 hover:border-cyan-200 hover:bg-cyan-50/30"
@@ -386,7 +368,7 @@ export default function PricingsStrategyGenerator() {
                   <button
                     key={c}
                     onClick={() => setCustomer(c)}
-                    className={`py-4 rounded-2xl border-2 text-sm font-bold transition-all ${
+                    className={`py-4 rounded-xl border-2 text-sm font-bold transition-all cursor-pointer ${
                       customer === c
                         ? "border-cyan-500 bg-gradient-to-br from-cyan-50 to-teal-50 text-cyan-700 shadow-md shadow-cyan-100"
                         : "border-gray-100 text-gray-500 hover:border-cyan-200 hover:bg-cyan-50/30"
@@ -398,13 +380,13 @@ export default function PricingsStrategyGenerator() {
 
             <div className="flex gap-3">
               <button onClick={() => setStep(2)}
-                className="flex-1 py-4 rounded-2xl border-2 border-gray-100 text-gray-500 font-bold text-sm hover:border-cyan-200 hover:text-cyan-600 transition-all">
+                className="flex-1 py-4 rounded-xl border-2 border-gray-100 text-gray-500 font-bold text-sm hover:border-cyan-200 hover:text-cyan-600 transition-all cursor-pointer">
                 ← Back
               </button>
               <button
                 onClick={handleGenerate}
                 disabled={!competition || !customer || loading}
-                className="flex-[3] py-4 rounded-2xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                className="flex-[3] py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-cyan-600 text-white shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-3">
@@ -426,7 +408,7 @@ export default function PricingsStrategyGenerator() {
                 <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
                 4 Models Generated
               </div>
-              <h2 className="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">Your Pricing Strategy</h2>
+              <h2 className="text-4xl font-medium text-gray-900 mb-4 tracking-tight">Your Pricing Strategy</h2>
               <div className="flex flex-wrap items-center justify-center gap-2.5">
                 {[
                   { k: "Product", v: productTypes.find(p => p.id === product)?.label },
@@ -452,7 +434,7 @@ export default function PricingsStrategyGenerator() {
                   <button
                     key={key}
                     onClick={() => setActiveModel(key)}
-                    className={`p-4 rounded-2xl border-2 text-left transition-all ${
+                    className={`p-4 rounded-xl border-2 text-left transition-all cursor-pointer ${
                       isActive
                         ? "border-cyan-500 bg-gradient-to-br from-cyan-50 to-teal-50 shadow-lg shadow-cyan-100"
                         : "border-gray-100 bg-white hover:border-cyan-200 hover:bg-cyan-50/30"
@@ -475,8 +457,8 @@ export default function PricingsStrategyGenerator() {
             {result[activeModel] && (() => {
               const m = result[activeModel];
               return (
-                <div className="bg-white rounded-3xl border border-gray-100 shadow-2xl shadow-gray-100/60 overflow-hidden">
-                  <div className="h-1.5 w-full bg-gradient-to-r from-cyan-400 via-cyan-500 to-teal-400" />
+                <div className="bg-white rounded-xl border border-gray-100 shadow-2xl shadow-gray-100/60 overflow-hidden">
+                  <div className="h-1 w-full bg-gradient-to-r from-cyan-400 via-cyan-500 to-teal-400" />
 
                   {/* Header */}
                   <div className="p-8 border-b border-gray-50 flex flex-col md:flex-row md:items-center justify-between gap-5">
@@ -501,7 +483,7 @@ export default function PricingsStrategyGenerator() {
                       <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-5">Pricing Tiers</div>
                       <div className="space-y-3">
                         {m.tiers.map((tier, i) => (
-                          <div key={i} className={`p-5 rounded-2xl border-2 transition-all ${
+                          <div key={i} className={`p-5 rounded-xl border-2 transition-all ${
                             tier.popular
                               ? "border-cyan-400 bg-gradient-to-br from-cyan-50 to-teal-50 shadow-lg shadow-cyan-100"
                               : "border-gray-100"
@@ -564,7 +546,7 @@ export default function PricingsStrategyGenerator() {
                       </div>
 
                       {/* Insight */}
-                      <div className="bg-gradient-to-br from-cyan-50 to-teal-50 border border-cyan-100 rounded-2xl p-5">
+                      <div className="bg-gradient-to-br from-cyan-50 to-teal-50 border border-cyan-100 rounded-xl p-5">
                         <div className="text-xs font-bold text-cyan-600 uppercase tracking-widest mb-2">Strategic Insight</div>
                         <p className="text-sm text-gray-600 leading-relaxed">{m.insight}</p>
                       </div>
@@ -575,7 +557,7 @@ export default function PricingsStrategyGenerator() {
             })()}
 
             {/* Comparison bar */}
-            <div className="mt-4 bg-white rounded-3xl border border-gray-100 shadow-lg shadow-gray-50 p-8">
+            <div className="mt-4 bg-white rounded-xl border border-gray-100 shadow-lg shadow-gray-50 p-8">
               <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Model Fit Comparison</div>
               <div className="space-y-5">
                 {models.map((key) => {
@@ -583,7 +565,7 @@ export default function PricingsStrategyGenerator() {
                   const isActive = activeModel === key;
                   return (
                     <button key={key} onClick={() => setActiveModel(key)} className="flex items-center gap-4 w-full group">
-                      <span className={`w-28 text-sm font-bold text-left transition-colors ${isActive ? "text-cyan-600" : "text-gray-400 group-hover:text-gray-600"}`}>
+                      <span className={`w-28 text-sm font-bold text-left transition-colors cursor-pointer ${isActive ? "text-cyan-600" : "text-gray-400 group-hover:text-gray-600"}`}>
                         {m.icon} {m.label}
                       </span>
                       <div className="flex-1 h-2.5 bg-cyan-50 rounded-full overflow-hidden">
@@ -610,11 +592,11 @@ export default function PricingsStrategyGenerator() {
             <div className="mt-4 flex gap-3">
               <button
                 onClick={handleReset}
-                className="flex-1 py-4 rounded-2xl border-2 border-gray-100 text-gray-500 font-bold text-sm hover:border-cyan-200 hover:text-cyan-600 transition-all"
+                className="flex-1 py-4 rounded-xl border-2 border-gray-100 text-gray-500 font-bold text-sm hover:border-cyan-600 hover:text-cyan-600 transition-all cursor-pointer"
               >
                 ← New Analysis
               </button>
-              <button className="flex-[2] py-4 rounded-2xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 transition-all">
+              <button className="flex-[2] py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-cyan-500 to-cyan-600 text-white shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 transition-all cursor-pointer">
                 Export Report ↓
               </button>
             </div>
@@ -622,22 +604,6 @@ export default function PricingsStrategyGenerator() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-gray-100 mt-16 py-8">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-sm text-gray-400">
-            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-teal-500 flex items-center justify-center">
-              <span className="text-white text-[10px] font-extrabold">$</span>
-            </div>
-            © 2025 PricerAI · All rights reserved
-          </div>
-          <div className="flex gap-5 text-sm text-gray-400">
-            {["Privacy", "Terms", "Contact"].map(l => (
-              <a key={l} href="#" className="hover:text-cyan-600 transition-colors">{l}</a>
-            ))}
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

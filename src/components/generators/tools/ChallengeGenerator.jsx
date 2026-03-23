@@ -83,12 +83,12 @@ export default function ChallengeGenerator() {
   const gradient = current ? CAT_COLORS[current.cat] : "from-gray-400 to-gray-500";
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 sm:p-8">
+    <div className="min-h-screen bg-white py-16">
       <div className="max-w-lg mx-auto">
 
         {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
+          <h1 className="text-4xl font-medium tracking-tight text-gray-900">
             🎲 Challenge Spinner
           </h1>
           <p className="text-sm text-gray-500 mt-1">Spin karo, complete karo, mazze karo!</p>
@@ -100,9 +100,9 @@ export default function ChallengeGenerator() {
             <button
               key={cat}
               onClick={() => setActiveCat(cat)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border ${
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border cursor-pointer ${
                 activeCat === cat
-                  ? "bg-gray-900 text-white border-gray-900"
+                  ? "bg-cyan-600 text-white border-cyan-600"
                   : "bg-white text-gray-600 border-gray-200 hover:border-gray-400 hover:text-gray-900"
               }`}
             >
@@ -114,11 +114,11 @@ export default function ChallengeGenerator() {
         {/* Challenge Card */}
         <div
           key={animKey}
-          className="animate-bounce-in bg-white rounded-3xl shadow-lg overflow-hidden mb-4 border border-gray-100"
+          className="animate-bounce-in bg-white rounded-xl shadow-lg overflow-hidden mb-4 border border-gray-100"
           style={{ animation: animKey > 0 ? "popIn 0.4s cubic-bezier(.34,1.56,.64,1)" : "none" }}
         >
           {/* Gradient top bar */}
-          <div className={`h-2 bg-gradient-to-r ${gradient}`} />
+          <div className={`h-1 bg-gradient-to-r ${gradient}`} />
 
           <div className="p-6">
             {current ? (
@@ -153,7 +153,7 @@ export default function ChallengeGenerator() {
         <div className="flex gap-3 mb-6">
           <button
             onClick={spin}
-            className="flex-1 flex items-center justify-center gap-2 bg-gray-900 hover:bg-gray-700 active:scale-95 text-white font-bold py-3.5 rounded-2xl transition-all text-base"
+            className="flex-1 flex items-center justify-center gap-2 bg-cyan-600 hover:bg-cyan-700 active:scale-95 text-white font-bold py-2.5 rounded-xl transition-all text-base cursor-pointer"
           >
             <span className={spinning ? "animate-spin inline-block" : "inline-block"}>⟳</span>
             New Challenge
@@ -161,14 +161,14 @@ export default function ChallengeGenerator() {
           <button
             onClick={markDone}
             disabled={!current}
-            className="px-4 py-3.5 rounded-2xl border border-gray-200 bg-white hover:bg-green-50 hover:border-green-300 hover:text-green-700 font-medium text-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-4 py-2 rounded-xl border border-gray-200 bg-white hover:bg-green-50 hover:border-green-300 hover:text-green-700 font-medium text-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
           >
             ✓ Done
           </button>
           <button
             onClick={skipChallenge}
             disabled={!current}
-            className="px-4 py-3.5 rounded-2xl border border-gray-200 bg-white hover:bg-gray-100 font-medium text-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            className="px-4 py-2 rounded-xl border border-gray-200 bg-white hover:bg-gray-100 font-medium text-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
           >
             Skip →
           </button>
@@ -177,12 +177,12 @@ export default function ChallengeGenerator() {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3 mb-6">
           {[
-            { label: "Spun", value: stats.total, color: "text-gray-800" },
+            { label: "Spin", value: stats.total, color: "text-gray-800" },
             { label: "Completed", value: stats.done, color: "text-green-600" },
             { label: "Skipped", value: stats.skipped, color: "text-gray-500" },
           ].map(({ label, value, color }) => (
-            <div key={label} className="bg-white rounded-2xl p-3 text-center border border-gray-100 shadow-sm">
-              <div className={`text-2xl font-extrabold ${color}`}>{value}</div>
+            <div key={label} className="bg-white rounded-xl p-2 text-center border border-gray-100 shadow-sm">
+              <div className={`text-2xl font-semibold ${color}`}>{value}</div>
               <div className="text-xs text-gray-400 mt-0.5">{label}</div>
             </div>
           ))}

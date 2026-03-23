@@ -127,25 +127,6 @@ export default function MarketingStrategyGenerator() {
         <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-sky-100 rounded-full opacity-30 blur-3xl" />
       </div>
 
-      {/* Navbar */}
-      <nav className="relative z-10 border-b border-cyan-100 bg-white/80 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-teal-500 flex items-center justify-center shadow-sm">
-              <span className="text-white text-sm font-bold">M</span>
-            </div>
-            <span className="font-bold text-gray-900 text-lg tracking-tight">StrategyAI</span>
-          </div>
-          <div className="hidden md:flex items-center gap-8 text-sm text-gray-500">
-            <a href="#" className="hover:text-cyan-600 transition-colors">Features</a>
-            <a href="#" className="hover:text-cyan-600 transition-colors">Pricing</a>
-            <a href="#" className="hover:text-cyan-600 transition-colors">Blog</a>
-          </div>
-          <button className="text-sm bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-5 py-2 rounded-full font-medium hover:shadow-md hover:shadow-cyan-200 transition-all">
-            Get Started Free
-          </button>
-        </div>
-      </nav>
 
       <main className="relative z-10 max-w-4xl mx-auto px-6 py-16">
         {/* Hero */}
@@ -155,13 +136,13 @@ export default function MarketingStrategyGenerator() {
               <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse" />
               AI-Powered Marketing Intelligence
             </div>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4 tracking-tight">
-              Generate Your
-              <span className="block bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent">
+            <h1 className="text-4xl font-semibold text-gray-900 leading-tight mb-2 tracking-tight">
+              Generate Your {""}
+              <span className="text-cyan-600">
                 Marketing Strategy
               </span>
             </h1>
-            <p className="text-lg text-gray-500 max-w-xl mx-auto leading-relaxed">
+            <p className="text-base text-gray-500 max-w-xl mx-auto leading-relaxed">
               Enter your niche and growth goal. Get a complete, actionable marketing plan in seconds — no agency required.
             </p>
           </div>
@@ -169,7 +150,7 @@ export default function MarketingStrategyGenerator() {
 
         {/* Step Indicator */}
         {step < 3 && (
-          <div className="flex items-center justify-center gap-4 mb-10">
+          <div className="flex items-center justify-center gap-4 mb-6">
             {[1, 2].map((s) => (
               <div key={s} className="flex items-center gap-2">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
@@ -188,8 +169,8 @@ export default function MarketingStrategyGenerator() {
 
         {/* Step 1 */}
         {step === 1 && (
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-100 p-8 md:p-10">
-            <h2 className="text-xl font-bold text-gray-900 mb-8">Tell us about your business</h2>
+          <div className="bg-white rounded-xl border border-gray-200 shadow-xl shadow-gray-100 p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-8">Tell us about your business</h2>
 
             {/* Niche */}
             <div className="mb-8">
@@ -241,7 +222,7 @@ export default function MarketingStrategyGenerator() {
             <button
               onClick={() => setStep(2)}
               disabled={!finalNiche || !goal}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold text-base hover:shadow-lg hover:shadow-cyan-200 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-semibold text-base hover:shadow-lg hover:shadow-cyan-200 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
             >
               Continue →
             </button>
@@ -250,7 +231,7 @@ export default function MarketingStrategyGenerator() {
 
         {/* Step 2 */}
         {step === 2 && (
-          <div className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-100 p-8 md:p-10">
+          <div className="bg-white rounded-xl border border-gray-100 shadow-xl shadow-gray-100 p-8 md:p-10">
             <h2 className="text-xl font-bold text-gray-900 mb-8">Refine your strategy</h2>
 
             {/* Audience */}
@@ -317,14 +298,14 @@ export default function MarketingStrategyGenerator() {
             <div className="flex gap-3">
               <button
                 onClick={() => setStep(1)}
-                className="flex-1 py-4 rounded-2xl border border-gray-200 text-gray-600 font-semibold hover:border-gray-300 transition-all"
+                className="flex-1 py-4 rounded-xl border border-gray-200 text-gray-600 font-semibold hover:border-gray-300 transition-all"
               >
                 ← Back
               </button>
               <button
                 onClick={handleGenerate}
                 disabled={!audience || !tone || !budget}
-                className="flex-[3] py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold text-base hover:shadow-lg hover:shadow-cyan-200 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="flex-[3] py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold text-base hover:shadow-lg hover:shadow-cyan-200 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-3">
@@ -346,7 +327,7 @@ export default function MarketingStrategyGenerator() {
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full" />
                 Strategy Generated Successfully
               </div>
-              <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Your Marketing Strategy</h2>
+              <h2 className="text-4xl font-medium text-gray-900 mb-2">Your Marketing Strategy</h2>
               <p className="text-gray-500 text-sm">
                 Tailored for <span className="font-semibold text-cyan-600">{finalNiche}</span> · Goal:{" "}
                 <span className="font-semibold text-cyan-600">{goal}</span>
@@ -375,7 +356,7 @@ export default function MarketingStrategyGenerator() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`whitespace-nowrap px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all ${
+                  className={`whitespace-nowrap px-5 py-2.5 rounded-xl text-sm font-semibold border transition-all cursor-pointer ${
                     activeTab === tab
                       ? "bg-cyan-500 text-white border-cyan-500 shadow-md shadow-cyan-100"
                       : "bg-white text-gray-500 border-gray-200 hover:border-cyan-200 hover:text-cyan-600"
@@ -388,8 +369,8 @@ export default function MarketingStrategyGenerator() {
 
             {/* Active tab content */}
             {result[activeTab] && (
-              <div className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-100 overflow-hidden">
-                <div className={`h-2 w-full bg-gradient-to-r ${result[activeTab].color}`} />
+              <div className="bg-white rounded-xl border border-gray-100 shadow-xl shadow-gray-100 overflow-hidden">
+                <div className={`h-1   w-full bg-gradient-to-r ${result[activeTab].color}`} />
                 <div className="p-8">
                   <div className="flex items-center gap-3 mb-6">
                     <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${result[activeTab].color} flex items-center justify-center text-2xl shadow-md`}>
@@ -403,7 +384,7 @@ export default function MarketingStrategyGenerator() {
 
                   <div className="space-y-4">
                     {result[activeTab].items.map((item, i) => (
-                      <div key={i} className="flex gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-cyan-200 hover:bg-cyan-50/50 transition-all group">
+                      <div key={i} className="flex gap-4 p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-cyan-200 hover:bg-cyan-50/50 transition-all group">
                         <div className="flex-shrink-0 w-7 h-7 rounded-full bg-gradient-to-br from-cyan-400 to-teal-500 text-white text-xs font-bold flex items-center justify-center shadow-sm">
                           {i + 1}
                         </div>
@@ -421,7 +402,7 @@ export default function MarketingStrategyGenerator() {
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className="p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-cyan-200 transition-all text-left group"
+                  className="p-5 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md hover:border-cyan-200 transition-all text-left group cursor-pointer"
                 >
                   <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${result[tab].color} flex items-center justify-center text-lg mb-3 shadow-sm`}>
                     {result[tab].icon}
@@ -436,12 +417,12 @@ export default function MarketingStrategyGenerator() {
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <button
                 onClick={handleReset}
-                className="flex-1 py-4 rounded-2xl border-2 border-cyan-200 text-cyan-700 font-semibold hover:bg-cyan-50 transition-all"
+                className="flex-1 py-4 rounded-xl border-2 border-cyan-200 text-cyan-700 font-semibold hover:bg-cyan-50 transition-all cursor-pointer"
               >
                 ← Generate New Strategy
               </button>
               <button
-                className="flex-1 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-200 transition-all"
+                className="flex-1 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 text-white font-semibold hover:shadow-lg hover:shadow-cyan-200 transition-all cursor-pointer"
               >
                 Export as PDF ↓
               </button>
@@ -450,22 +431,6 @@ export default function MarketingStrategyGenerator() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-gray-100 mt-20 py-8">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm text-gray-400">
-            <div className="w-6 h-6 rounded-md bg-gradient-to-br from-cyan-400 to-teal-500 flex items-center justify-center">
-              <span className="text-white text-xs font-bold">M</span>
-            </div>
-            © 2025 StrategyAI · All rights reserved
-          </div>
-          <div className="flex gap-6 text-sm text-gray-400">
-            <a href="#" className="hover:text-cyan-600 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-cyan-600 transition-colors">Terms</a>
-            <a href="#" className="hover:text-cyan-600 transition-colors">Contact</a>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

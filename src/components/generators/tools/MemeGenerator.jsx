@@ -4,32 +4,32 @@ import { useState, useRef, useEffect, useCallback } from "react";
    TEMPLATES
 ══════════════════════════════════════════ */
 const TEMPLATES = [
-  { id: "classic",    label: "Classic",       emoji: "😂", desc: "Top & bottom text",    layout: "tb",    bg: "#e0f7fa", border: "#06b6d4" },
-  { id: "drake",      label: "Drake",         emoji: "🤨", desc: "Reject / Accept",       layout: "2row",  bg: "#f0fdfa", border: "#0891b2" },
-  { id: "brain",      label: "Brain Expand",  emoji: "🧠", desc: "4 levels of galaxy",    layout: "4row",  bg: "#ecfeff", border: "#22d3ee" },
-  { id: "twobtns",    label: "Two Buttons",   emoji: "😰", desc: "Hard choice panic",     layout: "2col",  bg: "#f0f9ff", border: "#0e7490" },
-  { id: "onedoesnot", label: "One Does Not",  emoji: "🧙", desc: "Simply...",             layout: "tb",    bg: "#e0f2fe", border: "#06b6d4" },
-  { id: "catjudge",   label: "Cat Judge",     emoji: "🐱", desc: "Side-eye moment",       layout: "2col",  bg: "#f0fdfa", border: "#0891b2" },
-  { id: "thisfine",   label: "This Is Fine",  emoji: "🔥", desc: "Everything burning",    layout: "tb",    bg: "#fff7ed", border: "#f97316" },
-  { id: "success",    label: "Success Kid",   emoji: "✊", desc: "Tiny win flex",          layout: "tb",    bg: "#f0fdf4", border: "#22c55e" },
+  { id: "classic", label: "Classic", emoji: "😂", desc: "Top & bottom text", layout: "tb", bg: "#e0f7fa", border: "#06b6d4" },
+  { id: "drake", label: "Drake", emoji: "🤨", desc: "Reject / Accept", layout: "2row", bg: "#f0fdfa", border: "#0891b2" },
+  { id: "brain", label: "Brain Expand", emoji: "🧠", desc: "4 levels of galaxy", layout: "4row", bg: "#ecfeff", border: "#22d3ee" },
+  { id: "twobtns", label: "Two Buttons", emoji: "😰", desc: "Hard choice panic", layout: "2col", bg: "#f0f9ff", border: "#0e7490" },
+  { id: "onedoesnot", label: "One Does Not", emoji: "🧙", desc: "Simply...", layout: "tb", bg: "#e0f2fe", border: "#06b6d4" },
+  { id: "catjudge", label: "Cat Judge", emoji: "🐱", desc: "Side-eye moment", layout: "2col", bg: "#f0fdfa", border: "#0891b2" },
+  { id: "thisfine", label: "This Is Fine", emoji: "🔥", desc: "Everything burning", layout: "tb", bg: "#fff7ed", border: "#f97316" },
+  { id: "success", label: "Success Kid", emoji: "✊", desc: "Tiny win flex", layout: "tb", bg: "#f0fdf4", border: "#22c55e" },
 ];
 
 const CATEGORIES = [
-  { id: "office",    label: "Office Life",    emoji: "💼" },
-  { id: "student",   label: "Student Life",   emoji: "📚" },
-  { id: "monday",    label: "Monday Mood",    emoji: "😩" },
-  { id: "food",      label: "Foodie",         emoji: "🍕" },
-  { id: "tech",      label: "Tech & Code",    emoji: "💻" },
-  { id: "family",    label: "Family Drama",   emoji: "👨‍👩‍👧" },
-  { id: "dating",    label: "Dating Life",    emoji: "💘" },
-  { id: "gym",       label: "Gym Bro",        emoji: "💪" },
-  { id: "desi",      label: "Desi Life",      emoji: "🇮🇳" },
-  { id: "general",   label: "General",        emoji: "😂" },
+  { id: "office", label: "Office Life", emoji: "💼" },
+  { id: "student", label: "Student Life", emoji: "📚" },
+  { id: "monday", label: "Monday Mood", emoji: "😩" },
+  { id: "food", label: "Foodie", emoji: "🍕" },
+  { id: "tech", label: "Tech & Code", emoji: "💻" },
+  { id: "family", label: "Family Drama", emoji: "👨‍👩‍👧" },
+  { id: "dating", label: "Dating Life", emoji: "💘" },
+  { id: "gym", label: "Gym Bro", emoji: "💪" },
+  { id: "desi", label: "Desi Life", emoji: "🇮🇳" },
+  { id: "general", label: "General", emoji: "😂" },
 ];
 
 const LANGUAGES = [
-  { id: "english",  label: "English",  flag: "🇬🇧" },
-  { id: "hinglish", label: "Hinglish", flag: "🇮🇳" },
+  { id: "english", label: "English", flag: "🇬🇧" },
+  { id: "hindi", label: "Hindi", flag: "🇮🇳" },
 ];
 
 /* ══════════════════════════════════════════
@@ -73,7 +73,7 @@ function drawMeme(canvas, tpl, top, bottom, textColor, strokeColor, fontSize) {
   }
 
   // gradient wash
-  const g = ctx.createRadialGradient(W*.5, H*.4, 0, W*.5, H*.5, W*.8);
+  const g = ctx.createRadialGradient(W * .5, H * .4, 0, W * .5, H * .5, W * .8);
   g.addColorStop(0, "rgba(6,182,212,0.09)"); g.addColorStop(1, "rgba(255,255,255,0)");
   ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
@@ -86,66 +86,70 @@ function drawMeme(canvas, tpl, top, bottom, textColor, strokeColor, fontSize) {
     ctx.fillText("🙅", W * 0.3, H * 0.27);
     ctx.fillText("😏", W * 0.72, H * 0.73);
     ctx.save();
-    ctx.strokeStyle = tpl.border + "44"; ctx.lineWidth = 2; ctx.setLineDash([10,6]);
-    ctx.beginPath(); ctx.moveTo(0, H/2); ctx.lineTo(W, H/2); ctx.stroke();
+    ctx.strokeStyle = tpl.border + "44"; ctx.lineWidth = 2; ctx.setLineDash([10, 6]);
+    ctx.beginPath(); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
     ctx.restore();
   } else if (tpl.layout === "4row") {
-    ["🧠","💡","🤯","✨"].forEach((e, i) => ctx.fillText(e, W*0.72, H/4*i + H/8));
+    ["🧠", "💡", "🤯", "✨"].forEach((e, i) => ctx.fillText(e, W * 0.72, H / 4 * i + H / 8));
   } else if (tpl.layout === "2col") {
-    ctx.fillText("😰", W*0.27, H/2); ctx.fillText("🔘", W*0.73, H/2);
+    ctx.fillText("😰", W * 0.27, H / 2); ctx.fillText("🔘", W * 0.73, H / 2);
   } else {
-    ctx.fillText(em, W/2, H*0.42);
+    ctx.fillText(em, W / 2, H * 0.42);
   }
 
   // corner dots
-  [[3,3],[W-14,3],[3,H-14],[W-14,H-14]].forEach(([x,y]) => {
+  [[3, 3], [W - 14, 3], [3, H - 14], [W - 14, H - 14]].forEach(([x, y]) => {
     ctx.fillStyle = tpl.border;
-    ctx.beginPath(); ctx.arc(x+5,y+5,5,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(x + 5, y + 5, 5, 0, Math.PI * 2); ctx.fill();
   });
 
   // border
   ctx.strokeStyle = tpl.border; ctx.lineWidth = 3; ctx.setLineDash([]);
-  ctx.strokeRect(2,2,W-4,H-4);
+  ctx.strokeRect(2, 2, W - 4, H - 4);
 
   // text helper
   const drawT = (text, cx, cy, maxW) => {
     if (!text.trim()) return;
-    const fs = parseInt(fontSize)||42;
+    const fs = parseInt(fontSize) || 42;
     ctx.font = `900 ${fs}px Impact,'Arial Black',sans-serif`;
     ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.lineWidth = 6; ctx.strokeStyle = strokeColor||"#000";
-    ctx.shadowColor="rgba(0,0,0,0.2)"; ctx.shadowBlur=8; ctx.shadowOffsetY=2;
+    ctx.lineWidth = 6; ctx.strokeStyle = strokeColor || "#000";
+    ctx.shadowColor = "rgba(0,0,0,0.2)"; ctx.shadowBlur = 8; ctx.shadowOffsetY = 2;
     ctx.strokeText(text.toUpperCase(), cx, cy, maxW);
-    ctx.fillStyle = textColor||"#fff";
+    ctx.fillStyle = textColor || "#fff";
     ctx.fillText(text.toUpperCase(), cx, cy, maxW);
-    ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+    ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
   };
 
-  const fs = parseInt(fontSize)||42;
+  const fs = parseInt(fontSize) || 42;
   const pad = fs * 0.65;
 
   if (tpl.layout === "2row") {
-    drawT(top,    W*0.3,  pad+fs*0.5, W*0.55);
-    drawT(bottom, W*0.72, H-pad-fs*0.5, W*0.55);
+    drawT(top, W * 0.3, pad + fs * 0.5, W * 0.55);
+    drawT(bottom, W * 0.72, H - pad - fs * 0.5, W * 0.55);
   } else {
-    drawT(top,    W/2, pad+fs*0.5,   W-40);
-    drawT(bottom, W/2, H-pad-fs*0.5, W-40);
+    drawT(top, W / 2, pad + fs * 0.5, W - 40);
+    drawT(bottom, W / 2, H - pad - fs * 0.5, W - 40);
   }
 }
 
 /* ══════════════════════════════════════════
    AI JOKE GENERATOR
 ══════════════════════════════════════════ */
+
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_KEY;
+const GEMINI_API_URL = import.meta.env.VITE_GEMINI_API_URL;
+
 async function generateMemeJoke(category, language, template) {
-  const langInstr = language === "hinglish"
-    ? "Write in Hinglish (mix of Hindi and English, like how young Indians chat on WhatsApp). Use Roman script for Hindi words. Make it very relatable for Indians."
+  const langInstr = language === "hindi"
+    ? "Write in Hindi (mix of Hindi and English, like how young Indians chat on WhatsApp). Use Roman script for Hindi words. Make it very relatable for Indians."
     : "Write in casual, punchy English.";
 
   const layoutInstr = {
-    "tb":    "Setup line (top) and punchline (bottom). Keep each under 8 words.",
-    "2row":  "Line 1: something people REJECT. Line 2: something they PREFER instead. Keep each under 7 words.",
-    "4row":  "4 escalating lines showing galaxy brain thinking. Each line max 6 words. From normal to absurd.",
-    "2col":  "Two contrasting options someone has to choose between. Keep each option under 6 words.",
+    "tb": "Setup line (top) and punchline (bottom). Keep each under 8 words.",
+    "2row": "Line 1: something people REJECT. Line 2: something they PREFER instead. Keep each under 7 words.",
+    "4row": "4 escalating lines showing galaxy brain thinking. Each line max 6 words. From normal to absurd.",
+    "2col": "Two contrasting options someone has to choose between. Keep each option under 6 words.",
   }[template.layout] || "Setup and punchline.";
 
   const prompt = `You are a meme text writer. Generate funny meme text for the "${category}" category.
@@ -163,24 +167,44 @@ CRITICAL RULES:
 - For 4row layout use: {"top":"line1 | line2 | line3 | line4","bottom":""}
 - For 2col use: {"top":"option1","bottom":"option2"}`;
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      messages: [{ role: "user", content: prompt }],
-    }),
-  });
-
-  const data = await res.json();
-  const raw = data.content?.[0]?.text || '{"top":"When you generate memes","bottom":"And they actually slap"}';
-  const clean = raw.replace(/```json|```/g, "").trim();
   try {
-    return JSON.parse(clean);
-  } catch {
-    const match = raw.match(/\{[\s\S]*\}/);
-    return match ? JSON.parse(match[0]) : { top: "Something went wrong", bottom: "Try again lol" };
+    const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: prompt
+          }]
+        }],
+        generationConfig: {
+          temperature: 0.9,
+          topK: 40,
+          topP: 0.95,
+          maxOutputTokens: 1000,
+        }
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Gemini API error:", errorData);
+      throw new Error(`Gemini API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '{"top":"When you generate memes","bottom":"And they actually slap"}';
+    const clean = raw.replace(/```json|```/g, "").trim();
+
+    try {
+      return JSON.parse(clean);
+    } catch {
+      const match = raw.match(/\{[\s\S]*\}/);
+      return match ? JSON.parse(match[0]) : { top: "Something went wrong", bottom: "Try again lol" };
+    }
+  } catch (error) {
+    console.error("Gemini API error:", error);
+    throw new Error("Failed to generate joke with Gemini");
   }
 }
 
@@ -188,21 +212,21 @@ CRITICAL RULES:
    MAIN APP
 ══════════════════════════════════════════ */
 export default function MemeGenerator() {
-  const [template,    setTemplate]    = useState(TEMPLATES[0]);
-  const [category,    setCategory]    = useState(CATEGORIES[0]);
-  const [language,    setLanguage]    = useState(LANGUAGES[0]);
-  const [topText,     setTopText]     = useState("");
-  const [bottomText,  setBottomText]  = useState("");
-  const [fontSize,    setFontSize]    = useState(40);
-  const [textColor,   setTextColor]   = useState("#ffffff");
+  const [template, setTemplate] = useState(TEMPLATES[0]);
+  const [category, setCategory] = useState(CATEGORIES[0]);
+  const [language, setLanguage] = useState(LANGUAGES[0]);
+  const [topText, setTopText] = useState("");
+  const [bottomText, setBottomText] = useState("");
+  const [fontSize, setFontSize] = useState(40);
+  const [textColor, setTextColor] = useState("#ffffff");
   const [strokeColor, setStrokeColor] = useState("#000000");
-  const [generating,  setGenerating]  = useState(false);
+  const [generating, setGenerating] = useState(false);
   const [downloading, setDownloading] = useState(false);
-  const [copied,      setCopied]      = useState(false);
-  const [saved,       setSaved]       = useState(false);
-  const [error,       setError]       = useState("");
-  const [history,     setHistory]     = useState([]);
-  const [activeTab,   setActiveTab]   = useState("generate"); // generate | style | history
+  const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [error, setError] = useState("");
+  const [history, setHistory] = useState([]);
+  const [activeTab, setActiveTab] = useState("generate"); // generate | style | history
   const canvasRef = useRef(null);
 
   const redraw = useCallback(() => {
@@ -228,7 +252,7 @@ export default function MemeGenerator() {
       setTopText(top);
       setBottomText(bottom);
       // save to history
-      setHistory(h => [{ top, bottom, template: template.label, category: category.label, lang: language.label, ts: Date.now() }, ...h.slice(0,9)]);
+      setHistory(h => [{ top, bottom, template: template.label, category: category.label, lang: language.label, ts: Date.now() }, ...h.slice(0, 9)]);
     } catch (e) {
       setError("Couldn't generate. Check your connection and try again!");
     } finally {
@@ -265,7 +289,7 @@ export default function MemeGenerator() {
   };
 
   return (
-    <div className="min-h-screen bg-white" style={{ fontFamily: "'DM Sans','Segoe UI',sans-serif" }}>
+    <div className="min-h-screen bg-white pt-16" style={{ fontFamily: "'DM Sans','Segoe UI',sans-serif" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Bebas+Neue&display=swap');
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
@@ -289,84 +313,62 @@ export default function MemeGenerator() {
 
       {/* BG blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-28 -right-28 w-[460px] h-[460px] rounded-full opacity-[0.14]" style={{ background:"radial-gradient(circle,#06b6d4,transparent 70%)" }} />
-        <div className="absolute top-1/2 -left-20 w-64 h-64 rounded-full opacity-[0.09]" style={{ background:"radial-gradient(circle,#22d3ee,transparent 70%)" }} />
-        <div className="absolute bottom-8 right-1/4 w-72 h-72 rounded-full opacity-[0.07]" style={{ background:"radial-gradient(circle,#0891b2,transparent 70%)" }} />
-        <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage:"radial-gradient(#06b6d4 1px,transparent 1px)", backgroundSize:"28px 28px" }} />
+        <div className="absolute -top-28 -right-28 w-[460px] h-[460px] rounded-full opacity-[0.14]" style={{ background: "radial-gradient(circle,#06b6d4,transparent 70%)" }} />
+        <div className="absolute top-1/2 -left-20 w-64 h-64 rounded-full opacity-[0.09]" style={{ background: "radial-gradient(circle,#22d3ee,transparent 70%)" }} />
+        <div className="absolute bottom-8 right-1/4 w-72 h-72 rounded-full opacity-[0.07]" style={{ background: "radial-gradient(circle,#0891b2,transparent 70%)" }} />
+        <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: "radial-gradient(#06b6d4 1px,transparent 1px)", backgroundSize: "28px 28px" }} />
       </div>
 
-      {/* Navbar */}
-      <nav className="relative z-20 bg-white/90 backdrop-blur-md border-b border-cyan-100 sticky top-0 shadow-sm shadow-cyan-50">
-        <div className="max-w-7xl mx-auto px-6 py-3.5 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400 to-teal-500 flex items-center justify-center shadow-md shadow-cyan-200 text-lg">
-              😂
-            </div>
-            <span style={{ fontFamily:"'Bebas Neue',Impact,sans-serif", letterSpacing:"0.07em", fontSize:"1.5rem" }} className="text-gray-900 font-black">
-              MemeCraft
-            </span>
-            <span className="text-xs font-extrabold bg-gradient-to-r from-cyan-500 to-teal-500 bg-clip-text text-transparent ml-0.5">AI</span>
-          </div>
-          <div className="hidden md:flex items-center gap-1.5 bg-cyan-50 border border-cyan-200 rounded-full px-3 py-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-xs font-bold text-cyan-700">AI Powered · Real Jokes</span>
-          </div>
-          <button className="text-sm font-bold bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-5 py-2.5 rounded-full shadow-md shadow-cyan-200 hover:shadow-lg hover:shadow-cyan-300 transition-all">
-            Sign Up Free
-          </button>
-        </div>
-      </nav>
 
       {/* Hero */}
-      <div className="relative z-10 text-center py-10 px-6">
+      <div className="relative z-10 text-center pb-10 px-6">
         <div className="float inline-block text-5xl mb-3">😂</div>
-        <h1 style={{ fontFamily:"'Bebas Neue',Impact,sans-serif", letterSpacing:"0.05em", fontSize:"clamp(2.8rem,8vw,5.5rem)" }} className="text-gray-900 font-black leading-none mb-2">
-          AI MEME GENERATOR
+        <h1 className="text-gray-900 font-medium leading-none mb-2 text-4xl">
+          AI <span className="text-cyan-600">MEME</span>  GENERATOR
         </h1>
-        <p className="text-gray-400 font-medium text-base max-w-md mx-auto">
+        <p className="text-gray-500 text-base max-w-lg mx-auto">
           Pick a category, language & template — AI generates the joke, you share the laugh!
         </p>
         <div className="flex items-center justify-center gap-2 mt-4">
-          {["🇬🇧 English","🇮🇳 Hinglish","10 Categories","Canvas Export"].map(l => (
+          {["English", "Hindi", "10 Categories", "Canvas Export"].map(l => (
             <span key={l} className="hidden md:inline text-[11px] font-bold text-cyan-600 bg-cyan-50 border border-cyan-100 rounded-full px-3 py-1">{l}</span>
           ))}
         </div>
       </div>
 
-      <main className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pb-20">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 pb-16">
         <div className="grid lg:grid-cols-[1fr_440px] gap-6 items-start">
 
           {/* ── LEFT ── */}
           <div className="space-y-5">
 
             {/* Language + Category row */}
-            <div className="bg-white rounded-3xl border border-gray-100 shadow-lg shadow-gray-50 p-5">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-lg shadow-gray-50 p-5">
               <div className="flex items-center gap-2 mb-5">
-                <div className="w-1 h-5 rounded-full bg-gradient-to-b from-cyan-400 to-teal-500" />
+                <div className="w-1 h-5 rounded-full bg-gradient-to-b from-cyan-400 to-cyan-600" />
                 <h2 className="text-base font-extrabold text-gray-900">Language & Category</h2>
               </div>
 
               {/* Language toggle */}
               <div className="mb-5">
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2.5">Language</label>
-                <div className="flex gap-2 p-1.5 bg-gray-50 rounded-2xl border border-gray-100 w-fit">
+                <label className="text-xs font-medium text-gray-400 uppercase tracking-widest block mb-2.5">Language</label>
+                <div className="flex gap-2 p-1.5 bg-gray-50 rounded-xl border border-gray-100 w-fit">
                   {LANGUAGES.map(l => (
                     <button
                       key={l.id}
                       onClick={() => setLanguage(l)}
-                      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-extrabold transition-all ${
-                        language.id === l.id
-                          ? "bg-gradient-to-r from-cyan-500 to-teal-500 text-white shadow-md shadow-cyan-100"
-                          : "text-gray-500 hover:text-gray-700"
-                      }`}
+                      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-extrabold transition-all cursor-pointer ${language.id === l.id
+                        ? "bg-gradient-to-r from-cyan-500 to-cyan-600 text-white shadow-md shadow-cyan-100"
+                        : "text-gray-500 hover:text-gray-700"
+                        }`}
                     >
-                      <span>{l.flag}</span> {l.label}
+                      {l.label}
                     </button>
                   ))}
                 </div>
-                {language.id === "hinglish" && (
+                {language.id === "hindi" && (
                   <p className="text-xs text-cyan-600 font-medium mt-2 pop">
-                    🇮🇳 Hinglish mode — desi jokes, Roman Hindi, pure dhamaka!
+                    In Hindi mode — desi jokes, Roman Hindi, pure dhamaka!
                   </p>
                 )}
               </div>
@@ -379,11 +381,10 @@ export default function MemeGenerator() {
                     <button
                       key={c.id}
                       onClick={() => setCategory(c)}
-                      className={`p-3 rounded-2xl border-2 text-center transition-all ${
-                        category.id === c.id
-                          ? "border-cyan-400 bg-gradient-to-br from-cyan-50 to-teal-50 shadow-sm shadow-cyan-100"
-                          : "border-gray-100 hover:border-cyan-200 hover:bg-cyan-50/40"
-                      }`}
+                      className={`p-3 rounded-xl border-2 text-center transition-all cursor-pointer ${category.id === c.id
+                        ? "border-cyan-400 bg-gradient-to-br from-cyan-50 to-teal-50 shadow-sm shadow-cyan-100"
+                        : "border-gray-100 hover:border-cyan-200 hover:bg-cyan-50/40"
+                        }`}
                     >
                       <div className="text-xl mb-1">{c.emoji}</div>
                       <div className={`text-[10px] font-extrabold leading-tight ${category.id === c.id ? "text-cyan-700" : "text-gray-500"}`}>{c.label}</div>
@@ -394,7 +395,7 @@ export default function MemeGenerator() {
             </div>
 
             {/* Template */}
-            <div className="bg-white rounded-3xl border border-gray-100 shadow-lg shadow-gray-50 p-5">
+            <div className="bg-white rounded-xl border border-gray-100 shadow-lg shadow-gray-50 p-5">
               <div className="flex items-center gap-2 mb-5">
                 <div className="w-1 h-5 rounded-full bg-gradient-to-b from-cyan-400 to-teal-500" />
                 <h2 className="text-base font-extrabold text-gray-900">Meme Template</h2>
@@ -406,11 +407,10 @@ export default function MemeGenerator() {
                     <button
                       key={t.id}
                       onClick={() => setTemplate(t)}
-                      className={`relative p-4 rounded-2xl border-2 text-center transition-all group ${
-                        active
-                          ? "border-cyan-400 bg-gradient-to-br from-cyan-50 to-teal-50 shadow-md shadow-cyan-100"
-                          : "border-gray-100 hover:border-cyan-200 hover:bg-cyan-50/40"
-                      }`}
+                      className={`relative p-4 rounded-xl border-2 text-center transition-all group cursor-pointer ${active
+                        ? "border-cyan-400 bg-gradient-to-br from-cyan-50 to-teal-50 shadow-md shadow-cyan-100"
+                        : "border-gray-100 hover:border-cyan-200 hover:bg-cyan-50/40"
+                        }`}
                     >
                       <div className="text-2xl mb-1.5">{t.emoji}</div>
                       <div className={`text-xs font-extrabold mb-0.5 ${active ? "text-cyan-700" : "text-gray-700"}`}>{t.label}</div>
@@ -427,17 +427,17 @@ export default function MemeGenerator() {
             </div>
 
             {/* Tabs for text / style / history */}
-            <div className="bg-white rounded-3xl border border-gray-100 shadow-lg shadow-gray-50 overflow-hidden">
+            <div className="bg-white rounded-xl border border-gray-100 shadow-lg shadow-gray-50 overflow-hidden">
               <div className="flex border-b border-gray-100">
                 {[
-                  { id:"generate", label:"✏️ Text" },
-                  { id:"style",    label:"🎨 Style" },
-                  { id:"history",  label:`🕐 History ${history.length > 0 ? `(${history.length})` : ""}` },
+                  { id: "generate", label: "✏️ Text" },
+                  { id: "style", label: "🎨 Style" },
+                  { id: "history", label: `🕐 History ${history.length > 0 ? `(${history.length})` : ""}` },
                 ].map(tab => (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex-1 py-3.5 text-sm font-extrabold transition-all ${activeTab === tab.id ? "tab-active text-cyan-600 bg-cyan-50/50" : "text-gray-400 hover:text-gray-600"}`}
+                    className={`flex-1 py-3.5 text-sm font-extrabold transition-all cursor-pointer ${activeTab === tab.id ? "tab-active text-cyan-600 bg-cyan-50/50" : "text-gray-400 hover:text-gray-600"}`}
                   >
                     {tab.label}
                   </button>
@@ -452,7 +452,7 @@ export default function MemeGenerator() {
                     <input
                       type="text" value={topText} onChange={e => setTopText(e.target.value)}
                       placeholder="Setup / first line..."
-                      className="w-full border-2 border-gray-200 focus:border-cyan-400 rounded-2xl px-4 py-3.5 text-gray-800 font-bold text-sm focus:outline-none placeholder-gray-300 transition-colors"
+                      className="w-full border-2 border-gray-200 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-gray-800 font-bold text-sm focus:outline-none placeholder-gray-300 transition-colors"
                     />
                   </div>
                   <div>
@@ -460,12 +460,12 @@ export default function MemeGenerator() {
                     <input
                       type="text" value={bottomText} onChange={e => setBottomText(e.target.value)}
                       placeholder="Punchline / reaction..."
-                      className="w-full border-2 border-gray-200 focus:border-cyan-400 rounded-2xl px-4 py-3.5 text-gray-800 font-bold text-sm focus:outline-none placeholder-gray-300 transition-colors"
+                      className="w-full border-2 border-gray-200 focus:border-cyan-400 rounded-xl px-4 py-3.5 text-gray-800 font-bold text-sm focus:outline-none placeholder-gray-300 transition-colors"
                     />
                   </div>
 
                   {error && (
-                    <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-2xl px-4 py-3 text-sm text-red-600 font-semibold">
+                    <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-600 font-semibold">
                       <span>⚠️</span> {error}
                     </div>
                   )}
@@ -474,19 +474,17 @@ export default function MemeGenerator() {
                   <button
                     onClick={handleGenerate}
                     disabled={generating}
-                    className="w-full py-5 rounded-2xl font-black text-white transition-all shimmer-btn shadow-xl shadow-cyan-200 hover:shadow-2xl hover:shadow-cyan-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
-                    style={{ fontFamily:"'Bebas Neue',Impact,sans-serif", letterSpacing:"0.12em", fontSize:"1.3rem" }}
+                    className="w-full py-2.5 rounded-xl text-white transition-all shimmer-btn shadow-xl shadow-cyan-200 hover:shadow-2xl hover:shadow-cyan-300 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 cursor-pointer"
+
                   >
                     {generating ? (
                       <span className="flex items-center justify-center gap-3">
-                        <span className="w-5 h-5 border-3 border-white border-t-transparent rounded-full" style={{ animation:"spin-slow 0.8s linear infinite", borderWidth:"3px" }} />
+                        <span className="w-5 h-5 border-3 border-white border-t-transparent rounded-full" style={{ animation: "spin-slow 0.8s linear infinite", borderWidth: "3px" }} />
                         Generating Joke...
                       </span>
-                    ) : `✨ AI Generate ${language.flag} Joke`}
+                    ) : `✨ AI Generate Joke`}
                   </button>
-                  <p className="text-center text-xs text-gray-400 font-medium">
-                    Powered by Claude AI · {category.emoji} {category.label} · {language.flag} {language.label}
-                  </p>
+
                 </div>
               )}
 
@@ -498,21 +496,21 @@ export default function MemeGenerator() {
                       <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">Font Size</label>
                       <span className="text-sm font-extrabold text-cyan-600">{fontSize}px</span>
                     </div>
-                    <input type="range" min="20" max="72" value={fontSize} onChange={e=>setFontSize(e.target.value)} className="w-full h-2 rounded-full" />
+                    <input type="range" min="20" max="72" value={fontSize} onChange={e => setFontSize(e.target.value)} className="w-full h-2 rounded-full" />
                     <div className="flex justify-between text-[10px] text-gray-300 font-bold mt-1"><span>Tiny</span><span>Big</span></div>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">Text Color</label>
-                      <div className="flex items-center gap-2 border-2 border-gray-200 hover:border-cyan-300 rounded-2xl px-3 py-2.5 transition-colors">
-                        <input type="color" value={textColor} onChange={e=>setTextColor(e.target.value)} className="w-8 h-7 cursor-pointer border-0 bg-transparent p-0 rounded" />
+                      <div className="flex items-center gap-2 border-2 border-gray-200 hover:border-cyan-300 rounded-xl px-3 py-2.5 transition-colors">
+                        <input type="color" value={textColor} onChange={e => setTextColor(e.target.value)} className="w-8 h-7 cursor-pointer border-0 bg-transparent p-0 rounded" />
                         <span className="text-xs font-mono text-gray-400 font-bold">{textColor}</span>
                       </div>
                     </div>
                     <div>
                       <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-2">Outline</label>
-                      <div className="flex items-center gap-2 border-2 border-gray-200 hover:border-cyan-300 rounded-2xl px-3 py-2.5 transition-colors">
-                        <input type="color" value={strokeColor} onChange={e=>setStrokeColor(e.target.value)} className="w-8 h-7 cursor-pointer border-0 bg-transparent p-0 rounded" />
+                      <div className="flex items-center gap-2 border-2 border-gray-200 hover:border-cyan-300 rounded-xl px-3 py-2.5 transition-colors">
+                        <input type="color" value={strokeColor} onChange={e => setStrokeColor(e.target.value)} className="w-8 h-7 cursor-pointer border-0 bg-transparent p-0 rounded" />
                         <span className="text-xs font-mono text-gray-400 font-bold">{strokeColor}</span>
                       </div>
                     </div>
@@ -521,20 +519,20 @@ export default function MemeGenerator() {
                     <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-3">Quick Presets</label>
                     <div className="grid grid-cols-2 gap-2">
                       {[
-                        { label:"Classic White", t:"#ffffff", s:"#000000" },
-                        { label:"Cyan Glow",     t:"#22d3ee", s:"#0c4a6e" },
-                        { label:"Bold Black",    t:"#111827", s:"#ffffff" },
-                        { label:"Gold Impact",   t:"#fbbf24", s:"#1c1917" },
-                        { label:"Neon Teal",     t:"#14b8a6", s:"#ffffff" },
-                        { label:"Hot Pink",      t:"#ec4899", s:"#000000" },
+                        { label: "Classic White", t: "#ffffff", s: "#000000" },
+                        { label: "Cyan Glow", t: "#22d3ee", s: "#0c4a6e" },
+                        { label: "Bold Black", t: "#111827", s: "#ffffff" },
+                        { label: "Gold Impact", t: "#fbbf24", s: "#1c1917" },
+                        { label: "Neon Teal", t: "#14b8a6", s: "#ffffff" },
+                        { label: "Hot Pink", t: "#ec4899", s: "#000000" },
                       ].map(p => {
-                        const active = textColor===p.t && strokeColor===p.s;
+                        const active = textColor === p.t && strokeColor === p.s;
                         return (
-                          <button key={p.label} onClick={()=>{setTextColor(p.t);setStrokeColor(p.s);}}
-                            className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border-2 text-xs font-bold transition-all ${active?"border-cyan-400 bg-cyan-50 text-cyan-700":"border-gray-100 text-gray-500 hover:border-cyan-200"}`}>
+                          <button key={p.label} onClick={() => { setTextColor(p.t); setStrokeColor(p.s); }}
+                            className={`flex items-center gap-2 px-3 py-2.5 rounded-lg border-2 text-xs font-bold transition-all cursor-pointer ${active ? "border-cyan-400 bg-cyan-50 text-cyan-700" : "border-gray-100 text-gray-500 hover:border-cyan-200"}`}>
                             <span className="flex gap-1">
-                              <span className="w-4 h-4 rounded-full border border-gray-200 flex-shrink-0" style={{background:p.t}} />
-                              <span className="w-4 h-4 rounded-full border border-gray-200 flex-shrink-0" style={{background:p.s}} />
+                              <span className="w-4 h-4 rounded-full border border-gray-200 flex-shrink-0" style={{ background: p.t }} />
+                              <span className="w-4 h-4 rounded-full border border-gray-200 flex-shrink-0" style={{ background: p.s }} />
                             </span>
                             {p.label}
                           </button>
@@ -557,11 +555,11 @@ export default function MemeGenerator() {
                     <div className="space-y-3">
                       {history.map((item, i) => (
                         <div key={item.ts}
-                          className="flex items-start gap-3 p-4 rounded-2xl border border-gray-100 hover:border-cyan-200 hover:bg-cyan-50/30 cursor-pointer transition-all group"
+                          className="flex items-start gap-3 p-4 rounded-xl border border-gray-100 hover:border-cyan-200 hover:bg-cyan-50/30 cursor-pointer transition-all group"
                           onClick={() => loadFromHistory(item)}
                         >
                           <div className="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-600 flex items-center justify-center text-sm font-extrabold flex-shrink-0">
-                            {i+1}
+                            {i + 1}
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-bold text-gray-800 truncate">{item.top}</div>
@@ -585,7 +583,7 @@ export default function MemeGenerator() {
           <div className="lg:sticky lg:top-24 space-y-4">
 
             {/* Canvas card */}
-            <div className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-100/60 p-5">
+            <div className="bg-white rounded-xl border border-gray-200 shadow-xl shadow-gray-100/60 p-5">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-cyan-300" />
@@ -599,11 +597,11 @@ export default function MemeGenerator() {
                 </div>
               </div>
 
-              <div className="relative rounded-2xl overflow-hidden canvas-glow">
+              <div className="relative rounded-xl overflow-hidden canvas-glow">
                 <canvas ref={canvasRef} width={420} height={420} className="w-full block rounded-2xl" />
                 {generating && (
                   <div className="absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl">
-                    <div className="text-5xl mb-4" style={{ animation:"spin-slow 1s linear infinite" }}>✨</div>
+                    <div className="text-5xl mb-4" style={{ animation: "spin-slow 1s linear infinite" }}>✨</div>
                     <p className="text-cyan-700 font-extrabold text-lg">Generating joke...</p>
                     <p className="text-gray-400 text-sm mt-1">{language.flag} {category.emoji} {category.label}</p>
                   </div>
@@ -611,7 +609,7 @@ export default function MemeGenerator() {
               </div>
 
               {/* Template + lang info */}
-              <div className="mt-4 flex items-center gap-3 bg-gradient-to-r from-cyan-50 to-teal-50 border border-cyan-100 rounded-2xl px-4 py-3">
+              <div className="mt-4 flex items-center gap-3 bg-gradient-to-r from-cyan-50 to-teal-50 border border-cyan-100 rounded-xl px-4 py-3">
                 <span className="text-2xl">{template.emoji}</span>
                 <div className="flex-1 min-w-0">
                   <div className="text-sm font-extrabold text-gray-800">{template.label}</div>
@@ -626,24 +624,24 @@ export default function MemeGenerator() {
             {/* Copy + Download */}
             <div className="grid grid-cols-2 gap-3">
               <button onClick={handleCopy}
-                className={`py-4 rounded-2xl border-2 text-sm font-extrabold transition-all ${copied?"border-teal-400 bg-teal-50 text-teal-700 shadow-md shadow-teal-100":"border-cyan-200 text-cyan-700 hover:bg-cyan-50 hover:border-cyan-400"}`}>
+                className={`py-4 rounded-xl border-2 text-sm font-extrabold transition-all cursor-pointer ${copied ? "border-teal-400 bg-teal-50 text-teal-700 shadow-md shadow-teal-100" : "border-cyan-200 text-cyan-700 hover:bg-cyan-50 hover:border-cyan-400"}`}>
                 {copied ? "✓ Copied!" : "📋 Copy Image"}
               </button>
               <button onClick={handleDownload} disabled={downloading}
-                className="py-4 rounded-2xl border-2 border-cyan-200 text-cyan-700 font-extrabold text-sm hover:bg-cyan-50 hover:border-cyan-400 transition-all disabled:opacity-50">
+                className="py-4 rounded-xl border-2 border-cyan-200 text-cyan-700 font-extrabold text-sm hover:bg-cyan-50 hover:border-cyan-400 transition-all disabled:opacity-50 cursor-pointer">
                 {downloading ? "Saving…" : "💾 Download PNG"}
               </button>
             </div>
 
             {/* Main generate (shortcut from right panel too) */}
             <button onClick={handleGenerate} disabled={generating}
-              className="w-full py-4 rounded-2xl font-black text-white shimmer-btn shadow-xl shadow-cyan-200 hover:shadow-2xl hover:shadow-cyan-300 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
-              style={{ fontFamily:"'Bebas Neue',Impact,sans-serif", letterSpacing:"0.1em", fontSize:"1.15rem" }}>
-              {generating ? "🔄 Generating..." : `✨ Generate ${language.flag} Meme Joke`}
+              className="w-full py-4 rounded-xl font-black text-white shimmer-btn shadow-xl shadow-cyan-200 hover:shadow-2xl hover:shadow-cyan-300 hover:scale-[1.01] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 cursor-pointer"
+            >
+              {generating ? "🔄 Generating..." : `✨ Generate Meme Joke`}
             </button>
 
             {saved && (
-              <div className="pop flex items-center gap-2 justify-center py-3 rounded-2xl bg-teal-50 border border-teal-200 text-teal-700 text-sm font-bold">
+              <div className="pop flex items-center gap-2 justify-center py-3 rounded-xl bg-teal-50 border border-teal-200 text-teal-700 text-sm font-bold">
                 <span className="w-5 h-5 rounded-full bg-teal-500 text-white flex items-center justify-center text-xs">✓</span>
                 Meme downloaded!
               </div>
@@ -652,11 +650,11 @@ export default function MemeGenerator() {
             {/* Funny stats */}
             <div className="grid grid-cols-3 gap-2.5">
               {[
-                { e:"😂", label:"Funny", val:`${Math.floor(Math.random()*20)+80}%` },
-                { e:"🔥", label:"Viral",  val:`${Math.floor(Math.random()*30)+65}%` },
-                { e:"🎯", label:"Relatable", val:`${Math.floor(Math.random()*20)+78}%` },
+                { e: "😂", label: "Funny", val: `${Math.floor(Math.random() * 20) + 80}%` },
+                { e: "🔥", label: "Viral", val: `${Math.floor(Math.random() * 30) + 65}%` },
+                { e: "🎯", label: "Relatable", val: `${Math.floor(Math.random() * 20) + 78}%` },
               ].map(s => (
-                <div key={s.label} className="bg-gradient-to-br from-cyan-50 to-teal-50 border border-cyan-100 rounded-2xl p-3 text-center">
+                <div key={s.label} className="bg-gradient-to-br from-cyan-50 to-teal-50 border border-cyan-100 rounded-xl p-3 text-center">
                   <div className="text-xl mb-1">{s.e}</div>
                   <div className="text-base font-extrabold text-cyan-700">{s.val}</div>
                   <div className="text-[9px] font-bold text-gray-400 uppercase tracking-wide">{s.label}</div>
@@ -668,37 +666,12 @@ export default function MemeGenerator() {
             <div className="flex gap-3 bg-cyan-50 border border-cyan-100 rounded-2xl p-4">
               <span className="text-xl flex-shrink-0">💡</span>
               <p className="text-xs text-gray-500 font-medium leading-relaxed">
-                <span className="font-extrabold text-cyan-700">Pro tip:</span> Switch to <strong>Hinglish</strong> for desi dhamaka jokes — perfect for WhatsApp & Instagram reels!
+                <span className="font-extrabold text-cyan-700">Pro tip:</span> Switch to <strong>Hindi</strong> for desi dhamaka jokes — perfect for WhatsApp & Instagram reels!
               </p>
             </div>
           </div>
         </div>
       </main>
-
-      {/* Ticker */}
-      <div className="relative z-10 border-t border-b border-cyan-100 bg-cyan-50/60 py-3 overflow-hidden">
-        <div className="flex gap-10 whitespace-nowrap" style={{ animation:"marquee 24s linear infinite" }}>
-          {Array(6).fill(null).map((_, i) => (
-            <span key={i} className="text-xs font-extrabold text-cyan-400 tracking-wide">
-              😂 AI GENERATES REAL JOKES &nbsp;·&nbsp; 🇮🇳 HINGLISH SUPPORT &nbsp;·&nbsp; 🎨 10 CATEGORIES &nbsp;·&nbsp; 💾 DOWNLOAD PNG FREE &nbsp;·&nbsp; 🔥 SHARE & GO VIRAL &nbsp;·&nbsp;
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <footer className="relative z-10 border-t border-gray-100 py-7 bg-white">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-sm font-semibold text-gray-400">
-            <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-teal-500 flex items-center justify-center text-sm">😂</div>
-            © 2025 MemeCraft AI · Built for the internet generation
-          </div>
-          <div className="flex gap-5 text-sm font-semibold text-gray-400">
-            {["Privacy","Terms","Contact"].map(l => (
-              <a key={l} href="#" className="hover:text-cyan-600 transition-colors">{l}</a>
-            ))}
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

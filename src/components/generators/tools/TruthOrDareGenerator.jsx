@@ -168,7 +168,7 @@ export default function TruthOrDare() {
   const topPlayer = Object.entries(scores).sort((a, b) => b[1] - a[1])[0];
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white" style={{ fontFamily: "'Trebuchet MS', sans-serif" }}>
+    <div className=" text-black py-16" style={{ fontFamily: "'Trebuchet MS', sans-serif" }}>
 
       {/* Animated bg dots */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
@@ -198,17 +198,19 @@ export default function TruthOrDare() {
         .shake { animation: shake 0.3s ease-in-out 3; }
       `}</style>
 
-      <div className="relative max-w-sm mx-auto px-4 py-8 min-h-screen flex flex-col">
+      <div className="relative max-w-sm mx-auto px-4 py-8 flex flex-col">
 
         {/* ── SETUP SCREEN ── */}
         {screen === "setup" && (
-          <div className="flex-1 flex flex-col slide-up">
+          <div className="  ">
             <div className="text-center mb-8">
               <div className="text-5xl mb-3">🎭</div>
-              <h1 className="text-4xl font-black tracking-tight bg-gradient-to-r from-violet-400 to-pink-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-black tracking-tight bg-gradient-to-r from-cyan-400 to-cyan-700 bg-clip-text text-transparent">
                 Truth or Dare
               </h1>
-              <p className="text-zinc-500 text-sm mt-1">Party ka asli maza shuru karo</p>
+              <p className="text-zinc-500 text-sm mt-1">
+                Start the real fun of the party
+              </p>
             </div>
 
             {/* Players */}
@@ -223,7 +225,7 @@ export default function TruthOrDare() {
                     <input
                       value={p}
                       onChange={(e) => updatePlayer(i, e.target.value)}
-                      placeholder={`Player ${i + 1} ka naam`}
+                      placeholder={`Player ${i + 1} name`}
                       maxLength={20}
                       className="flex-1 bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white outline-none focus:border-violet-500 placeholder-zinc-600 transition-colors"
                     />
@@ -242,17 +244,16 @@ export default function TruthOrDare() {
 
             {/* Level */}
             <div className="mb-8">
-              <label className="text-xs tracking-[2px] text-zinc-500 mb-3 block">LEVEL CHOOSE KARO</label>
+              <label className="text-xs tracking-[2px] text-zinc-500 mb-3 block">CHOOSE LEVEL</label>
               <div className="grid grid-cols-3 gap-2">
                 {LEVELS.map((l) => (
                   <button
                     key={l.id}
                     onClick={() => setLevel(l.id)}
-                    className={`py-3 rounded-xl border text-center transition-all ${
-                      level === l.id
+                    className={`py-3 rounded-xl border text-center transition-all ${level === l.id
                         ? `${l.border} bg-zinc-900 ${l.text}`
                         : "border-zinc-800 text-zinc-500 hover:border-zinc-600"
-                    }`}
+                      }`}
                   >
                     <div className="text-lg mb-1">{l.emoji}</div>
                     <div className="text-xs tracking-wide font-medium">{l.label}</div>
@@ -264,16 +265,16 @@ export default function TruthOrDare() {
             <button
               onClick={startGame}
               disabled={players.filter((p) => p.trim()).length < 2}
-              className="w-full py-4 rounded-2xl font-black text-base tracking-wide bg-gradient-to-r from-violet-600 to-pink-600 hover:from-violet-500 hover:to-pink-500 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 transition-all"
+              className="w-full py-4 rounded-2xl font-black text-base tracking-wide bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-=cyan-500 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95 transition-all cursor-pointer"
             >
-              GAME SHURU KARO 🎮
+              START GAME 🎮
             </button>
           </div>
         )}
 
         {/* ── GAME SCREEN ── */}
         {screen === "game" && (
-          <div className="flex-1 flex flex-col slide-up">
+          <div className="">
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
               <button onClick={() => setScreen("setup")} className="text-zinc-500 hover:text-white text-sm transition-colors">← Back</button>
@@ -284,7 +285,7 @@ export default function TruthOrDare() {
             </div>
 
             {/* Scoreboard */}
-            <div className="bg-zinc-900 rounded-2xl p-3 mb-6 border border-zinc-800">
+            <div className="bg-zinc-900 rounded-xl p-3  border border-zinc-800">
               <div className="text-xs tracking-[2px] text-zinc-500 mb-2">SCOREBOARD</div>
               <div className="flex gap-2 flex-wrap">
                 {players.map((p, i) => (
@@ -299,18 +300,18 @@ export default function TruthOrDare() {
             </div>
 
             {/* Current player */}
-            <div className="flex-1 flex flex-col items-center justify-center text-center">
+            <div className="mt-5 flex flex-col items-center justify-center text-center">
               <div className={`w-24 h-24 rounded-full ${playerColor} flex items-center justify-center text-4xl font-black text-white mb-4 shadow-lg`}
                 style={{ boxShadow: `0 0 40px ${playerColor.includes("violet") ? "#7c3aed" : "#ec4899"}40` }}>
                 {currentName[0]?.toUpperCase()}
               </div>
               <h2 className="text-3xl font-black mb-1">{currentName}</h2>
-              <p className="text-zinc-500 text-sm mb-10">ki baari hai! Choose karo:</p>
+              <p className="text-zinc-500 text-sm mb-10">Turn, Please choose</p>
 
               <div className="flex gap-4 w-full">
                 <button
                   onClick={() => pickCard("truth")}
-                  className="flex-1 py-6 rounded-2xl border-2 border-sky-500 bg-sky-950 hover:bg-sky-900 active:scale-95 transition-all text-center"
+                  className="flex-1 py-6 rounded-xl border-2 border-sky-500 bg-sky-950 hover:bg-sky-900 active:scale-95 transition-all text-center"
                 >
                   <div className="text-3xl mb-2">🤔</div>
                   <div className="text-lg font-black text-sky-400">TRUTH</div>
@@ -331,7 +332,7 @@ export default function TruthOrDare() {
 
         {/* ── CARD SCREEN ── */}
         {screen === "card" && card && (
-          <div key={animKey} className="flex-1 flex flex-col flip-in">
+          <div key={animKey} className="flex flex-col flip-in">
             <div className="flex items-center justify-between mb-6">
               <button onClick={() => setScreen("game")} className="text-zinc-500 hover:text-white text-sm transition-colors">← Back</button>
               <div className={`text-sm font-bold px-3 py-1 rounded-full ${choice === "truth" ? "bg-sky-950 text-sky-400 border border-sky-500" : "bg-orange-950 text-orange-400 border border-orange-500"}`}>
@@ -341,11 +342,10 @@ export default function TruthOrDare() {
             </div>
 
             <div className="flex-1 flex flex-col justify-center">
-              <div className={`rounded-3xl p-8 border-2 text-center mb-6 ${
-                choice === "truth"
+              <div className={`rounded-xl p-8 border-2 text-center mb-6 ${choice === "truth"
                   ? "bg-sky-950 border-sky-500"
                   : "bg-orange-950 border-orange-500"
-              }`}>
+                }`}>
                 <div className="text-5xl mb-6">{choice === "truth" ? "🤔" : "😈"}</div>
                 <p className="text-xl font-bold leading-relaxed text-white">{card.text}</p>
               </div>
@@ -353,16 +353,16 @@ export default function TruthOrDare() {
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={() => completeChallenge(true)}
-                  className="py-4 rounded-2xl bg-emerald-900 border border-emerald-500 text-emerald-400 font-bold text-sm hover:bg-emerald-800 active:scale-95 transition-all"
+                  className="py-4 rounded-xl bg-emerald-900 border border-emerald-500 text-emerald-400 font-bold text-sm hover:bg-emerald-800 active:scale-95 transition-all cursor-pointer"
                 >
-                  ✓ Completed!<br/>
+                  ✓ Completed!<br />
                   <span className="text-xs font-normal opacity-70">+1 point</span>
                 </button>
                 <button
                   onClick={() => completeChallenge(false)}
-                  className="py-4 rounded-2xl bg-red-950 border border-red-700 text-red-400 font-bold text-sm hover:bg-red-900 active:scale-95 transition-all"
+                  className="py-4 rounded-2xl bg-red-950 border border-red-700 text-red-400 font-bold text-sm hover:bg-red-900 active:scale-95 transition-all cursor-pointer"
                 >
-                  ✗ Skip<br/>
+                  ✗ Skip<br />
                   <span className="text-xs font-normal opacity-70">0 points</span>
                 </button>
               </div>
@@ -390,7 +390,7 @@ export default function TruthOrDare() {
             {skipped && <div className="mb-6" />}
 
             {/* Updated scores */}
-            <div className="w-full bg-zinc-900 rounded-2xl p-4 border border-zinc-800 mb-8">
+            <div className="w-full bg-zinc-900 rounded-xl p-4 border border-zinc-800 mb-8">
               <div className="text-xs tracking-[2px] text-zinc-500 mb-3">SCORES</div>
               {Object.entries(scores)
                 .sort((a, b) => b[1] - a[1])
@@ -409,7 +409,7 @@ export default function TruthOrDare() {
 
             <button
               onClick={nextPlayer}
-              className="w-full py-4 rounded-2xl font-black text-base tracking-wide bg-gradient-to-r from-violet-600 to-pink-600 hover:from-violet-500 hover:to-pink-500 active:scale-95 transition-all"
+              className="w-full py-4 rounded-xl font-black text-base tracking-wide bg-gradient-to-r from-cyan-600 to-cyan-500 hover:from-cyan-500 hover:to-cyan-600 active:scale-95 transition-all cursor-pointer text-white"
             >
               NEXT PLAYER →
             </button>

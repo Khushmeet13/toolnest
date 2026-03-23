@@ -191,7 +191,7 @@ export default function EmojiMovieGuess() {
 
   return (
     <div
-      className="min-h-screen bg-gray-950 text-white"
+      className="bg-white text-black py-16"
       style={{ fontFamily: "'Trebuchet MS', sans-serif" }}
     >
       <style>{`
@@ -207,21 +207,21 @@ export default function EmojiMovieGuess() {
         .timer-pulse { animation: timerPulse 0.8s ease-in-out infinite; }
       `}</style>
 
-      <div className="max-w-sm mx-auto px-4 py-8 min-h-screen flex flex-col">
+      <div className="max-w-sm mx-auto px-4  flex flex-col">
 
         {/* ── HOME SCREEN ── */}
         {screen === "home" && (
           <div className="flex-1 flex flex-col slide-up">
             <div className="text-center mb-10">
-              <div className="text-6xl mb-4 pop-in">🎬</div>
-              <h1 className="text-4xl font-black tracking-tight bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-400 bg-clip-text text-transparent">
+              <div className="text-4xl mb-4 pop-in">🎬</div>
+              <h1 className="text-4xl font-black tracking-tight text-cyan-600 ">
                 Emoji Movie
               </h1>
-              <h2 className="text-2xl font-black text-white mb-2">Guess Game</h2>
+              <h2 className="text-2xl font-black text-black mb-2">Guess Game</h2>
               <p className="text-gray-500 text-sm">Emojis dekho, movie pehchano!</p>
             </div>
 
-            <div className="bg-gray-900 rounded-2xl p-5 border border-gray-800 mb-4">
+            <div className="bg-gray-900 rounded-xl p-5 border border-gray-800 mb-4">
               <div className="text-xs tracking-[2px] text-gray-500 mb-3">CATEGORY</div>
               <div className="flex gap-2">
                 {CATEGORIES.map((c) => (
@@ -230,7 +230,7 @@ export default function EmojiMovieGuess() {
                     onClick={() => setCategory(c)}
                     className={`flex-1 py-2.5 rounded-xl border text-sm font-medium transition-all ${
                       category === c
-                        ? "bg-yellow-500 border-yellow-500 text-gray-900"
+                        ? "bg-cyan-600 border-cyan-600 text-gray-900"
                         : "border-gray-700 text-gray-400 hover:border-gray-500 hover:text-white"
                     }`}
                   >
@@ -240,7 +240,7 @@ export default function EmojiMovieGuess() {
               </div>
             </div>
 
-            <div className="bg-gray-900 rounded-2xl p-5 border border-gray-800 mb-6">
+            <div className="bg-gray-900 rounded-xl p-5 border border-gray-800 mb-6">
               <div className="text-xs tracking-[2px] text-gray-500 mb-3">DIFFICULTY</div>
               <div className="flex gap-2">
                 {DIFFICULTIES.map((d) => {
@@ -272,7 +272,7 @@ export default function EmojiMovieGuess() {
                 { label: "Time", val: `${timeLimit}s` },
               ].map(({ label, val }) => (
                 <div key={label} className="bg-gray-900 border border-gray-800 rounded-xl p-3 text-center">
-                  <div className="text-xl font-black text-yellow-400">{val}</div>
+                  <div className="text-xl font-black text-cyan-600">{val}</div>
                   <div className="text-xs text-gray-500 mt-0.5">{label}</div>
                 </div>
               ))}
@@ -280,7 +280,7 @@ export default function EmojiMovieGuess() {
 
             <button
               onClick={startGame}
-              className="w-full py-4 rounded-2xl font-black text-base tracking-wide bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 hover:from-yellow-400 hover:to-pink-400 active:scale-95 transition-all text-gray-900"
+              className="w-full py-4 rounded-2xl font-black text-base tracking-wide bg-gradient-to-r from-cyan-600 via-cyan-500 to-cyan-500 hover:from-cyan-400 hover:to-cyan-600 active:scale-95 transition-all text-white cursor-pointer"
             >
               GAME SHURU KARO 🎬
             </button>
@@ -347,7 +347,7 @@ export default function EmojiMovieGuess() {
 
             {/* Emoji Card */}
             <div key={animKey} className="pop-in">
-              <div className="bg-gray-900 border border-gray-700 rounded-3xl p-6 text-center mb-4">
+              <div className="bg-gray-900 border border-gray-700 rounded-xl p-6 text-center mb-4">
                 <div className="text-xs tracking-[2px] text-gray-500 mb-4">YE MOVIE KAUN SI HAI?</div>
                 <div className="text-6xl leading-tight tracking-widest mb-4 select-none">
                   {movie.emojis}
@@ -405,7 +405,7 @@ export default function EmojiMovieGuess() {
               {revealed && (
                 <button
                   onClick={nextQuestion}
-                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 text-gray-900 font-black text-sm hover:from-yellow-400 hover:to-orange-400 active:scale-95 transition-all"
+                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-cyan-600 text-gray-900 font-black text-sm hover:from-cyan-600 hover:to-cyan-500 active:scale-95 transition-all cursor-pointer"
                 >
                   {current + 1 >= queue.length ? "RESULTS DEKHO →" : "NEXT →"}
                 </button>
@@ -478,13 +478,13 @@ export default function EmojiMovieGuess() {
             <div className="flex gap-3">
               <button
                 onClick={() => setScreen("home")}
-                className="flex-1 py-3.5 rounded-2xl border border-gray-700 text-gray-400 font-medium text-sm hover:border-gray-500 hover:text-white active:scale-95 transition-all"
+                className="flex-1 py-2.5 rounded-xl border border-gray-700 text-gray-400 font-medium text-sm hover:border-gray-500 hover:text-black active:scale-95 transition-all cursor-pointer"
               >
                 ← Home
               </button>
               <button
                 onClick={startGame}
-                className="flex-1 py-3.5 rounded-2xl font-black text-sm bg-gradient-to-r from-yellow-500 to-orange-500 text-gray-900 hover:from-yellow-400 hover:to-orange-400 active:scale-95 transition-all"
+                className="flex-1 py-2.5 rounded-xl font-black text-sm bg-gradient-to-r from-cyan-500 to-cyan-500 text-gray-900 hover:from-cyan-400 hover:to-cyan-600 active:scale-95 transition-all cursor-pointer"
               >
                 PHIR KHELO 🎬
               </button>
