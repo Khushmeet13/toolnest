@@ -112,7 +112,7 @@ export default function Navbar() {
             </NavLink>
           </div>
 
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <button className="bg-cyan-600 px-4 py-1.5 rounded-lg hover:bg-cyan-600 cursor-pointer text-white">
               Login
             </button>
@@ -120,7 +120,7 @@ export default function Navbar() {
             <button className="border border-cyan-600 px-4 py-1.5 rounded-lg cursor-pointer text-cyan-600">
               Signup
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Mobile Menu Button */}
@@ -150,13 +150,13 @@ export default function Navbar() {
           <a href="#" className="block">Image Tools</a>
           <a href="#" className="block">Dev Tools</a>
 
-          <button className="w-full bg-cyan-500 py-2 rounded-lg">
+          {/* <button className="w-full bg-cyan-500 py-2 rounded-lg">
             Login
           </button>
 
           <button className="w-full border border-cyan-500 py-2 rounded-lg">
             Signup
-          </button>
+          </button> */}
         </div>
       )}
     </nav>
