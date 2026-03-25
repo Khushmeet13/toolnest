@@ -3,14 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import generators from "../../data/generatorTools";
 import { ArrowRight, ArrowUp, ArrowUpIcon, ChevronRightIcon } from "lucide-react";
 import ToolInterface from "./tools/AITextToolInterface";
-import {
-    BoltIcon,
-    SparklesIcon,
-    ShieldCheckIcon,
-    CpuChipIcon,
-    GlobeAltIcon,
-    AdjustmentsHorizontalIcon
-} from "@heroicons/react/24/outline";
 import HowItWorks from "./HowItWorks";
 import FeatureSection from "./FeatureSection";
 import ExampleSection from "./ExampleSection";

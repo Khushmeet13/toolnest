@@ -17,6 +17,7 @@ import Changelog from "./pages/Changelog";
 import Roadmap from "./pages/Roadmap";
 import FAQPage from "./pages/FAQPage";
 import GeneratorSinglePage from "./components/generators/GeneratorSinglePage";
+import ConverterSinglePage from "./components/converters/ConverterSinglePage";
 
 export default function App() {
   return (
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="/faq" element={<FAQPage />} />
 
           <Route path="/generators/:slug" element={<GeneratorSinglePage />} />
+          <Route path="/converters/:slug" element={<ConverterSinglePage />} />
 
 
           {/* <Route path="/contact" element={<Contact />} /> */}

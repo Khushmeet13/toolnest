@@ -2,12 +2,21 @@ import { motion } from "framer-motion";
 import { ArrowUpRightIcon } from "@heroicons/react/20/solid";
 import converters from "../../data/converterTools";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ToolsSection({ activeTab }) {
+    const navigate = useNavigate();
     const filteredTools =
         activeTab === "All"
             ? converters
             : converters.filter((tool) => tool.category === activeTab);
+
+    const createSlug = (title) => {
+        return title
+            .toLowerCase()
+            .replace(/\s+/g, "-") 
+            .replace(/[^\w-]+/g, "");
+    };
 
     return (
         <section className="relative py-16 bg-white text-black overflow-hidden">
@@ -30,6 +39,7 @@ export default function ToolsSection({ activeTab }) {
                     {filteredTools.map((tool, index) => (
                         <div
                             key={tool.id}
+                           onClick={() => navigate(`/converters/${createSlug(tool.title)}`)}
                             className={`group relative rounded-lg p-[1px] bg-gradient-to-br from-cyan-500/40 via-indigo-500/30 to-pink-500/40 hover:from-cyan-500 hover:to-cyan-500 transition duration-500 cursor-pointer ${index % 5 === 0 ? "lg:col-span-2" : ""
                                 }`}
                         >
