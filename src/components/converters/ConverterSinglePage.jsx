@@ -18,14 +18,8 @@ import {
 
 const slugify = (text) => text.toLowerCase().replace(/\s+/g, "-");
 
-// ─── Placeholder tool components by slug ──────────────────────────────────────
-// Replace these with your actual tool components
-const toolComponents = {
-  // "length-converter": LengthConverter,
-  // etc.
-};
+const toolComponents = {};
 
-// ─── Static content helpers ────────────────────────────────────────────────────
 const getFeatures = (tool) => [
   {
     icon: Zap,
@@ -50,26 +44,10 @@ const getFeatures = (tool) => [
 ];
 
 const getSteps = (tool) => [
-  {
-    num: "01",
-    title: "Enter your value",
-    desc: `Type or paste the value you want to convert into the input field.`,
-  },
-  {
-    num: "02",
-    title: "Select units",
-    desc: "Choose your source and target units from the dropdown menus.",
-  },
-  {
-    num: "03",
-    title: "Get results instantly",
-    desc: "Results appear in real time as you type — no button needed.",
-  },
-  {
-    num: "04",
-    title: "Copy & use",
-    desc: "One-click copy to clipboard. Paste it wherever you need.",
-  },
+  { num: "01", title: "Enter your value", desc: "Type or paste the value you want to convert into the input field." },
+  { num: "02", title: "Select units", desc: "Choose your source and target units from the dropdown menus." },
+  { num: "03", title: "Get results instantly", desc: "Results appear in real time as you type — no button needed." },
+  { num: "04", title: "Copy & use", desc: "One-click copy to clipboard. Paste it wherever you need." },
 ];
 
 const getExamples = (category) => {
@@ -121,7 +99,7 @@ const getExamples = (category) => {
 const getFaqs = (tool) => [
   {
     q: `Is the ${tool.title} free to use?`,
-    a: `Yes, completely free. No account, no subscription, no hidden charges. Just open and use.`,
+    a: "Yes, completely free. No account, no subscription, no hidden charges. Just open and use.",
   },
   {
     q: "Is my data safe?",
@@ -141,16 +119,209 @@ const getFaqs = (tool) => [
   },
 ];
 
-// ─── Sub-components ────────────────────────────────────────────────────────────
+// ─── Inline styles ─────────────────────────────────────────────────────────────
+const injectStyles = () => {
+  const id = "csp-styles";
+  if (document.getElementById(id)) return;
+  const el = document.createElement("style");
+  el.id = id;
+  el.textContent = `
+  
 
-function StatPill({ value, label }) {
-  return (
-    <div className="flex flex-col items-center px-6 py-3 rounded-2xl bg-white/60 dark:bg-white/5 backdrop-blur border border-gray-100 dark:border-white/10">
-      <span className="text-2xl font-bold text-cyan-600 dark:text-cyan-400">{value}</span>
-      <span className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{label}</span>
-    </div>
-  );
-}
+   
+    @keyframes csp-float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-12px) rotate(1deg); }
+      66% { transform: translateY(-6px) rotate(-1deg); }
+    }
+    @keyframes csp-pulse-ring {
+      0% { transform: scale(1); opacity: 0.4; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+    @keyframes csp-shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes csp-ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes csp-fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes csp-spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .csp-float { animation: csp-float 6s ease-in-out infinite; }
+    .csp-float-delay { animation: csp-float 8s ease-in-out 1.5s infinite; }
+    .csp-fade-up { animation: csp-fade-up 0.6s ease forwards; }
+    .csp-spin-slow { animation: csp-spin-slow 20s linear infinite; }
+
+    .csp-shimmer-text {
+      background: linear-gradient(90deg, #0891b2 0%, #22d3ee 40%, #67e8f9 50%, #22d3ee 60%, #0891b2 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: csp-shimmer 3s linear infinite;
+    }
+
+    .csp-ticker-track { display: flex; animation: csp-ticker 60s linear infinite; width: max-content; }
+
+    .csp-card-hover {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .csp-card-hover:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
+
+    .csp-feature-card {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+    }
+    .csp-feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 1px;
+      background: linear-gradient(135deg, transparent, rgba(8,145,178,0.3), transparent);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .csp-feature-card:hover::before { opacity: 1; }
+    .csp-feature-card:hover { transform: translateY(-6px); }
+
+    .csp-step-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 4rem;
+      line-height: 1;
+      -webkit-text-stroke: 1px rgba(8,145,178,0.3);
+      color: transparent;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+    }
+
+    .csp-glass {
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .dark .csp-glass {
+      background: rgba(17,24,39,0.7);
+    }
+
+    .csp-tool-panel {
+      background: linear-gradient(135deg, rgba(8,145,178,0.03) 0%, rgba(255,255,255,1) 60%);
+    }
+    .dark .csp-tool-panel {
+      background: linear-gradient(135deg, rgba(8,145,178,0.08) 0%, rgba(17,24,39,1) 60%);
+    }
+
+    .csp-input {
+      transition: all 0.25s ease;
+      border: 1.5px solid rgba(0,0,0,0.08);
+    }
+    .dark .csp-input { border-color: rgba(255,255,255,0.08); }
+    .csp-input:focus {
+      border-color: #0891b2;
+      box-shadow: 0 0 0 4px rgba(8,145,178,0.12);
+      outline: none;
+    }
+
+    .csp-btn-primary {
+      background: linear-gradient(135deg, #0891b2, #0e7490);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 20px rgba(8,145,178,0.35);
+    }
+    .csp-btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 30px rgba(8,145,178,0.45);
+    }
+    .csp-btn-primary:active { transform: translateY(0) scale(0.99); }
+
+    .csp-stat-box { transition: all 0.3s ease; }
+    .csp-stat-box:hover { background: rgba(8,145,178,0.08); }
+
+    .csp-orbit {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(8,145,178,0.2);
+    }
+
+    .csp-example-card {
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .csp-example-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(8,145,178,0.12);
+    }
+
+    .csp-faq-item {
+      transition: background 0.2s ease;
+      border-radius: 12px;
+    }
+    .csp-faq-item:hover { background: rgba(8,145,178,0.03); }
+
+    .csp-related-card {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .csp-related-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(8,145,178,0.1);
+    }
+
+    .csp-noise {
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .csp-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, rgba(8,145,178,0.1), rgba(14,116,144,0.15));
+      border: 1px solid rgba(8,145,178,0.2);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #0891b2;
+    }
+    .dark .csp-hero-badge { color: #22d3ee; border-color: rgba(34,211,238,0.2); background: rgba(8,145,178,0.15); }
+
+    .csp-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(8,145,178,0.3), transparent);
+    }
+
+    .csp-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: rgba(8,145,178,0.08);
+      color: #0891b2;
+      border: 1px solid rgba(8,145,178,0.15);
+    }
+    .dark .csp-tag { color: #67e8f9; background: rgba(8,145,178,0.15); border-color: rgba(8,145,178,0.25); }
+  `;
+  document.head.appendChild(el);
+};
+
+// ─── Sub-components ────────────────────────────────────────────────────────────
 
 function CopyButton({ text }) {
   const [copied, setCopied] = useState(false);
@@ -162,9 +333,14 @@ function CopyButton({ text }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-white/10 hover:bg-cyan-50 dark:hover:bg-cyan-500/20 text-gray-500 dark:text-gray-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all duration-200"
+      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200"
+      style={{
+        background: copied ? "rgba(8,145,178,0.12)" : "rgba(0,0,0,0.04)",
+        color: copied ? "#0891b2" : "#9ca3af",
+        border: `1px solid ${copied ? "rgba(8,145,178,0.25)" : "rgba(0,0,0,0.06)"}`,
+      }}
     >
-      {copied ? <Check size={13} /> : <Copy size={13} />}
+      {copied ? <Check size={12} /> : <Copy size={12} />}
       {copied ? "Copied!" : "Copy"}
     </button>
   );
@@ -173,21 +349,22 @@ function CopyButton({ text }) {
 function FAQItem({ q, a, index }) {
   const [open, setOpen] = useState(index === 0);
   return (
-    <div className="border-b border-gray-100 dark:border-white/10 last:border-0">
+    <div className="csp-faq-item px-4 py-1 mb-1">
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between gap-4 py-5 text-left"
       >
-        <span className={`text-sm font-medium transition-colors ${open ? "text-cyan-600 dark:text-cyan-400" : "text-gray-800 dark:text-gray-200"}`}>
+        <span className={`text-sm font-semibold transition-colors ${open ? "text-cyan-600 dark:text-cyan-400" : "text-gray-800 dark:text-gray-200"}`}
+          style={{ fontFamily: "'Syne', sans-serif" }}
+        >
           {q}
         </span>
-        <ChevronDown
-          size={16}
-          className={`flex-shrink-0 text-gray-400 transition-transform duration-300 ${open ? "rotate-180 text-cyan-500" : ""}`}
-        />
+        <div className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center transition-all duration-300 ${open ? "bg-cyan-500 text-white rotate-180" : "bg-gray-100 dark:bg-white/8 text-gray-400"}`}>
+          <ChevronDown size={13} />
+        </div>
       </button>
       {open && (
-        <p className="text-sm text-gray-500 dark:text-gray-400 pb-5 leading-relaxed pr-8">
+        <p className="text-sm text-gray-500 dark:text-gray-400 pb-5 leading-relaxed pr-10">
           {a}
         </p>
       )}
@@ -195,23 +372,38 @@ function FAQItem({ q, a, index }) {
   );
 }
 
+function TickerBar() {
+  const items = ["Free forever", "No signup", "100% private", "Instant results", "Mobile ready", "Works offline", "Open source", "Zero latency"];
+  const doubled = [...items, ...items];
+  return (
+    <div className="overflow-hidden py-3" style={{ background: "linear-gradient(90deg, rgba(8,145,178,0.06), rgba(14,116,144,0.08))", borderTop: "1px solid rgba(8,145,178,0.1)", borderBottom: "1px solid rgba(8,145,178,0.1)" }}>
+      <div className="csp-ticker-track">
+        {doubled.map((item, i) => (
+          <span key={i} className="flex items-center gap-3 mx-6 text-xs font-semibold text-cyan-700 dark:text-cyan-400 whitespace-nowrap uppercase tracking-widest">
+            <span className="w-1 h-1 rounded-full bg-cyan-400 flex-shrink-0" />
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Component ────────────────────────────────────────────────────────────
 export default function ConverterSinglePage() {
+  injectStyles();
   const { slug } = useParams();
   const ToolComponent = toolComponents[slug];
-
   const tool = converters.find((t) => slugify(t.title) === slug);
 
   if (!tool) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-center px-6">
+      <div className="csp-root min-h-screen flex items-center justify-center text-center px-6">
         <div>
           <div className="text-6xl mb-4">🔍</div>
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">Tool not found</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2" style={{ fontFamily: "'Syne', sans-serif" }}>Tool not found</h2>
           <p className="text-gray-500 dark:text-gray-400 mb-6">We couldn't find a tool matching this URL.</p>
-          <Link to="/converters" className="text-cyan-600 hover:underline font-medium">
-            ← Browse all converters
-          </Link>
+          <Link to="/converters" className="text-cyan-600 hover:underline font-medium">← Browse all converters</Link>
         </div>
       </div>
     );
@@ -221,223 +413,210 @@ export default function ConverterSinglePage() {
   const steps = getSteps(tool);
   const examples = getExamples(tool.category);
   const faqs = getFaqs(tool);
-  const relatedTools = converters
-    .filter((t) => t.category === tool.category && t.id !== tool.id)
-    .slice(0, 4);
-
+  const relatedTools = converters.filter((t) => t.category === tool.category && t.id !== tool.id).slice(0, 4);
   const titleWords = tool.title.split(" ");
   const lastWord = titleWords[titleWords.length - 1];
   const titleWithoutLast = titleWords.slice(0, -1).join(" ");
 
   return (
-    <div className="bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
+    <div className="csp-root bg-white dark:bg-gray-950 text-gray-900 dark:text-white" >
 
-      {/* ═══════════════════════════════════════════════
-          HERO / HEADER SECTION
-      ═══════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-gray-50 via-white to-white dark:from-gray-900 dark:via-gray-950 dark:to-gray-950 pt-12 pb-20">
+      {/* ═══ HERO ═══ */}
+      <section className="relative overflow-hidden py-20" style={{ background: "linear-gradient(160deg, #f0f9ff 0%, #e0f2fe 30%, #ffffff 70%)" }}>
+        {/* Noise overlay */}
+        <div className="csp-noise absolute inset-0 pointer-events-none" />
 
-        {/* Grid texture */}
-        <div
-          className="absolute inset-0 -z-10 opacity-40 dark:opacity-20"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right,rgba(8,145,178,0.08) 1px,transparent 1px),linear-gradient(to bottom,rgba(8,145,178,0.08) 1px,transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-        />
+        {/* Decorative orbits */}
+        <div className="csp-orbit csp-spin-slow" style={{ width: 500, height: 500, top: -200, right: -150, opacity: 0.4 }} />
+        <div className="csp-orbit" style={{ width: 300, height: 300, top: -80, right: -50, opacity: 0.3, animationDirection: "reverse" }} />
 
-        {/* Glow blob */}
-        <div className="absolute -top-32 right-1/4 -z-10 w-[600px] h-[400px] bg-cyan-400/10 dark:bg-cyan-500/10 blur-[100px] rounded-full" />
-        <div className="absolute top-10 left-1/4 -z-10 w-[300px] h-[300px] bg-blue-400/10 dark:bg-blue-500/8 blur-[80px] rounded-full" />
+        {/* Glow blobs */}
+        <div className="absolute top-0 right-0 w-[700px] h-[500px] pointer-events-none" style={{ background: "radial-gradient(ellipse at top right, rgba(8,145,178,0.12) 0%, transparent 70%)" }} />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] pointer-events-none" style={{ background: "radial-gradient(ellipse at bottom left, rgba(14,116,144,0.08) 0%, transparent 70%)" }} />
 
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-1.5 text-sm text-gray-400 dark:text-gray-500 mb-10">
-            <Link to="/" className="hover:text-cyan-600 transition-colors">Home</Link>
-            <ChevronRightIcon className="w-3.5 h-3.5" />
-            <Link to="/converters" className="hover:text-cyan-600 transition-colors">Converters</Link>
-            <ChevronRightIcon className="w-3.5 h-3.5" />
-            <span className="text-cyan-600 dark:text-cyan-400">{tool.title}</span>
-          </nav>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-
-            {/* Left: Text content */}
+          <div className="grid lg:grid-cols-[1fr_420px] gap-16 items-center">
+            {/* Left */}
             <div>
-              {/* Category pill */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 border border-cyan-100 dark:border-cyan-500/20 mb-6">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
+              {/* Breadcrumb */}
+              <div className="mb-4 flex items-center text-sm text-gray-500 dark:text-gray-400">
+                <Link to="/" className="hover:text-cyan-600">Home</Link>
+
+                <ChevronRightIcon className="w-4 h-4 mx-1" />
+
+                <Link to="/generators" className="hover:text-cyan-600">Generators</Link>
+
+                <ChevronRightIcon className="w-4 h-4 mx-1" />
+
+                <span className="text-cyan-600 dark:text-gray-200">{tool.title}</span>
+              </div>
+              <div className="csp-hero-badge mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse inline-block" />
                 {tool.category} · Free Tool
               </div>
 
-              {/* Title */}
-              <h1 className="text-4xl md:text-5xl font-semibold leading-[1.15] tracking-tight">
+              <h1 className="text-4xl md:text-5xl font-semibold leading-[1.15] tracking-tight mb-2" >
                 {titleWithoutLast}{" "}
-                <span className="relative inline-block text-cyan-600 dark:text-cyan-400">
-                  {lastWord}
-                  <svg className="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 200 6" preserveAspectRatio="none">
-                    <path d="M0 5 Q50 0 100 4 Q150 8 200 3" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.4" />
-                  </svg>
-                </span>
+                <span class="relative inline-block text-cyan-600 dark:text-cyan-400">{lastWord}<svg class="absolute -bottom-1 left-0 w-full" height="6" viewBox="0 0 200 6" preserveAspectRatio="none"><path d="M0 5 Q50 0 100 4 Q150 8 200 3" fill="none" stroke="currentColor" stroke-width="2" opacity="0.4"></path></svg></span>
               </h1>
 
-              {/* Description */}
-              <p className="mt-5 text-base text-gray-500 dark:text-gray-400 leading-relaxed max-w-md">
+              <p className="text-base text-gray-500 leading-relaxed max-w-lg mb-8" style={{ fontWeight: 300 }}>
                 {tool.description} Fast, free, and works right in your browser — no signup needed.
               </p>
 
-              {/* CTA row */}
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <a
-                  href="#tool"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold transition-all duration-200 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:-translate-y-0.5"
-                >
+              {/* CTA */}
+              <div className="flex flex-wrap items-center gap-3 mb-6">
+                <a href="#tool" className="inline-flex items-center gap-2 rounded-lg bg-cyan-600 px-4 py-2.5 text-sm font-semibold text-white shadow hover:bg-cyan-700 transition">
                   <ArrowRightLeft size={15} />
                   Start Converting
                 </a>
-                <a
-                  href="#how-it-works"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-gray-200 dark:border-white/10 text-sm text-gray-600 dark:text-gray-300 hover:border-cyan-300 dark:hover:border-cyan-500/40 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all duration-200"
-                >
+                <a href="#how-it-works" className="inline-flex items-center gap-2 rounded-lg border border-cyan-600 px-4 py-2.5 text-sm font-semibold text-cyan-600 shadow  transition">
                   How it works
                   <ArrowRight size={13} />
                 </a>
               </div>
 
-              {/* Quick-nav links */}
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+              {/* Nav pills */}
+              <div className="flex flex-wrap gap-2">
                 {["Features", "How it works", "Examples", "FAQ"].map((label) => (
-                  <a
-                    key={label}
-                    href={`#${label.toLowerCase().replace(/\s+/g, "-")}`}
-                    className="text-xs text-gray-400 dark:text-gray-500 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
-                  >
-                    {label} ↓
+                  <a key={label} href={`#${label.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="text-xs font-semibold px-3 py-1.5 rounded-lg text-gray-400 hover:text-cyan-600 transition-all duration-200 border border-gray-300 hover:border-cyan-600"
+                   >
+                    {label}
                   </a>
                 ))}
               </div>
             </div>
 
-            {/* Right: Stats card */}
-            <div className="hidden lg:flex flex-col gap-4 items-end">
-              <div className="w-full max-w-sm bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-white/10 p-6 shadow-xl shadow-gray-100/60 dark:shadow-none">
+            {/* Right: floating card */}
+            <div className="hidden lg:block relative">
+              {/* Floating decorative element */}
+              <div className="csp-float absolute z-10 -top-6 -right-4 w-12 h-12 rounded-xl flex items-center justify-center text-3xl shadow-xl"
+                style={{ background: "linear-gradient(135deg, #cffafe, #a5f3fc)", border: "1px solid rgba(8,145,178,0.2)" }}>
+                ⚡
+              </div>
+              <div className="csp-float-delay absolute z-10 -bottom-4 -left-7 w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-lg"
+                style={{ background: "linear-gradient(135deg, #e0f2fe, #bae6fd)", border: "1px solid rgba(8,145,178,0.15)" }}>
+                🔄
+              </div>
 
-                {/* Decorative header bar */}
-                <div className="flex items-center gap-2 mb-5">
-                  <div className="w-3 h-3 rounded-full bg-red-400" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                  <div className="w-3 h-3 rounded-full bg-green-400" />
-                  <div className="ml-auto text-xs text-gray-300 dark:text-gray-600 font-mono">
-                    {tool.title.toLowerCase().replace(/\s/g, "_")}.js
+              <div className="csp-glass rounded-3xl overflow-hidden shadow-2xl" style={{ border: "1px solid rgba(8,145,178,0.15)" }}>
+                {/* Code header */}
+                <div className="px-5 py-4 flex items-center gap-2" style={{ background: "rgba(8,145,178,0.06)", borderBottom: "1px solid rgba(8,145,178,0.1)" }}>
+                  <div className="flex gap-1.5">
+                    {["#fc5c65", "#fed330", "#26de81"].map((c) => <div key={c} className="w-3 h-3 rounded-full" style={{ background: c }} />)}
                   </div>
+                  <span className="ml-auto text-xs text-gray-400 font-mono">{tool.title.toLowerCase().replace(/\s/g, "_")}.js</span>
                 </div>
 
-                {/* Fake code preview */}
-                <div className="font-mono text-xs space-y-1.5 text-gray-400 dark:text-gray-500">
-                  <div><span className="text-purple-400">const</span> <span className="text-cyan-500">result</span> = convert(</div>
-                  <div className="pl-4 text-amber-400">"<span className="text-green-400">input value</span>",</div>
-                  <div className="pl-4 text-amber-400">"<span className="text-green-400">from_unit</span>",</div>
-                  <div className="pl-4 text-amber-400">"<span className="text-green-400">to_unit</span>"</div>
+                {/* Code body */}
+                <div className="p-6 font-mono text-xs space-y-1.5 text-gray-400">
+                  <div><span style={{ color: "#c084fc" }}>const</span> <span style={{ color: "#22d3ee" }}>result</span> = convert(</div>
+                  <div className="pl-5" style={{ color: "#fbbf24" }}>"<span style={{ color: "#4ade80" }}>input value</span>",</div>
+                  <div className="pl-5" style={{ color: "#fbbf24" }}>"<span style={{ color: "#4ade80" }}>from_unit</span>",</div>
+                  <div className="pl-5" style={{ color: "#fbbf24" }}>"<span style={{ color: "#4ade80" }}>to_unit</span>"</div>
                   <div>);</div>
-                  <div className="pt-1 text-gray-300 dark:text-gray-600">// ✓ Result: <span className="text-cyan-400">42.0</span></div>
+                  <div className="pt-2 text-gray-400">{"// ✓ Result: "}<span style={{ color: "#22d3ee" }}>42.00</span></div>
                 </div>
 
-                {/* Stats row */}
-                <div className="mt-6 pt-5 border-t border-gray-100 dark:border-white/10 grid grid-cols-3 gap-3 text-center">
-                  {[
-                    { v: "100%", l: "Free" },
-                    { v: "0ms", l: "Latency" },
-                    { v: "∞", l: "Uses" },
-                  ].map(({ v, l }) => (
-                    <div key={l}>
-                      <div className="text-lg font-bold text-gray-800 dark:text-white">{v}</div>
-                      <div className="text-xs text-gray-400 dark:text-gray-500">{l}</div>
+                {/* Stats */}
+                <div className="grid grid-cols-3 divide-x" style={{ borderTop: "1px solid rgba(8,145,178,0.1)", divideBorderColor: "rgba(8,145,178,0.1)" }}>
+                  {[{ v: "100%", l: "Free" }, { v: "0ms", l: "Latency" }, { v: "∞", l: "Uses" }].map(({ v, l }) => (
+                    <div key={l} className="csp-stat-box py-5 text-center" style={{ borderRight: "1px solid rgba(8,145,178,0.1)" }}>
+                      <div className="text-lg font-bold text-gray-800" style={{ fontFamily: "'Syne', sans-serif" }}>{v}</div>
+                      <div className="text-xs text-gray-400 mt-0.5">{l}</div>
                     </div>
                   ))}
                 </div>
-              </div>
 
-              {/* Trust row */}
-              <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
-                <div className="flex -space-x-1">
-                  {["bg-cyan-400", "bg-blue-400", "bg-purple-400", "bg-pink-400"].map((c, i) => (
-                    <div key={i} className={`w-5 h-5 rounded-full ${c} border-2 border-white dark:border-gray-950`} />
-                  ))}
-                </div>
-                <span>Trusted by 50,000+ users</span>
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={10} className="fill-amber-400 text-amber-400" />
-                  ))}
+                {/* Trust row */}
+                <div className="px-5 py-4 flex items-center gap-3" style={{ background: "rgba(8,145,178,0.04)", borderTop: "1px solid rgba(8,145,178,0.08)" }}>
+                  <div className="flex -space-x-2">
+                    {["#22d3ee", "#60a5fa", "#a78bfa", "#f472b6"].map((c, i) => (
+                      <div key={i} className="w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold text-white" style={{ background: c }}>
+                        {String.fromCharCode(65 + i)}
+                      </div>
+                    ))}
+                  </div>
+                  <span className="text-xs text-gray-500 flex-1">50,000+ users</span>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => <Star key={i} size={10} style={{ fill: "#fbbf24", color: "#fbbf24" }} />)}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none" style={{ background: "linear-gradient(to bottom, transparent, white)" }} />
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          TOOL SECTION
-      ═══════════════════════════════════════════════ */}
-      <section id="tool" className="py-16 bg-gray-50 dark:bg-gray-900/50 border-y border-gray-100 dark:border-white/5">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{tool.title}</h2>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Results update as you type</p>
+      {/* ═══ TICKER ═══ */}
+      <TickerBar />
+
+      {/* ═══ TOOL SECTION ═══ */}
+      <section id="tool" className="py-20 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)" }}>
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(rgba(8,145,178,0.05) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 relative">
+          <div className="text-center mb-12">
+            <p className="csp-tag mb-3 inline-block">Converter</p>
+            <h2 className="text-3xl font-bold text-gray-900 mt-3" style={{ fontFamily: "'Syne', sans-serif" }}>{tool.title}</h2>
+            <p className="text-sm text-gray-400 mt-2">Results update as you type · No data stored</p>
           </div>
 
           {ToolComponent ? (
             <ToolComponent />
           ) : (
-            /* Generic fallback converter UI */
-            <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-white/10 shadow-sm overflow-hidden">
-              <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-100 dark:divide-white/10">
-
-                {/* Input panel */}
-                <div className="p-6">
-                  <label className="block text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
-                    From
-                  </label>
-                  <select className="w-full mb-4 px-3 py-2 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+            <div className="csp-tool-panel rounded-3xl overflow-hidden shadow-xl" style={{ border: "1px solid rgba(8,145,178,0.12)" }}>
+              <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x" style={{ borderColor: "rgba(8,145,178,0.1)" }}>
+                {/* Input */}
+                <div className="p-8">
+                  <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">From</label>
+                  <select className="csp-input w-full mb-5 px-4 py-3 rounded-xl bg-gray-50 text-sm text-gray-700 font-medium appearance-none cursor-pointer">
                     <option>Select unit</option>
                   </select>
                   <textarea
-                    rows={4}
+                    rows={5}
                     placeholder="Enter value to convert..."
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-sm text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none"
+                    className="csp-input w-full px-4 py-4 rounded-xl bg-gray-50 text-sm text-gray-800 placeholder-gray-300 resize-none"
+                    style={{ fontFamily: "'DM Sans', sans-serif" }}
                   />
                 </div>
 
-                {/* Output panel */}
-                <div className="p-6 relative">
-                  <div className="flex items-center justify-between mb-3">
-                    <label className="block text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
-                      To
-                    </label>
+                {/* Output */}
+                <div className="p-8 relative">
+                  <div className="flex items-center justify-between mb-4">
+                    <label className="block text-xs font-bold text-gray-400 uppercase tracking-widest">To</label>
                     <CopyButton text="result" />
                   </div>
-                  <select className="w-full mb-4 px-3 py-2 rounded-lg border border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-white/5 text-sm text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                  <select className="csp-input w-full mb-5 px-4 py-3 rounded-xl bg-gray-50 text-sm text-gray-700 font-medium appearance-none cursor-pointer">
                     <option>Select unit</option>
                   </select>
-                  <div className="w-full h-[104px] px-4 py-3 rounded-xl border border-dashed border-cyan-200 dark:border-cyan-500/20 bg-cyan-50/50 dark:bg-cyan-500/5 text-sm text-gray-400 dark:text-gray-500 flex items-center justify-center">
-                    Result will appear here
+                  <div className="w-full rounded-xl px-4 py-5 flex flex-col items-center justify-center gap-2 min-h-[130px]"
+                    style={{ background: "linear-gradient(135deg, rgba(8,145,178,0.06), rgba(14,116,144,0.04))", border: "1.5px dashed rgba(8,145,178,0.25)" }}>
+                    <ArrowRightLeft size={20} className="text-cyan-300" />
+                    <p className="text-sm text-gray-400">Result will appear here</p>
                   </div>
 
-                  {/* Swap button */}
-                  <button className="absolute top-1/2 -left-5 -translate-y-1/2 w-10 h-10 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-white/10 flex items-center justify-center shadow-md hover:shadow-lg hover:border-cyan-300 dark:hover:border-cyan-500/40 text-gray-400 hover:text-cyan-600 transition-all duration-200">
-                    <ArrowRightLeft size={14} />
+                  {/* Swap */}
+                  <button className="absolute top-1/2 -left-6 -translate-y-1/2 w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-lg hover:shadow-xl text-gray-400 hover:text-cyan-600 hover:scale-110 transition-all duration-300"
+                    style={{ border: "1.5px solid rgba(8,145,178,0.15)" }}>
+                    <ArrowRightLeft size={15} />
                   </button>
                 </div>
               </div>
 
               {/* Action bar */}
-              <div className="px-6 py-4 border-t border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-white/3 flex items-center justify-between gap-4">
-                <p className="text-xs text-gray-400 dark:text-gray-500">
-                  <span className="text-green-500">●</span> Live conversion · No data stored
-                </p>
-                <button className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-700 text-white text-sm font-semibold transition-all duration-200">
+              <div className="px-8 py-5 flex items-center justify-between gap-4" style={{ background: "rgba(8,145,178,0.04)", borderTop: "1px solid rgba(8,145,178,0.1)" }}>
+                <div className="flex items-center gap-2 text-xs text-gray-400">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Live conversion · 100% client-side
+                </div>
+                <button className="csp-btn-primary inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-white text-sm font-bold">
                   <ArrowRightLeft size={13} />
                   Convert
                 </button>
@@ -447,140 +626,129 @@ export default function ConverterSinglePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          FEATURES SECTION
-      ═══════════════════════════════════════════════ */}
-      <section id="features" className="py-20 bg-white dark:bg-gray-950">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-
-          <div className="max-w-xl mb-14">
-            <p className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-3">Why use this tool</p>
-            <h2 className="text-3xl font-semibold text-gray-900 dark:text-white leading-tight">
-              Built for speed,<br />
-              <span className="text-cyan-600 dark:text-cyan-400">designed for simplicity</span>
-            </h2>
+      {/* ═══ FEATURES ═══ */}
+      <section id="features" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="grid lg:grid-cols-[1fr_1fr] gap-16 items-center mb-20">
+            <div>
+              <p className="csp-tag mb-4 inline-block">Why this tool</p>
+              <h2 className="text-4xl font-extrabold text-gray-900 leading-tight mt-4" style={{ fontFamily: "'Syne', sans-serif" }}>
+                Built for speed,<br />
+                <span className="csp-shimmer-text">designed for simplicity</span>
+              </h2>
+            </div>
+            <p className="text-base text-gray-400 leading-relaxed" style={{ fontWeight: 300 }}>
+              Every detail is crafted to make conversions feel effortless. No distractions, no friction — just fast, accurate results whenever you need them.
+            </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map(({ icon: Icon, title, desc }) => (
-              <div
-                key={title}
-                className="group relative p-6 rounded-2xl border border-gray-100 dark:border-white/8 hover:border-cyan-200 dark:hover:border-cyan-500/20 bg-white dark:bg-white/3 hover:shadow-lg hover:shadow-cyan-500/5 transition-all duration-300"
-              >
-                <div className="w-10 h-10 rounded-xl bg-cyan-50 dark:bg-cyan-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <Icon size={18} className="text-cyan-600 dark:text-cyan-400" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {features.map(({ icon: Icon, title, desc }, i) => (
+              <div key={title} className="csp-feature-card p-7 rounded-2xl" style={{
+                background: "linear-gradient(160deg, #f8fafc 0%, #ffffff 100%)",
+                border: "1px solid rgba(0,0,0,0.06)",
+                animationDelay: `${i * 0.1}s`
+              }}>
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6" style={{ background: "linear-gradient(135deg, rgba(8,145,178,0.12), rgba(14,116,144,0.08))" }}>
+                  <Icon size={20} className="text-cyan-600" />
                 </div>
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{desc}</p>
+                <h3 className="text-sm font-bold text-gray-900 mb-2" style={{ fontFamily: "'Syne', sans-serif" }}>{title}</h3>
+                <p className="text-xs text-gray-400 leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
 
-          {/* Stats bar */}
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-px bg-gray-100 dark:bg-white/5 rounded-2xl overflow-hidden border border-gray-100 dark:border-white/8">
+          {/* Stats row */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { value: "50K+", label: "Monthly users" },
-              { value: "1M+", label: "Conversions done" },
-              { value: "4.9★", label: "Average rating" },
-              { value: "0ms", label: "Response time" },
-            ].map(({ value, label }) => (
-              <div key={label} className="bg-white dark:bg-gray-950 py-8 text-center">
-                <div className="text-3xl font-bold text-cyan-600 dark:text-cyan-400">{value}</div>
-                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{label}</div>
+              { value: "50K+", label: "Monthly users", emoji: "👥" },
+              { value: "1M+", label: "Conversions done", emoji: "⚡" },
+              { value: "4.9★", label: "Average rating", emoji: "⭐" },
+              { value: "0ms", label: "Response time", emoji: "🚀" },
+            ].map(({ value, label, emoji }) => (
+              <div key={label} className="csp-card-hover rounded-2xl p-6 text-center" style={{ background: "linear-gradient(135deg, #f0f9ff, #e0f2fe)", border: "1px solid rgba(8,145,178,0.12)" }}>
+                <div className="text-2xl mb-2">{emoji}</div>
+                <div className="text-3xl font-extrabold text-cyan-600 mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>{value}</div>
+                <div className="text-xs text-gray-400 font-medium">{label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          HOW IT WORKS SECTION
-      ═══════════════════════════════════════════════ */}
-      <section id="how-it-works" className="py-20 bg-gray-50 dark:bg-gray-900/40">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      {/* ═══ HOW IT WORKS ═══ */}
+      <section id="how-it-works" className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%)" }}>
+        <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(rgba(8,145,178,0.06) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
 
-          <div className="text-center max-w-xl mx-auto mb-16">
-            <p className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-3">Simple process</p>
-            <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 relative">
+          <div className="text-center max-w-2xl mx-auto mb-20">
+            <p className="csp-tag mb-4 inline-block">Simple process</p>
+            <h2 className="text-4xl font-extrabold text-gray-900 mt-4" style={{ fontFamily: "'Syne', sans-serif" }}>
               How to use the {tool.title}
             </h2>
-            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+            <p className="mt-4 text-sm text-gray-400 leading-relaxed" style={{ fontWeight: 300 }}>
               Get your conversion done in seconds. No learning curve required.
             </p>
           </div>
 
-          {/* Steps */}
-          <div className="relative grid md:grid-cols-4 gap-8">
-            {/* Connecting line (desktop) */}
-            <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-cyan-300 dark:via-cyan-600 to-transparent -z-0" />
+          <div className="grid md:grid-cols-4 gap-6 relative">
+            {/* Connector line */}
+            <div className="hidden md:block absolute top-10 left-[15%] right-[15%] h-px pointer-events-none" style={{ background: "linear-gradient(90deg, transparent, rgba(8,145,178,0.4), rgba(8,145,178,0.4), transparent)" }} />
 
-            {steps.map(({ num, title, desc }) => (
-              <div key={num} className="relative text-center flex flex-col items-center">
-                {/* Step circle */}
-                <div className="relative z-10 w-16 h-16 rounded-2xl bg-white dark:bg-gray-900 border-2 border-cyan-200 dark:border-cyan-600/40 flex items-center justify-center shadow-md shadow-cyan-100/50 dark:shadow-none mb-5">
-                  <span className="text-xl font-bold text-cyan-600 dark:text-cyan-400">{num}</span>
+            {steps.map(({ num, title, desc }, i) => (
+              <div key={num} className="csp-card-hover relative text-center flex flex-col items-center p-8 rounded-3xl bg-white" style={{ border: "1px solid rgba(8,145,178,0.1)", boxShadow: "0 4px 20px rgba(8,145,178,0.06)" }}>
+                <span className="csp-step-num">{num}</span>
+                <div className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-lg" style={{ background: "linear-gradient(135deg, #0891b2, #0e7490)", boxShadow: "0 8px 24px rgba(8,145,178,0.3)" }}>
+                  <span className="text-xl font-black text-white" style={{ fontFamily: "'Syne', sans-serif" }}>{String(i + 1).padStart(2, "0")}</span>
                 </div>
-                <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed max-w-[180px]">{desc}</p>
+                <h3 className="text-sm font-bold text-gray-900 mb-2" style={{ fontFamily: "'Syne', sans-serif" }}>{title}</h3>
+                <p className="text-xs text-gray-400 leading-relaxed">{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          EXAMPLES SECTION
-      ═══════════════════════════════════════════════ */}
-      <section id="examples" className="py-20 bg-white dark:bg-gray-950">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+      {/* ═══ EXAMPLES ═══ */}
+      <section id="examples" className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
             <div>
-              <p className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-3">Live examples</p>
-              <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
-                See it in action
-              </h2>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                Real conversions from our most common use cases.
-              </p>
+              <p className="csp-tag mb-4 inline-block">Live examples</p>
+              <h2 className="text-4xl font-extrabold text-gray-900 mt-4" style={{ fontFamily: "'Syne', sans-serif" }}>See it in action</h2>
+              <p className="mt-3 text-sm text-gray-400" style={{ fontWeight: 300 }}>Real conversions from our most common use cases.</p>
             </div>
-            <a
-              href="#tool"
-              className="inline-flex items-center gap-2 text-sm font-medium text-cyan-600 dark:text-cyan-400 hover:underline whitespace-nowrap"
-            >
-              Try it yourself <ArrowRight size={13} />
+            <a href="#tool" className="inline-flex items-center gap-2 text-sm font-bold text-cyan-600 hover:gap-3 transition-all duration-200 whitespace-nowrap">
+              Try it yourself <ArrowRight size={14} />
             </a>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-5">
             {examples.map(({ input, output, label }, i) => (
-              <div
-                key={i}
-                className="group relative rounded-2xl border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-white/3 p-5 hover:border-cyan-200 dark:hover:border-cyan-500/20 hover:shadow-md hover:shadow-cyan-500/5 transition-all duration-300 overflow-hidden"
-              >
-                {/* Subtle top accent */}
-                <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div key={i} className="csp-example-card group relative rounded-2xl p-6 bg-white overflow-hidden" style={{ border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}>
+                {/* Hover accent */}
+                <div className="absolute top-0 inset-x-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-t-2xl" style={{ background: "linear-gradient(90deg, #0891b2, #22d3ee)" }} />
 
-                <span className="inline-block mb-4 text-xs px-2.5 py-1 rounded-full bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 font-mono">
-                  {label}
-                </span>
+                <span className="csp-tag inline-block mb-5">{label}</span>
 
                 <div className="space-y-3">
                   <div>
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Input</p>
-                    <p className="text-sm font-mono text-gray-700 dark:text-gray-300 bg-white dark:bg-white/5 rounded-lg px-3 py-2 border border-gray-100 dark:border-white/8">
+                    <p className="text-xs text-gray-400 font-semibold mb-2 uppercase tracking-wider">Input</p>
+                    <p className="text-sm font-mono text-gray-700 px-3 py-2.5 rounded-xl" style={{ background: "#f8fafc", border: "1px solid rgba(0,0,0,0.06)" }}>
                       {input}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-center text-cyan-400 dark:text-cyan-600">
-                    <ArrowRightLeft size={14} />
+                  <div className="flex justify-center">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-cyan-400" style={{ background: "rgba(8,145,178,0.08)" }}>
+                      <ArrowRightLeft size={14} />
+                    </div>
                   </div>
 
                   <div>
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">Output</p>
+                    <p className="text-xs text-gray-400 font-semibold mb-2 uppercase tracking-wider">Output</p>
                     <div className="flex items-center gap-2">
-                      <p className="flex-1 text-sm font-mono font-semibold text-cyan-700 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-500/10 rounded-lg px-3 py-2 border border-cyan-100 dark:border-cyan-500/20">
+                      <p className="flex-1 text-sm font-mono font-bold px-3 py-2.5 rounded-xl" style={{ background: "linear-gradient(135deg, rgba(8,145,178,0.08), rgba(14,116,144,0.05))", color: "#0891b2", border: "1px solid rgba(8,145,178,0.15)" }}>
                         {output}
                       </p>
                       <CopyButton text={output} />
@@ -593,20 +761,17 @@ export default function ConverterSinglePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          USE CASES SECTION
-      ═══════════════════════════════════════════════ */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900/40 dark:to-gray-950">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <p className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-3">Use cases</p>
-            <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
+      {/* ═══ USE CASES ═══ */}
+      <section className="py-24 relative overflow-hidden" style={{ background: "linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)" }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <p className="csp-tag mb-4 inline-block">Use cases</p>
+            <h2 className="text-4xl font-extrabold text-gray-900 mt-4" style={{ fontFamily: "'Syne', sans-serif" }}>
               Who uses the {tool.title}?
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
               { emoji: "👩‍💻", role: "Developers", desc: "Quickly convert values during testing, API integration, or data formatting tasks." },
               { emoji: "📊", role: "Data analysts", desc: "Clean and transform datasets with consistent unit conversions across large tables." },
@@ -615,11 +780,13 @@ export default function ConverterSinglePage() {
               { emoji: "🏗️", role: "Engineers", desc: "Perform precise technical conversions for design, construction, and calculations." },
               { emoji: "🛒", role: "Everyday users", desc: "Handle everyday tasks like cooking, shopping, or comparing product specs easily." },
             ].map(({ emoji, role, desc }) => (
-              <div key={role} className="flex gap-4 p-5 rounded-2xl border border-gray-100 dark:border-white/8 bg-white dark:bg-white/3 hover:border-cyan-200 dark:hover:border-cyan-500/20 transition-colors duration-200">
-                <span className="text-2xl flex-shrink-0">{emoji}</span>
+              <div key={role} className="csp-card-hover group flex gap-4 p-6 rounded-2xl bg-white" style={{ border: "1px solid rgba(0,0,0,0.06)", boxShadow: "0 2px 8px rgba(0,0,0,0.03)" }}>
+                <div className="w-12 h-12 rounded-2xl flex-shrink-0 flex items-center justify-center text-2xl" style={{ background: "linear-gradient(135deg, #f0f9ff, #e0f2fe)" }}>
+                  {emoji}
+                </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">{role}</h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{desc}</p>
+                  <h3 className="text-sm font-bold text-gray-900 mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>{role}</h3>
+                  <p className="text-xs text-gray-400 leading-relaxed">{desc}</p>
                 </div>
               </div>
             ))}
@@ -627,53 +794,45 @@ export default function ConverterSinglePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          RELATED TOOLS SECTION
-      ═══════════════════════════════════════════════ */}
-      {relatedTools.length > 0 && (
-        <section className="py-20 bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-white/5">
-          <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      {/* ═══ DIVIDER ═══ */}
+      <div className="csp-divider mx-10" />
 
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+      {/* ═══ RELATED TOOLS ═══ */}
+      {relatedTools.length > 0 && (
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-6 lg:px-10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
               <div>
-                <p className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-3">
-                  <TrendingUp size={11} className="inline mr-1" />
-                  Related tools
+                <p className="csp-tag mb-4 inline-block">
+                  <TrendingUp size={10} className="inline mr-1" />Related tools
                 </p>
-                <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
+                <h2 className="text-4xl font-extrabold text-gray-900 mt-4" style={{ fontFamily: "'Syne', sans-serif" }}>
                   More {tool.category} converters
                 </h2>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                  Explore other tools in the same category.
-                </p>
+                <p className="mt-2 text-sm text-gray-400" style={{ fontWeight: 300 }}>Explore other tools in the same category.</p>
               </div>
-              <Link
-                to="/converters"
-                className="inline-flex items-center gap-2 text-sm font-medium text-cyan-600 dark:text-cyan-400 hover:underline whitespace-nowrap"
-              >
-                View all converters <ArrowRight size={13} />
+              <Link to="/converters" className="inline-flex items-center gap-2 text-sm font-bold text-cyan-600 hover:gap-3 transition-all duration-200 whitespace-nowrap">
+                View all <ArrowRight size={14} />
               </Link>
             </div>
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {relatedTools.map((t) => (
-                <Link
-                  key={t.id}
-                  to={`/converters/${slugify(t.title)}`}
-                  className="group flex flex-col gap-3 p-5 rounded-2xl border border-gray-100 dark:border-white/8 bg-gray-50 dark:bg-white/3 hover:border-cyan-200 dark:hover:border-cyan-500/20 hover:bg-white dark:hover:bg-white/5 hover:shadow-md hover:shadow-cyan-500/5 transition-all duration-250"
-                >
+                <Link key={t.id} to={`/converters/${slugify(t.title)}`} className="csp-related-card group flex flex-col gap-4 p-6 rounded-2xl bg-white"
+                  style={{ border: "1px solid rgba(0,0,0,0.07)" }}>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400">
-                      {t.category}
-                    </span>
-                    <ArrowRight size={12} className="text-gray-300 dark:text-gray-600 group-hover:text-cyan-500 group-hover:translate-x-0.5 transition-all duration-200" />
+                    <span className="csp-tag">{t.category}</span>
+                    <div className="w-7 h-7 rounded-xl flex items-center justify-center transition-all duration-200 group-hover:bg-cyan-50"
+                      style={{ border: "1px solid rgba(0,0,0,0.07)" }}>
+                      <ArrowRight size={11} className="text-gray-300 group-hover:text-cyan-500 group-hover:translate-x-0.5 transition-all duration-200" />
+                    </div>
                   </div>
-                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white leading-snug group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors duration-150">
-                    {t.title}
-                  </h3>
-                  <p className="text-xs text-gray-400 dark:text-gray-500 leading-relaxed line-clamp-2">
-                    {t.description}
-                  </p>
+                  <div>
+                    <h3 className="text-sm font-bold text-gray-900 mb-2 group-hover:text-cyan-700 transition-colors leading-snug" style={{ fontFamily: "'Syne', sans-serif" }}>
+                      {t.title}
+                    </h3>
+                    <p className="text-xs text-gray-400 leading-relaxed line-clamp-2">{t.description}</p>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -681,23 +840,20 @@ export default function ConverterSinglePage() {
         </section>
       )}
 
-      {/* ═══════════════════════════════════════════════
-          FAQ SECTION
-      ═══════════════════════════════════════════════ */}
-      <section id="faq" className="py-20 bg-gray-50 dark:bg-gray-900/40 border-t border-gray-100 dark:border-white/5">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8">
-
-          <div className="text-center max-w-xl mx-auto mb-14">
-            <p className="text-xs font-semibold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest mb-3">FAQ</p>
-            <h2 className="text-3xl font-semibold text-gray-900 dark:text-white">
+      {/* ═══ FAQ ═══ */}
+      <section id="faq" className="py-24" style={{ background: "linear-gradient(180deg, #f0f9ff 0%, #f8fafc 100%)" }}>
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <p className="csp-tag mb-4 inline-block">FAQ</p>
+            <h2 className="text-4xl font-extrabold text-gray-900 mt-4" style={{ fontFamily: "'Syne', sans-serif" }}>
               Frequently asked questions
             </h2>
-            <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+            <p className="mt-4 text-sm text-gray-400" style={{ fontWeight: 300 }}>
               Everything you need to know about the {tool.title}.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-white/10 px-8 py-2 shadow-sm">
+          <div className="rounded-3xl overflow-hidden bg-white p-4" style={{ border: "1px solid rgba(8,145,178,0.1)", boxShadow: "0 4px 30px rgba(8,145,178,0.06)" }}>
             {faqs.map((faq, i) => (
               <FAQItem key={i} {...faq} index={i} />
             ))}
@@ -705,37 +861,32 @@ export default function ConverterSinglePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          CTA BOTTOM SECTION
-      ═══════════════════════════════════════════════ */}
-      <section className="py-20 bg-white dark:bg-gray-950">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <div className="relative rounded-3xl bg-gradient-to-br from-cyan-500 to-blue-600 p-12 overflow-hidden">
-            {/* Background pattern */}
-            <div
-              className="absolute inset-0 opacity-10"
-              style={{
-                backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
-                backgroundSize: "24px 24px",
-              }}
-            />
+      {/* ═══ CTA BOTTOM ═══ */}
+      <section className="py-24 bg-white">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <div className="relative rounded-3xl overflow-hidden p-14 text-center"
+            style={{ background: "linear-gradient(135deg, #0891b2 0%, #0e7490 40%, #164e63 100%)" }}>
+            {/* Noise */}
+            <div className="csp-noise absolute inset-0 pointer-events-none" />
+            {/* Dot grid */}
+            <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+            {/* Glow */}
+            <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full blur-[100px] pointer-events-none" style={{ background: "rgba(255,255,255,0.08)" }} />
 
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-semibold mb-6">
-                <Zap size={12} />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 text-xs font-bold text-white uppercase tracking-wider" style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.2)" }}>
+                <Zap size={11} />
                 Ready to convert?
               </div>
-              <h2 className="text-3xl font-semibold text-white mb-4">
+              <h2 className="text-4xl font-extrabold text-white mb-4 leading-tight" style={{ fontFamily: "'Syne', sans-serif" }}>
                 Start using the {tool.title} now
               </h2>
-              <p className="text-cyan-100 text-sm leading-relaxed max-w-md mx-auto mb-8">
+              <p className="text-cyan-100 text-sm leading-relaxed max-w-md mx-auto mb-10" style={{ fontWeight: 300 }}>
                 Free, fast, and works instantly. No registration, no downloads, no hassle.
               </p>
-              <a
-                href="#tool"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white text-cyan-700 text-sm font-bold hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
-              >
-                <ArrowRightLeft size={15} />
+              <a href="#tool" className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-white text-cyan-700 text-sm font-black shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.25)]"
+                style={{ fontFamily: "'Syne', sans-serif" }}>
+                <ArrowRightLeft size={16} />
                 Open {tool.title}
               </a>
             </div>
